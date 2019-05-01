@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Aliaksandr Khodas](https://up.htmlacademy.ru/react/1/user/860949).
-* Наставник: `Неизвестно`.
+* Наставник: `Николай Яшин`.
 
 ---
 
