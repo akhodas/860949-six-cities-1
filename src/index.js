@@ -4,7 +4,7 @@ import {App} from "./components/app/app.jsx";
 
 const init = () => {
   const settings = {
-    namesPlaceCard: [
+    placeCardNames: [
       `Beautiful & luxurious apartment at great location`,
       `Wood and stone place`,
       `Canal View Prinsengracht`,
@@ -14,7 +14,7 @@ const init = () => {
 
   ReactDOM.render(
       <App
-        namesPlaceCard = {settings.namesPlaceCard}
+        placeCardNames = {settings.placeCardNames}
       />,
       document.querySelector(`#root`)
   );

@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import {Stateless} from "../stateless/stateless.jsx";
 
 export const App = (props) => {
-  const {namesPlaceCard} = props;
+  const {placeCardNames} = props;
 
   return <Stateless
-    namesPlace = {namesPlaceCard}
+    placeNames = {placeCardNames}
   />;
 };
 
 App.propTypes = {
-  namesPlaceCard: PropTypes.arrayOf(PropTypes.string).isRequired,
+  placeCardNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

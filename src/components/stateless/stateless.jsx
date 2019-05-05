@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import {PlaceCard} from "../place-card/place-card.jsx";
 
 export const Stateless = (props) => {
-  const {namesPlace} = props;
+  const {placeNames} = props;
 
-  const placesList = namesPlace.map((item) =>
+  const placesList = placeNames.map((item) =>
     <PlaceCard
       key = {item}
-      namePlace = {item}
+      placeName = {item}
     />
   );
 
@@ -128,5 +128,5 @@ export const Stateless = (props) => {
 };
 
 Stateless.propTypes = {
-  namesPlace: PropTypes.arrayOf(PropTypes.string).isRequired,
+  placeNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
