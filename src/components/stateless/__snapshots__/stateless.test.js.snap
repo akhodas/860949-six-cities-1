@@ -351,6 +351,7 @@ exports[`Stateless correctly renders 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[MockFunction]}
                   >
                     Place #1
                   </a>
@@ -452,6 +453,7 @@ exports[`Stateless correctly renders 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[MockFunction]}
                   >
                     Place #2
                   </a>
@@ -553,6 +555,7 @@ exports[`Stateless correctly renders 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[MockFunction]}
                   >
                     Place #3
                   </a>
@@ -654,6 +657,7 @@ exports[`Stateless correctly renders 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[MockFunction]}
                   >
                     Place #4
                   </a>

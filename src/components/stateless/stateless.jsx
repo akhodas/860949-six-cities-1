@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import {PlaceCard} from "../place-card/place-card.jsx";
 
 export const Stateless = (props) => {
-  const {placeNames} = props;
+  const {placeNames, clickOnTitleCard} = props;
 
   const placesList = placeNames.map((item) =>
     <PlaceCard
       key = {item}
       placeName = {item}
+      clickOnTitleCard = {clickOnTitleCard}
     />
   );
 
@@ -129,4 +130,5 @@ export const Stateless = (props) => {
 
 Stateless.propTypes = {
   placeNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  clickOnTitleCard: PropTypes.func.isRequired,
 };

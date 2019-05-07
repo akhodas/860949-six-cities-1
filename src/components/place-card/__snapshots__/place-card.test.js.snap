@@ -91,6 +91,7 @@ exports[`PlaceCard correctly renders 1`] = `
     >
       <a
         href="#"
+        onClick={[MockFunction]}
       >
         Place #1
       </a>

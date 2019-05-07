@@ -10,11 +10,17 @@ const init = () => {
       `Canal View Prinsengracht`,
       `Nice, cozy, warm big bed apartment`,
     ],
+    clickOnTitleCard: (e) => {
+      e.preventDefault();
+      // eslint-disable-next-line no-console
+      console.log(`CLICK on title card`);
+    },
   };
 
   ReactDOM.render(
       <App
         placeCardNames = {settings.placeCardNames}
+        clickOnTitleCard = {settings.clickOnTitleCard}
       />,
       document.querySelector(`#root`)
   );

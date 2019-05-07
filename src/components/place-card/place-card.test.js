@@ -6,6 +6,7 @@ it(`PlaceCard correctly renders`, () => {
   const tree = renderer
     .create(<PlaceCard
       placeName = {`Place #1`}
+      clickOnTitleCard = {jest.fn()}
     />)
     .toJSON();
 

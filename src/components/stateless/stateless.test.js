@@ -6,6 +6,7 @@ it(`Stateless correctly renders`, () => {
   const tree = renderer
     .create(<Stateless
       placeNames = {[`Place #1`, `Place #2`, `Place #3`, `Place #4`]}
+      clickOnTitleCard = {jest.fn()}
     />)
     .toJSON();
 
