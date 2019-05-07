@@ -5,15 +5,17 @@ import {PlaceCard} from './place-card.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`Click on title card correctly works`, () => {
-  const clickHandler = jest.fn();
-  const app = shallow(<PlaceCard
-    placeName = {`Place #1`}
-    clickOnTitleCard = {clickHandler}
-  />);
+describe(`PlaceCard`, () => {
+  it(`click on title card correctly works`, () => {
+    const clickHandler = jest.fn();
+    const app = shallow(<PlaceCard
+      placeName = {`Place #1`}
+      clickOnTitleCard = {clickHandler}
+    />);
 
-  const clickOnTitle = app.find(`.place-card__name a`);
-  clickOnTitle.simulate(`click`, {preventDefault() {}});
+    const clickOnTitle = app.find(`.place-card__name a`);
+    clickOnTitle.simulate(`click`, {preventDefault() {}});
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+  });
 });

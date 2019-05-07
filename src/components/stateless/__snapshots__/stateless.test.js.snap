@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Stateless correctly renders 1`] = `
+exports[`Stateless correctly rendered 1`] = `
 <div>
   <div
     style={
