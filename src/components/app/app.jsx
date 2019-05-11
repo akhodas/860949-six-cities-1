@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Stateless} from "../stateless/stateless.jsx";
+import Stateless from "../stateless/stateless.jsx";
 
 export const App = (props) => {
   const {placeCardNames, clickOnTitleCard} = props;

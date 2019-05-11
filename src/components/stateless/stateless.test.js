@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Stateless} from './stateless.jsx';
+import Stateless from './stateless.jsx';
 
 describe(`Stateless`, () => {
   it(`correctly rendered`, () => {

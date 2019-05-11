@@ -1,17 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import OfferCard from "../offer-card/offer-card.jsx";
+import ListOffers from "../list-offers/list-offers.jsx";
 
-export const Stateless = (props) => {
-  const {placeNames, clickOnTitleCard} = props;
-
-  const placesList = placeNames.map((item) =>
-    <OfferCard
-      key = {item}
-      placeName = {item}
-      clickOnTitleCard = {clickOnTitleCard}
-    />
-  );
+const Stateless = (props) => {
 
   return <div>
     <div style={{display: `none`}}>
@@ -114,9 +104,9 @@ export const Stateless = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {placesList}
-            </div>
+            <ListOffers
+              {...props}
+            />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
@@ -128,7 +118,4 @@ export const Stateless = (props) => {
   </div>;
 };
 
-Stateless.propTypes = {
-  placeNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  clickOnTitleCard: PropTypes.func.isRequired,
-};
+export default Stateless;

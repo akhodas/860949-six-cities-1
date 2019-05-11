@@ -13,7 +13,7 @@ const init = () => {
     clickOnTitleCard: (e) => {
       e.preventDefault();
       // eslint-disable-next-line no-console
-      console.log(`CLICK on title card`);
+      console.log(`CLICK on title card: "${e.target.text}"`);
     },
   };
 
