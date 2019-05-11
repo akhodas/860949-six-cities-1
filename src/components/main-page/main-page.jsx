@@ -1,7 +1,7 @@
 import React from "react";
 import ListOffers from "../list-offers/list-offers.jsx";
 
-const Stateless = (props) => {
+const MainPage = (props) => {
 
   return <div>
     <div style={{display: `none`}}>
@@ -118,4 +118,4 @@ const Stateless = (props) => {
   </div>;
 };
 
-export default Stateless;
+export default MainPage;

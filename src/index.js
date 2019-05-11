@@ -1,15 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {App} from "./components/app/app.jsx";
+import App from "./components/app/app.jsx";
+import dataOffers from "./mocks/offers";
 
 const init = () => {
   const settings = {
-    placeCardNames: [
-      `Beautiful & luxurious apartment at great location`,
-      `Wood and stone place`,
-      `Canal View Prinsengracht`,
-      `Nice, cozy, warm big bed apartment`,
-    ],
+    offers: dataOffers,
     clickOnTitleCard: (e) => {
       e.preventDefault();
       // eslint-disable-next-line no-console

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
 
 const ListOffers = (props) => {
-  const {placeNames, clickOnTitleCard} = props;
+  const {offers, clickOnTitleCard} = props;
 
-  const placesList = placeNames.map((item, i) =>
+  const placesList = offers.map((item, i) =>
     <OfferCard
       key={i}
       placeName={item}
@@ -19,7 +19,15 @@ const ListOffers = (props) => {
 };
 
 ListOffers.propTypes = {
-  placeNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  })).isRequired,
   clickOnTitleCard: PropTypes.func.isRequired,
 };
 

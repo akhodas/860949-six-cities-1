@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Stateless from "../stateless/stateless.jsx";
+import MainPage from "../main-page/main-page.jsx";
 
-export const App = (props) => {
+const App = (props) => {
   const {placeCardNames, clickOnTitleCard} = props;
 
-  return <Stateless
+  return <MainPage
     placeNames = {placeCardNames}
     clickOnTitleCard = {clickOnTitleCard}
   />;
@@ -15,3 +15,5 @@ App.propTypes = {
   placeCardNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   clickOnTitleCard: PropTypes.func.isRequired,
 };
+
+export default App;
