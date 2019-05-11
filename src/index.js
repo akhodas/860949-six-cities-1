@@ -15,8 +15,7 @@ const init = () => {
 
   ReactDOM.render(
       <App
-        placeCardNames = {settings.placeCardNames}
-        clickOnTitleCard = {settings.clickOnTitleCard}
+        {...settings}
       />,
       document.querySelector(`#root`)
   );

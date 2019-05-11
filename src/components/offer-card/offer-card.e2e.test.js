@@ -9,8 +9,18 @@ describe(`OfferCard`, () => {
   it(`click on title card correctly works`, () => {
     const clickHandler = jest.fn();
     const app = shallow(<OfferCard
-      placeName = {`Place #1`}
-      clickOnTitleCard = {clickHandler}
+      offer={
+        {
+          id: 0,
+          image: `path`,
+          premium: true,
+          price: 0,
+          title: `title`,
+          type: `type`,
+          rating: 0,
+        }
+      }
+      clickOnTitleCard={clickHandler}
     />);
 
     const clickOnTitle = app.find(`.place-card__name a`);

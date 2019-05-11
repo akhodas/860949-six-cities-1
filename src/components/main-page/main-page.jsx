@@ -1,7 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import ListOffers from "../list-offers/list-offers.jsx";
 
 const MainPage = (props) => {
+  const {offers, clickOnTitleCard} = props;
 
   return <div>
     <div style={{display: `none`}}>
@@ -105,7 +108,8 @@ const MainPage = (props) => {
               </ul>
             </form>
             <ListOffers
-              {...props}
+              offers={offers}
+              clickOnTitleCard={clickOnTitleCard}
             />
           </section>
           <div className="cities__right-section">
@@ -116,6 +120,19 @@ const MainPage = (props) => {
 
     </main>
   </div>;
+};
+
+MainPage.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  })).isRequired,
+  clickOnTitleCard: PropTypes.func.isRequired,
 };
 
 export default MainPage;

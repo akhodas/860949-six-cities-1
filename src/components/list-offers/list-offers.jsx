@@ -5,10 +5,10 @@ import OfferCard from "../offer-card/offer-card.jsx";
 const ListOffers = (props) => {
   const {offers, clickOnTitleCard} = props;
 
-  const placesList = offers.map((item, i) =>
+  const placesList = offers.map((item) =>
     <OfferCard
-      key={i}
-      placeName={item}
+      key={item.id}
+      offer={item}
       clickOnTitleCard={clickOnTitleCard}
     />
   );

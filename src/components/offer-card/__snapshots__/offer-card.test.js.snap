@@ -21,7 +21,7 @@ exports[`OfferCard correctly rendered 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="path"
         width="260"
       />
     </a>
@@ -38,7 +38,8 @@ exports[`OfferCard correctly rendered 1`] = `
         <b
           className="place-card__price-value"
         >
-          €120
+          €
+          0
         </b>
         <span
           className="place-card__price-text"
@@ -75,7 +76,7 @@ exports[`OfferCard correctly rendered 1`] = `
         <span
           style={
             Object {
-              "width": "93%",
+              "width": "0%",
             }
           }
         />
@@ -93,13 +94,13 @@ exports[`OfferCard correctly rendered 1`] = `
         href="#"
         onClick={[MockFunction]}
       >
-        Place #1
+        title
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      type
     </p>
   </div>
 </article>

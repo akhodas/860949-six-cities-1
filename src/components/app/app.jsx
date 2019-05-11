@@ -1,18 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import MainPage from "../main-page/main-page.jsx";
 
 const App = (props) => {
-  const {placeCardNames, clickOnTitleCard} = props;
+  const {offers, clickOnTitleCard} = props;
 
   return <MainPage
-    placeNames = {placeCardNames}
-    clickOnTitleCard = {clickOnTitleCard}
+    offers={offers}
+    clickOnTitleCard={clickOnTitleCard}
   />;
 };
 
 App.propTypes = {
-  placeCardNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+  })).isRequired,
   clickOnTitleCard: PropTypes.func.isRequired,
 };
 

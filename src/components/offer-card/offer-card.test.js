@@ -6,8 +6,18 @@ describe(`OfferCard`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
       .create(<OfferCard
-        placeName = {`Place #1`}
-        clickOnTitleCard = {jest.fn()}
+        offer={
+          {
+            id: 0,
+            image: `path`,
+            premium: true,
+            price: 0,
+            title: `title`,
+            type: `type`,
+            rating: 0,
+          }
+        }
+        clickOnTitleCard={jest.fn()}
       />)
       .toJSON();
 
