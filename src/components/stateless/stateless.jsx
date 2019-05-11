@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {PlaceCard} from "../place-card/place-card.jsx";
+import OfferCard from "../offer-card/offer-card.jsx";
 
 export const Stateless = (props) => {
   const {placeNames, clickOnTitleCard} = props;
 
   const placesList = placeNames.map((item) =>
-    <PlaceCard
+    <OfferCard
       key = {item}
       placeName = {item}
       clickOnTitleCard = {clickOnTitleCard}

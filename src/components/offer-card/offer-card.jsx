@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const PlaceCard = (props) => {
+const OfferCard = (props) => {
   const {placeName, clickOnTitleCard} = props;
 
   return <article className="cities__place-card place-card">
@@ -40,8 +40,9 @@ export const PlaceCard = (props) => {
   </article>;
 };
 
-PlaceCard.propTypes = {
+OfferCard.propTypes = {
   placeName: PropTypes.string.isRequired,
   clickOnTitleCard: PropTypes.func.isRequired,
 };
 
+export default OfferCard;

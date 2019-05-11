@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {PlaceCard} from './place-card.jsx';
+import OfferCard from './offer-card.jsx';
 
-describe(`PlaceCard`, () => {
+describe(`OfferCard`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
-      .create(<PlaceCard
+      .create(<OfferCard
         placeName = {`Place #1`}
         clickOnTitleCard = {jest.fn()}
       />)
