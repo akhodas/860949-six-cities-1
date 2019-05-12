@@ -1,18 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const OfferCard = (props) => {
-  const {offer, clickOnTitleCard} = props;
-  const {image, premium, price, title, type, rating} = offer;
+  const {offer, clickOnTitleCard, clickOnImageCard} = props;
+  const {id, image, premium, price, title, type, rating} = offer;
 
-  return <article className="cities__place-card place-card">
+  return <React.Fragment>
     {premium ?
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       : null}
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <a href="#">
+      <a href="#" onClick={(e) => {
+        e.preventDefault();
+        clickOnImageCard(id);
+      }}>
         <img className="place-card__image" src={image} width="260" height="200" alt="Place image"></img>
       </a>
     </div>
@@ -36,11 +39,14 @@ const OfferCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={clickOnTitleCard}>{title}</a>
+        <a href="#" onClick={(e) => {
+          e.preventDefault();
+          clickOnTitleCard(id);
+        }}>{title}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
-  </article>;
+  </React.Fragment>;
 };
 
 OfferCard.propTypes = {
@@ -54,6 +60,7 @@ OfferCard.propTypes = {
     rating: PropTypes.number.isRequired,
   }).isRequired,
   clickOnTitleCard: PropTypes.func.isRequired,
+  clickOnImageCard: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

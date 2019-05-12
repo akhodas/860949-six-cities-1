@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import MainPage from './main-page.jsx';
 
 describe(`MainPage`, () => {
@@ -18,6 +19,7 @@ describe(`MainPage`, () => {
         }]
       }
       clickOnTitleCard={jest.fn()}
+      clickOnImageCard={jest.fn()}
     />)
     .toJSON();
 

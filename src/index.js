@@ -1,16 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/app/app.jsx";
-import dataOffers from "./mocks/offers";
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './components/app/app.jsx';
+import dataOffers from './mocks/offers';
 
 const init = () => {
   const settings = {
     offers: dataOffers,
-    clickOnTitleCard: (e) => {
-      e.preventDefault();
+    clickOnTitleCard: (id) => {
       // eslint-disable-next-line no-console
-      console.log(`CLICK on title card: "${e.target.text}"`);
+      console.log(`CLICK on title card #${id}: "${e.target.text}"`);
     },
+    clickOnImageCard: (id) => {
+      // eslint-disable-next-line no-console
+      console.log(`CLICK on image card: "${id}"`);
+    }
   };
 
   ReactDOM.render(

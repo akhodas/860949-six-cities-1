@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import ListOffers from "../list-offers/list-offers.jsx";
+import ListOffers from '../list-offers/list-offers.jsx';
 
 const MainPage = (props) => {
-  const {offers, clickOnTitleCard} = props;
+  const {offers, clickOnTitleCard, clickOnImageCard} = props;
 
   return <div>
     <div style={{display: `none`}}>
@@ -110,6 +110,7 @@ const MainPage = (props) => {
             <ListOffers
               offers={offers}
               clickOnTitleCard={clickOnTitleCard}
+              clickOnImageCard={clickOnImageCard}
             />
           </section>
           <div className="cities__right-section">
@@ -133,6 +134,7 @@ MainPage.propTypes = {
     rating: PropTypes.number.isRequired,
   })).isRequired,
   clickOnTitleCard: PropTypes.func.isRequired,
+  clickOnImageCard: PropTypes.func.isRequired,
 };
 
 export default MainPage;

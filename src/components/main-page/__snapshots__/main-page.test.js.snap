@@ -263,6 +263,7 @@ exports[`MainPage correctly rendered 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -276,6 +277,7 @@ exports[`MainPage correctly rendered 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Place image"
@@ -352,7 +354,7 @@ exports[`MainPage correctly rendered 1`] = `
                 >
                   <a
                     href="#"
-                    onClick={[MockFunction]}
+                    onClick={[Function]}
                   >
                     title
                   </a>

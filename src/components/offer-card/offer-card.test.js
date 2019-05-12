@@ -18,6 +18,7 @@ describe(`OfferCard`, () => {
           }
         }
         clickOnTitleCard={jest.fn()}
+        clickOnImageCard={jest.fn()}
       />)
       .toJSON();
 

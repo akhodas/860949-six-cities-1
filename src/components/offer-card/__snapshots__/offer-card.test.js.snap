@@ -1,21 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OfferCard correctly rendered 1`] = `
-<article
-  className="cities__place-card place-card"
->
+Array [
   <div
     className="place-card__mark"
   >
     <span>
       Premium
     </span>
-  </div>
+  </div>,
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
       href="#"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -25,7 +24,7 @@ exports[`OfferCard correctly rendered 1`] = `
         width="260"
       />
     </a>
-  </div>
+  </div>,
   <div
     className="place-card__info"
   >
@@ -92,7 +91,7 @@ exports[`OfferCard correctly rendered 1`] = `
     >
       <a
         href="#"
-        onClick={[MockFunction]}
+        onClick={[Function]}
       >
         title
       </a>
@@ -102,6 +101,6 @@ exports[`OfferCard correctly rendered 1`] = `
     >
       type
     </p>
-  </div>
-</article>
+  </div>,
+]
 `;
