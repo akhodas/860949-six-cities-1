@@ -9,7 +9,7 @@ const init = () => {
     offers: dataOffers,
     clickOnTitleCard: (id) => {
       // eslint-disable-next-line no-console
-      console.log(`CLICK on title card #${id}: "${e.target.text}"`);
+      console.log(`CLICK on title card #${id}`);
     },
     clickOnImageCard: (id) => {
       // eslint-disable-next-line no-console
