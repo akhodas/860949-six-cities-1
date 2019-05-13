@@ -11,10 +11,10 @@ class ListOffers extends Component {
       activeCard: {},
     };
 
-    this.handleCardActivate = this.handleCardActivate.bind(this);
+    this._handleCardActivate = this._handleCardActivate.bind(this);
   }
 
-  handleCardActivate(e, card) {
+  _handleCardActivate(e, card) {
     this.setState({activeCard: card});
     // eslint-disable-next-line no-console
     console.log(`Activate card #${card.id}`);
@@ -33,7 +33,7 @@ class ListOffers extends Component {
         onClickTitleCard={onClickTitleCard}
         onClickImageCard={onClickImageCard}
         onHoverCard={(e) => {
-          this.handleCardActivate(e, item);
+          this._handleCardActivate(e, item);
         }}
       />)
       }
