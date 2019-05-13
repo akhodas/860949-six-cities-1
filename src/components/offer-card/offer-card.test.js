@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import OfferCard from './offer-card.jsx';
 
-describe(`App`, () => {
+describe(`OfferCard`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
-      .create(<App
-        offers={[
+      .create(<OfferCard
+        offer={
           {
             id: 0,
             image: `path`,
@@ -15,10 +15,11 @@ describe(`App`, () => {
             title: `title`,
             type: `type`,
             rating: 0,
-          }]
+          }
         }
         onClickTitleCard={jest.fn()}
         onClickImageCard={jest.fn()}
+        onHoverCard={jest.fn()}
       />)
       .toJSON();
 

@@ -1,26 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import {App} from "./components/app/app.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './components/app/app.jsx';
+import dataOffers from './mocks/offers';
 
 const init = () => {
   const settings = {
-    placeCardNames: [
-      `Beautiful & luxurious apartment at great location`,
-      `Wood and stone place`,
-      `Canal View Prinsengracht`,
-      `Nice, cozy, warm big bed apartment`,
-    ],
-    clickOnTitleCard: (e) => {
-      e.preventDefault();
+    offers: dataOffers,
+    onClickTitleCard: (id) => {
       // eslint-disable-next-line no-console
-      console.log(`CLICK on title card`);
+      console.log(`CLICK on title card #${id}`);
     },
+    onClickImageCard: (id) => {
+      // eslint-disable-next-line no-console
+      console.log(`CLICK on image card: "${id}"`);
+    }
   };
 
   ReactDOM.render(
       <App
-        placeCardNames = {settings.placeCardNames}
-        clickOnTitleCard = {settings.clickOnTitleCard}
+        {...settings}
       />,
       document.querySelector(`#root`)
   );

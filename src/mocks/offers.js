@@ -1,0 +1,38 @@
+export default [
+  {
+    id: 1,
+    image: `img/apartment-01.jpg`,
+    premium: true,
+    price: 101,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+    rating: 95,
+  },
+  {
+    id: 2,
+    image: `img/room.jpg`,
+    premium: false,
+    price: 82,
+    title: `Wood and stone place`,
+    type: `Room`,
+    rating: 70,
+  },
+  {
+    id: 3,
+    image: `img/apartment-02.jpg`,
+    premium: false,
+    price: 73,
+    title: `Canal View Prinsengracht`,
+    type: `House`,
+    rating: 40,
+  },
+  {
+    id: 4,
+    image: `img/apartment-03.jpg`,
+    premium: true,
+    price: 154,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `Hotel`,
+    rating: 80,
+  },
+];
