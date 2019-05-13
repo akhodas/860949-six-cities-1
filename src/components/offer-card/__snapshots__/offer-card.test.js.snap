@@ -1,14 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OfferCard correctly rendered 1`] = `
-Array [
+<article
+  className="cities__place-card place-card"
+  onMouseEnter={[MockFunction]}
+>
   <div
     className="place-card__mark"
   >
     <span>
       Premium
     </span>
-  </div>,
+  </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -24,7 +27,7 @@ Array [
         width="260"
       />
     </a>
-  </div>,
+  </div>
   <div
     className="place-card__info"
   >
@@ -101,6 +104,6 @@ Array [
     >
       type
     </p>
-  </div>,
-]
+  </div>
+</article>
 `;

@@ -22,12 +22,13 @@ describe(`OfferCard`, () => {
           rating: 0,
         }
       }
-      clickOnTitleCard={clickHandler}
-      clickOnImageCard={jest.fn()}
+      onClickTitleCard={clickHandler}
+      onClickImageCard={jest.fn()}
+      onHoverCard={jest.fn()}
     />);
 
-    const clickOnTitle = app.find(`.place-card__name a`);
-    clickOnTitle.simulate(`click`, {preventDefault: formSendPrevention});
+    const onClickTitle = app.find(`.place-card__name a`);
+    onClickTitle.simulate(`click`, {preventDefault: formSendPrevention});
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
     expect(formSendPrevention).toHaveBeenCalledTimes(1);
@@ -48,12 +49,13 @@ describe(`OfferCard`, () => {
           rating: 0,
         }
       }
-      clickOnTitleCard={jest.fn()}
-      clickOnImageCard={clickHandler}
+      onClickTitleCard={jest.fn()}
+      onClickImageCard={clickHandler}
+      onHoverCard={jest.fn()}
     />);
 
-    const clickOnImage = app.find(`.place-card__image-wrapper a`);
-    clickOnImage.simulate(`click`, {preventDefault: formSendPrevention});
+    const onClickImage = app.find(`.place-card__image-wrapper a`);
+    onClickImage.simulate(`click`, {preventDefault: formSendPrevention});
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
     expect(formSendPrevention).toHaveBeenCalledTimes(1);
@@ -74,12 +76,13 @@ describe(`OfferCard`, () => {
           rating: 0,
         }
       }
-      clickOnTitleCard={jest.fn()}
-      clickOnImageCard={clickHandler}
+      onClickTitleCard={jest.fn()}
+      onClickImageCard={clickHandler}
+      onHoverCard={jest.fn()}
     />);
 
-    const clickOnImage = app.find(`.place-card__image-wrapper a`);
-    clickOnImage.simulate(`click`, {preventDefault: jest.fn()});
+    const onClickImage = app.find(`.place-card__image-wrapper a`);
+    onClickImage.simulate(`click`, {preventDefault: jest.fn()});
 
     expect(clickHandler).toHaveBeenCalledWith(100);
   });

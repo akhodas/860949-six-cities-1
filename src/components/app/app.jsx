@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page.jsx';
 
 const App = (props) => {
-  const {offers, clickOnTitleCard, clickOnImageCard} = props;
+  const {offers, onClickTitleCard, onClickImageCard} = props;
 
   return <MainPage
     offers={offers}
-    clickOnTitleCard={clickOnTitleCard}
-    clickOnImageCard={clickOnImageCard}
+    onClickTitleCard={onClickTitleCard}
+    onClickImageCard={onClickImageCard}
   />;
 };
 
@@ -23,8 +23,8 @@ App.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   })).isRequired,
-  clickOnTitleCard: PropTypes.func.isRequired,
-  clickOnImageCard: PropTypes.func.isRequired,
+  onClickTitleCard: PropTypes.func.isRequired,
+  onClickImageCard: PropTypes.func.isRequired,
 };
 
 export default App;

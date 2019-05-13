@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ListOffers from '../list-offers/list-offers.jsx';
 
 const MainPage = (props) => {
-  const {offers, clickOnTitleCard, clickOnImageCard} = props;
+  const {offers, onClickTitleCard, onClickImageCard} = props;
 
   return <div>
     <div style={{display: `none`}}>
@@ -109,8 +109,8 @@ const MainPage = (props) => {
             </form>
             <ListOffers
               offers={offers}
-              clickOnTitleCard={clickOnTitleCard}
-              clickOnImageCard={clickOnImageCard}
+              onClickTitleCard={onClickTitleCard}
+              onClickImageCard={onClickImageCard}
             />
           </section>
           <div className="cities__right-section">
@@ -133,8 +133,8 @@ MainPage.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   })).isRequired,
-  clickOnTitleCard: PropTypes.func.isRequired,
-  clickOnImageCard: PropTypes.func.isRequired,
+  onClickTitleCard: PropTypes.func.isRequired,
+  onClickImageCard: PropTypes.func.isRequired,
 };
 
 export default MainPage;

@@ -3,23 +3,6 @@ import PropTypes from 'prop-types';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 
-// const ListOffers = (props) => {
-//     const { offers, clickOnTitleCard, clickOnImageCard } = props;
-
-//     const placesList = offers.map((item) =>
-//         <OfferCard
-//             key={item.id}
-//             offer={item}
-//             clickOnTitleCard={clickOnTitleCard}
-//             clickOnImageCard={clickOnImageCard}
-//         />
-//     );
-
-//     return <div className="cities__places-list places__list tabs__content">
-//         {placesList}
-//     </div>;
-// };
-
 class ListOffers extends Component {
   constructor(props) {
     super(props);
@@ -28,37 +11,32 @@ class ListOffers extends Component {
       activeCard: {},
     };
 
-    this.activateCard = this.activateCard.bind(this);
+    this.handleCardActivate = this.handleCardActivate.bind(this);
   }
 
-  activateCard(e, card) {
+  handleCardActivate(e, card) {
     this.setState({activeCard: card});
     // eslint-disable-next-line no-console
-    console.log(card.id);
+    console.log(`Activate card #${card.id}`);
     // eslint-disable-next-line no-console
-    console.log(this.state.activeCard.title);
+    console.log(`Title last ativate card: "${
+      this.state.activeCard.title}"!!! (because "setState" asynk)`);
   }
 
   render() {
-    const {offers, clickOnTitleCard, clickOnImageCard} = this.props;
+    const {offers, onClickTitleCard, onClickImageCard} = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
-      {offers.map((item) => {
-        return <article
-          className="cities__place-card place-card"
-          key={item.id}
-          onMouseEnter={(e) => {
-            this.activateCard(e, item);
-          }}>
-          <OfferCard
-            offer={item}
-            clickOnTitleCard={clickOnTitleCard}
-            clickOnImageCard={clickOnImageCard}
-          />
-        </article>;
+      {offers.map((item) => <OfferCard
+        key={item.id}
+        offer={item}
+        onClickTitleCard={onClickTitleCard}
+        onClickImageCard={onClickImageCard}
+        onHoverCard={(e) => {
+          this.handleCardActivate(e, item);
+        }}
+      />)
       }
-
-      )}
     </div>;
   }
 }
@@ -73,8 +51,8 @@ ListOffers.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   })).isRequired,
-  clickOnTitleCard: PropTypes.func.isRequired,
-  clickOnImageCard: PropTypes.func.isRequired,
+  onClickTitleCard: PropTypes.func.isRequired,
+  onClickImageCard: PropTypes.func.isRequired,
 };
 
 export default ListOffers;

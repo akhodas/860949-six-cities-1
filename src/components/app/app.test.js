@@ -17,8 +17,8 @@ describe(`App`, () => {
             rating: 0,
           }]
         }
-        clickOnTitleCard={jest.fn()}
-        clickOnImageCard={jest.fn()}
+        onClickTitleCard={jest.fn()}
+        onClickImageCard={jest.fn()}
       />)
       .toJSON();
 
