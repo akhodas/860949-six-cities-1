@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ListOffers from '../list-offers/list-offers.jsx';
+import CitiesMap from '../cities-map/cities-map.jsx';
 
 const MainPage = (props) => {
   const {offers, onClickTitleCard, onClickImageCard} = props;
@@ -114,7 +115,9 @@ const MainPage = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <CitiesMap
+              offers={offers}
+            />
           </div>
         </div>
       </div>
@@ -132,6 +135,7 @@ MainPage.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,

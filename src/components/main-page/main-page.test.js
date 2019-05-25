@@ -16,6 +16,7 @@ describe(`MainPage`, () => {
           title: `title`,
           type: `type`,
           rating: 0,
+          coordinates: [0, 0],
         }]
       }
       onClickTitleCard={jest.fn()}

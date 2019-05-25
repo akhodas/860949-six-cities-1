@@ -7,6 +7,7 @@ export default [
     title: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
     rating: 95,
+    coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export default [
     title: `Wood and stone place`,
     type: `Room`,
     rating: 70,
+    coordinates: [52.369553943508, 4.85309666406198],
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export default [
     title: `Canal View Prinsengracht`,
     type: `House`,
     rating: 40,
+    coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
     id: 4,
@@ -34,5 +37,6 @@ export default [
     title: `Nice, cozy, warm big bed apartment`,
     type: `Hotel`,
     rating: 80,
+    coordinates: [52.3809553943508, 4.939309666406198],
   },
 ];
