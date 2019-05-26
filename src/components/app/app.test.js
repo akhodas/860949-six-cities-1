@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import App from './app.jsx';
 
 describe(`App`, () => {
@@ -15,6 +16,7 @@ describe(`App`, () => {
             title: `title`,
             type: `type`,
             rating: 0,
+            coordinates: [0, 0],
           }]
         }
         onClickTitleCard={jest.fn()}

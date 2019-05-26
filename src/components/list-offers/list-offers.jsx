@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 
-class ListOffers extends Component {
+class ListOffers extends React.PureComponent {
   constructor(props) {
     super(props);
 
