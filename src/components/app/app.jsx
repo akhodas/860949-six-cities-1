@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page.jsx';
 
 const App = (props) => {
-  const {offers, onClickTitleCard, onClickImageCard} = props;
+  const {offers, onClickTitleCard, onClickImageCard, leaflet} = props;
 
   return <MainPage
     offers={offers}
     onClickTitleCard={onClickTitleCard}
     onClickImageCard={onClickImageCard}
+    leaflet={leaflet}
   />;
 };
 
@@ -26,6 +27,7 @@ App.propTypes = {
   })).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default App;
