@@ -2,7 +2,6 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import MainPage from './main-page.jsx';
-import mockLeaflet from '../../mocks/mock-leaflet';
 
 describe(`MainPage`, () => {
   it(`correctly rendered`, () => {
@@ -22,7 +21,6 @@ describe(`MainPage`, () => {
       }
       onClickTitleCard={jest.fn()}
       onClickImageCard={jest.fn()}
-      leaflet={mockLeaflet}
     />)
     .toJSON();
 

@@ -5,7 +5,7 @@ import ListOffers from '../list-offers/list-offers.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 
 const MainPage = (props) => {
-  const {offers, onClickTitleCard, onClickImageCard, leaflet} = props;
+  const {offers, onClickTitleCard, onClickImageCard} = props;
 
   return <div>
     <div style={{display: `none`}}>
@@ -117,7 +117,6 @@ const MainPage = (props) => {
           <div className="cities__right-section">
             <CitiesMap
               offers={offers}
-              leaflet={leaflet}
             />
           </div>
         </div>
@@ -140,7 +139,6 @@ MainPage.propTypes = {
   })).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
-  leaflet: PropTypes.object.isRequired,
 };
 
 export default MainPage;

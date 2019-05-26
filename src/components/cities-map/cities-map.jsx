@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import leaflet from 'leaflet';
 
 class CitiesMap extends React.PureComponent {
   constructor(props) {
@@ -13,7 +14,7 @@ class CitiesMap extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers, leaflet} = this.props;
+    const {offers} = this.props;
 
     const city = [52.38333, 4.9];
     const icon = leaflet.icon({
@@ -56,7 +57,6 @@ CitiesMap.propTypes = {
     rating: PropTypes.number.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
-  leaflet: PropTypes.object.isRequired,
 };
 
 export default CitiesMap;
