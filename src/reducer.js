@@ -3,7 +3,7 @@ const initialState = {
   listOffers: [],
 };
 
-const getListOffersForCity = (listAllOffers, city) =>
+const getListOffers = (listAllOffers, city) =>
   listAllOffers.filter((offer) => offer.city === city);
 
 const ActionCreators = {
@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) =>{
 
 export {
   ActionCreators,
-  getListOffersForCity,
+  getListOffers,
   reducer,
 };
 

@@ -16,9 +16,11 @@ describe(`MainPage`, () => {
           title: `title`,
           type: `type`,
           rating: 0,
+          city: `Minsk`,
           coordinates: [0, 0],
         }]
       }
+      city = {`Minsk`}
       onClickTitleCard={jest.fn()}
       onClickImageCard={jest.fn()}
     />)

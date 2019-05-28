@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App correctly rendered 1`] = `
-<div>
+Array [
   <div
     style={
       Object {
@@ -41,7 +41,7 @@ exports[`App correctly rendered 1`] = `
         />
       </symbol>
     </svg>
-  </div>
+  </div>,
   <header
     className="header"
   >
@@ -93,7 +93,7 @@ exports[`App correctly rendered 1`] = `
         </nav>
       </div>
     </div>
-  </header>
+  </header>,
   <main
     className="page__main page__main--index"
   >
@@ -115,70 +115,11 @@ exports[`App correctly rendered 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
               className="locations__item-link tabs__item tabs__item--active"
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
               href="#"
             >
               <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Dusseldorf
+                Minsk
               </span>
             </a>
           </li>
@@ -202,7 +143,9 @@ exports[`App correctly rendered 1`] = `
           <b
             className="places__found"
           >
-            312 places to stay in Amsterdam
+            1
+             places to stay in 
+            Minsk
           </b>
           <form
             action="#"
@@ -386,6 +329,6 @@ exports[`App correctly rendered 1`] = `
         </div>
       </div>
     </div>
-  </main>
-</div>
+  </main>,
+]
 `;

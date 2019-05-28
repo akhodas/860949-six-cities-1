@@ -6,9 +6,16 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import ListCities from '../list-cities/list-cities.jsx';
 
 const MainPage = (props) => {
-  const {offers, onClickTitleCard, onClickImageCard} = props;
+  const {offers, onClickTitleCard, onClickImageCard, city} = props;
 
-  return <div>
+  const listCities = [];
+  offers.forEach((offer) => {
+    if (listCities.indexOf(offer.city) < 0 && listCities.length < 6) {
+      listCities.push(offer.city);
+    }
+  });
+
+  return <React.Fragment>
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
         <symbol id="icon-arrow-select" viewBox="0 0 7 4">
@@ -56,14 +63,15 @@ const MainPage = (props) => {
       <h1 className="visually-hidden">Cities</h1>
       <div className="cities tabs">
         <ListCities
-          offers={offers}
+          selectedCity = {city}
+          listCities = {listCities}
         />
       </div>
       <div className="cities__places-wrapper">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in {city}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -80,21 +88,21 @@ const MainPage = (props) => {
               </ul>
             </form>
             <ListOffers
-              offers={offers}
-              onClickTitleCard={onClickTitleCard}
-              onClickImageCard={onClickImageCard}
+              offers = {offers}
+              onClickTitleCard = {onClickTitleCard}
+              onClickImageCard = {onClickImageCard}
             />
           </section>
           <div className="cities__right-section">
             <CitiesMap
-              offers={offers}
+              offers = {offers}
             />
           </div>
         </div>
       </div>
 
     </main>
-  </div>;
+  </React.Fragment>;
 };
 
 MainPage.propTypes = {
@@ -109,6 +117,7 @@ MainPage.propTypes = {
     city: PropTypes.string.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
+  city: PropTypes.string.isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
 };
