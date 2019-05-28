@@ -8,10 +8,12 @@ import dataOffers from './mocks/offers';
 import {reducer} from './reducer.js';
 
 const init = () => {
-  const store = createStore(reducer);
+  const store = createStore(reducer, {
+    city: dataOffers[0] ? dataOffers[0].city : `No cities`,
+    listOffers: dataOffers,
+  });
 
   const settings = {
-    offers: dataOffers,
     onClickTitleCard: (id) => {
       // eslint-disable-next-line no-console
       console.log(`CLICK on title card #${id}`);

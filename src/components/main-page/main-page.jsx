@@ -6,14 +6,14 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import ListCities from '../list-cities/list-cities.jsx';
 
 const MainPage = (props) => {
-  const {offers, onClickTitleCard, onClickImageCard, city} = props;
-
-  const listCities = [];
-  offers.forEach((offer) => {
-    if (listCities.indexOf(offer.city) < 0 && listCities.length < 6) {
-      listCities.push(offer.city);
-    }
-  });
+  const {
+    offers,
+    city,
+    listCities,
+    onClickTitleCard,
+    onClickImageCard,
+    onCityClick
+  } = props;
 
   return <React.Fragment>
     <div style={{display: `none`}}>
@@ -65,6 +65,7 @@ const MainPage = (props) => {
         <ListCities
           selectedCity = {city}
           listCities = {listCities}
+          onCityClick = {onCityClick}
         />
       </div>
       <div className="cities__places-wrapper">
@@ -118,8 +119,10 @@ MainPage.propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   city: PropTypes.string.isRequired,
+  listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;

@@ -1,12 +1,12 @@
 const initialState = {
-  city: `Minsk`,
+  city: `No cities`,
   listOffers: [],
 };
 
 const getListOffers = (listAllOffers, city) =>
   listAllOffers.filter((offer) => offer.city === city);
 
-const ActionCreators = {
+const ActionCreator = {
   changeCity: (newCity) => ({
     type: `CHANGE_CITY`,
     payload: newCity,
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) =>{
 };
 
 export {
-  ActionCreators,
+  ActionCreator,
   getListOffers,
   reducer,
 };
