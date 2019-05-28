@@ -7,6 +7,7 @@ export default [
     title: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
     rating: 95,
+    city: `Minsk`,
     coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
@@ -17,6 +18,7 @@ export default [
     title: `Wood and stone place`,
     type: `Room`,
     rating: 70,
+    city: `Minsk`,
     coordinates: [52.369553943508, 4.85309666406198],
   },
   {
@@ -27,6 +29,7 @@ export default [
     title: `Canal View Prinsengracht`,
     type: `House`,
     rating: 40,
+    city: `Praga`,
     coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
@@ -37,6 +40,7 @@ export default [
     title: `Nice, cozy, warm big bed apartment`,
     type: `Hotel`,
     rating: 80,
+    city: `London`,
     coordinates: [52.3809553943508, 4.939309666406198],
   },
 ];
