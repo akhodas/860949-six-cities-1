@@ -55,6 +55,7 @@ CitiesMap.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
+    city: PropTypes.string.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
 };
