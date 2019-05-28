@@ -7,7 +7,7 @@ describe(`App`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
       .create(<App
-        offers = {[
+        listOffers = {[
           {
             id: 0,
             image: `path`,
@@ -23,6 +23,8 @@ describe(`App`, () => {
         city = {`Minsk`}
         onClickTitleCard = {jest.fn()}
         onClickImageCard = {jest.fn()}
+        onCityClick = {jest.fn()}
+        addOffers = {jest.fn()}
       />)
       .toJSON();
 
