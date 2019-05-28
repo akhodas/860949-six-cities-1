@@ -24,7 +24,6 @@ describe(`App`, () => {
         onClickTitleCard = {jest.fn()}
         onClickImageCard = {jest.fn()}
         onCityClick = {jest.fn()}
-        addOffers = {jest.fn()}
       />)
       .toJSON();
 

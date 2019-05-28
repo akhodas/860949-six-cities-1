@@ -51,7 +51,6 @@ App.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  addOffers: PropTypes.func.isRequired,
 };
 
 
@@ -65,9 +64,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (newCity) => {
     dispatch(ActionCreator.changeCity(newCity));
-  },
-  addOffers: (offers) => {
-    dispatch(ActionCreator.addListOffers(offers));
   },
 });
 

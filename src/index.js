@@ -5,13 +5,14 @@ import {Provider} from 'react-redux';
 
 import App from './components/app/app.jsx';
 import dataOffers from './mocks/offers';
-import {reducer} from './reducer.js';
+import {reducer, ActionCreator} from './reducer.js';
 
 const init = () => {
   const store = createStore(reducer, {
     city: dataOffers[0] ? dataOffers[0].city : `No cities`,
-    listOffers: dataOffers,
   });
+
+  store.dispatch(ActionCreator.addListOffers(dataOffers));
 
   const settings = {
     onClickTitleCard: (id) => {
