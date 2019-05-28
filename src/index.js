@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
 
 import App from './components/app/app.jsx';
 import dataOffers from './mocks/offers';
+import {reducer} from './reducer.js';
 
 const init = () => {
+  const store = createStore(reducer)
+
   const settings = {
     offers: dataOffers,
     onClickTitleCard: (id) => {
