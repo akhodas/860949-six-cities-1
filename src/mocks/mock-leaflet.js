@@ -16,6 +16,12 @@ const mockLeaflet = {
     return {
       addTo: jest.fn(),
     };
+  },
+  LayerGroup() {
+    return {
+      addTo: jest.fn(),
+      addLayer: jest.fn(),
+    };
   }
 };
 

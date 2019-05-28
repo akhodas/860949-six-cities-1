@@ -5,6 +5,10 @@ import leaflet from 'leaflet';
 class CitiesMap extends React.PureComponent {
   constructor(props) {
     super(props);
+
+    this._map = null;
+    this._icon = null;
+    this._markersLayer = null;
   }
 
   render() {
@@ -17,30 +21,53 @@ class CitiesMap extends React.PureComponent {
     const {offers} = this.props;
 
     const city = [52.38333, 4.9];
-    const icon = leaflet.icon({
+
+    this._icon = leaflet.icon({
       iconUrl: `img/icon-markermap.svg`,
       iconSize: [30, 30]
     });
 
     const zoom = 12;
 
-    const map = leaflet.map(`map`, {
+    this._map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
 
-    map.setView(city, zoom);
+    this._map.setView(city, zoom);
 
     leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    }).addTo(map);
+    }).addTo(this._map);
+
+    this._markersLayer = new leaflet.LayerGroup();
+    this._markersLayer.addTo(this._map);
 
     offers.forEach((offer) => {
-      leaflet
-      .marker(offer.coordinates, {icon})
-      .addTo(map);
+      this._markersLayer.addLayer(
+          leaflet
+          .marker(offer.coordinates, {icon: this._icon})
+          .addTo(this._map));
+    });
+  }
+
+  componentDidUpdate() {
+    const {offers} = this.props;
+
+    const city = [52.38333, 4.91];
+    const zoom = 12.2;
+
+    this._map.setView(city, zoom);
+
+    this._markersLayer.clearLayers();
+
+    offers.forEach((offer) => {
+      this._markersLayer.addLayer(
+          leaflet
+          .marker(offer.coordinates, {icon: this._icon})
+          .addTo(this._map));
     });
   }
 
