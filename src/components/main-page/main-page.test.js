@@ -16,11 +16,15 @@ describe(`MainPage`, () => {
           title: `title`,
           type: `type`,
           rating: 0,
+          city: `Minsk`,
           coordinates: [0, 0],
         }]
       }
-      onClickTitleCard={jest.fn()}
-      onClickImageCard={jest.fn()}
+      city = {`Minsk`}
+      listCities = {[`Minsk`]}
+      onClickTitleCard = {jest.fn()}
+      onClickImageCard = {jest.fn()}
+      onCityClick = {jest.fn()}
     />)
     .toJSON();
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import App from './app.jsx';
+import {App} from './app.jsx';
 
 describe(`App`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
       .create(<App
-        offers={[
+        listOffers = {[
           {
             id: 0,
             image: `path`,
@@ -16,11 +16,14 @@ describe(`App`, () => {
             title: `title`,
             type: `type`,
             rating: 0,
+            city: `Minsk`,
             coordinates: [0, 0],
           }]
         }
-        onClickTitleCard={jest.fn()}
-        onClickImageCard={jest.fn()}
+        city = {`Minsk`}
+        onClickTitleCard = {jest.fn()}
+        onClickImageCard = {jest.fn()}
+        onCityClick = {jest.fn()}
       />)
       .toJSON();
 

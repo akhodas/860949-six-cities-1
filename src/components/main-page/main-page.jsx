@@ -3,11 +3,19 @@ import PropTypes from 'prop-types';
 
 import ListOffers from '../list-offers/list-offers.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
+import ListCities from '../list-cities/list-cities.jsx';
 
 const MainPage = (props) => {
-  const {offers, onClickTitleCard, onClickImageCard} = props;
+  const {
+    offers,
+    city,
+    listCities,
+    onClickTitleCard,
+    onClickImageCard,
+    onCityClick
+  } = props;
 
-  return <div>
+  return <React.Fragment>
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
         <symbol id="icon-arrow-select" viewBox="0 0 7 4">
@@ -54,45 +62,17 @@ const MainPage = (props) => {
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="cities tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
-        </section></div>
+        <ListCities
+          selectedCity = {city}
+          listCities = {listCities}
+          onCityClick = {onCityClick}
+        />
+      </div>
       <div className="cities__places-wrapper">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in {city}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -109,21 +89,21 @@ const MainPage = (props) => {
               </ul>
             </form>
             <ListOffers
-              offers={offers}
-              onClickTitleCard={onClickTitleCard}
-              onClickImageCard={onClickImageCard}
+              offers = {offers}
+              onClickTitleCard = {onClickTitleCard}
+              onClickImageCard = {onClickImageCard}
             />
           </section>
           <div className="cities__right-section">
             <CitiesMap
-              offers={offers}
+              offers = {offers}
             />
           </div>
         </div>
       </div>
 
     </main>
-  </div>;
+  </React.Fragment>;
 };
 
 MainPage.propTypes = {
@@ -135,10 +115,14 @@ MainPage.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
+    city: PropTypes.string.isRequired,
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
+  city: PropTypes.string.isRequired,
+  listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 export default MainPage;
