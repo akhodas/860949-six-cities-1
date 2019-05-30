@@ -8,9 +8,13 @@ import dataOffers from './mocks/offers';
 import {reducer, ActionCreator} from './reducer.js';
 
 const init = () => {
-  const store = createStore(reducer, {
-    city: dataOffers[0] ? dataOffers[0].city : `No cities`,
-  });
+  const store = createStore(
+      reducer,
+      {
+        city: dataOffers[0] ? dataOffers[0].city : `No cities`,
+      },
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
   store.dispatch(ActionCreator.addListOffers(dataOffers));
 

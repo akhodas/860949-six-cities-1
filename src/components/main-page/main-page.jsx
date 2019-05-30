@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ListOffers from '../list-offers/list-offers.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import ListCities from '../list-cities/list-cities.jsx';
+import ListOffers from '../list-offers/list-offers.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
+
+const ListOffersWrapped = withActiveItem(ListOffers);
 
 const MainPage = (props) => {
   const {
@@ -16,7 +19,7 @@ const MainPage = (props) => {
   } = props;
 
   return <React.Fragment>
-    <div style={{display: `none`}}>
+    <div style = {{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
         <symbol id="icon-arrow-select" viewBox="0 0 7 4">
           <path fillRule="evenodd"
@@ -88,7 +91,7 @@ const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <ListOffers
+            <ListOffersWrapped
               offers = {offers}
               onClickTitleCard = {onClickTitleCard}
               onClickImageCard = {onClickImageCard}

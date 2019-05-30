@@ -18,8 +18,9 @@ describe(`ListOffers`, () => {
               rating: 0,
             }]
           }
-          onClickTitleCard={jest.fn()}
-          onClickImageCard={jest.fn()}
+          onClickTitleCard = {jest.fn()}
+          onClickImageCard = {jest.fn()}
+          onItemActivate = {jest.fn()}
         />)
         .toJSON();
 
