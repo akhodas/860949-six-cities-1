@@ -4,27 +4,9 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 
 class ListOffers extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: {},
-    };
-
-    this._handleCardActivate = this._handleCardActivate.bind(this);
-  }
-
-  _handleCardActivate(e, card) {
-    this.setState({activeCard: card});
-    // eslint-disable-next-line no-console
-    console.log(`Activate card #${card.id}`);
-    // eslint-disable-next-line no-console
-    console.log(`Title last ativate card: "${
-      this.state.activeCard.title}"!!! (because "setState" asynk)`);
-  }
 
   render() {
-    const {offers, onClickTitleCard, onClickImageCard} = this.props;
+    const {offers, onClickTitleCard, onClickImageCard, onItemActivate} = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((item) => <OfferCard
@@ -33,7 +15,7 @@ class ListOffers extends React.PureComponent {
         onClickTitleCard={onClickTitleCard}
         onClickImageCard={onClickImageCard}
         onHoverCard={(e) => {
-          this._handleCardActivate(e, item);
+          onItemActivate(item, e);
         }}
       />)
       }
@@ -53,6 +35,7 @@ ListOffers.propTypes = {
   })).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
+  onItemActivate: PropTypes.func.isRequired,
 };
 
 export default ListOffers;
