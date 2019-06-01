@@ -7,7 +7,7 @@ export default class ModelOffer {
       location: {
         latitude: 0,
         longitude: 0,
-        zoom: 1
+        zoom: 1,
       }
     };
     this.previewImage = data ? data.preview_image : undefined;
@@ -21,17 +21,22 @@ export default class ModelOffer {
     this.maxAdults = data ? data.max_adults : 0;
     this.price = data ? data.price : 0;
     this.goods = data ? data.goods : [``];
-    this.host = data ? data.host : {
+    this.host = data ? {
+      id: data.host.id,
+      isPro: data.host.is_pro,
+      name: data.host.name,
+      avatarUrl: data.host.avatar_url,
+    } : {
       id: undefined,
       isPro: false,
       name: ``,
-      avatarUrl: ``
+      avatarUrl: ``,
     };
     this.description = data ? data.description : ``;
     this.location = data ? data.location : {
       latitude: 0,
       longitude: 0,
-      zoom: 1
+      zoom: 1,
     };
   }
 
