@@ -2,8 +2,10 @@ import {connect} from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ActionCreator} from '../../reducer/user/user';
 import MainPage from '../main-page/main-page.jsx';
+import {ActionCreator} from '../../reducer/user/user';
+import {getOffers} from '../../reducer/data/selectors';
+import {getCity} from '../../reducer/user/selectors';
 
 
 const App = (props) => {
@@ -79,11 +81,11 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    city: (state.user.city === `No cities` && state.data.listOffers[0]) ?
-      state.data.listOffers[0].city.name
+    city: (getCity(state) === `No cities` && getOffers(state)[0]) ?
+      getOffers(state)[0].city.name
       :
-      state.user.city,
-    listOffers: state.data.listOffers,
+      getCity(state),
+    listOffers: getOffers(state),
   });
 };
 
