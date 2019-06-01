@@ -6,20 +6,19 @@ import {compose} from 'recompose';
 import {Provider} from 'react-redux';
 
 import App from './components/app/app.jsx';
-import dataOffers from './mocks/offers';
-import {ActionCreator, Operation, reducer} from './reducer.js';
+// import dataOffers from './mocks/offers';
+import {ActionCreator, Operation} from './reducer/data/data';
+import reducer from './reducer/index';
 import {createAPI} from './api';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
 
-  const store = createStore(
-      reducer,
-      compose(
-          applyMiddleware(thunk.withExtraArgument(api)),
-          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-      )
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const enhancer = composeEnhancers(
+      applyMiddleware(thunk.withExtraArgument(api))
   );
+  const store = createStore(reducer, enhancer);
 
   store.dispatch(Operation.loadQuestions());
   // store.dispatch(ActionCreator.addListOffers(dataOffers));

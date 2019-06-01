@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/user/user';
 import MainPage from '../main-page/main-page.jsx';
 
 
@@ -79,11 +79,11 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    city: (state.city === `No cities` && state.listOffers[0]) ?
-      state.listOffers[0].city.name
+    city: (state.user.city === `No cities` && state.data.listOffers[0]) ?
+      state.data.listOffers[0].city.name
       :
-      state.city,
-    listOffers: state.listOffers,
+      state.user.city,
+    listOffers: state.data.listOffers,
   });
 };
 
