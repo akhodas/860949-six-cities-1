@@ -8,20 +8,29 @@ export const getOffers = (state) => {
   return state[NAMESPACES].listOffers;
 };
 
-// export const getOffersForCity = createSelector(
-//     getOffers,
-//     (offers) => offers.filter((offer) => offer.city.name === `Berlin`)
-// );
+
+export const getCities = createSelector(
+    getOffers,
+    (offers) => {
+      const listCities = [];
+      offers.forEach((offer) => {
+        if (listCities.indexOf(offer.city.name) < 0 && listCities.length < 6) {
+          listCities.push(offer.city.name);
+        }
+      });
+      return listCities;
+    }
+);
 
 
-// const randomFilter = (_state) => {
-//   return Math.random() > 0.5;
-// };
+const cityFilter = (state, city) => {
+  return city;
+};
 
-// export const getRandomArtistQuestions = createSelector(
-//     getOffers,
-//     randomFilter,
-//     (resultOne, resultTwo) => {
-//       return resultOne.filter((it) => resultTwo && it.type === `Berlin`);
-//     }
-// );
+export const getOffersForCity = createSelector(
+    getOffers,
+    cityFilter,
+    (resultOne, resultTwo) => {
+      return resultOne.filter((it) => it.city.name === resultTwo);
+    }
+);

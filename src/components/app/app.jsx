@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import MainPage from '../main-page/main-page.jsx';
 import {ActionCreator} from '../../reducer/user/user';
-import {getOffers} from '../../reducer/data/selectors';
+import {getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
 import {getCity} from '../../reducer/user/selectors';
 
 
@@ -13,21 +13,14 @@ const App = (props) => {
     onClickTitleCard,
     onClickImageCard,
     city,
+    listCities,
     listOffers,
     onCityClick,
   } = props;
 
-  const listOffersForCity = listOffers.filter((offer) => city === offer.city.name);
-
-  const listCities = [];
-  listOffers.forEach((offer) => {
-    if (listCities.indexOf(offer.city.name) < 0 && listCities.length < 6) {
-      listCities.push(offer.city.name);
-    }
-  });
 
   return <MainPage
-    offers = {listOffersForCity}
+    offers = {listOffers}
     city = {city}
     listCities = {listCities}
     onClickTitleCard = {onClickTitleCard}
@@ -73,6 +66,7 @@ App.propTypes = {
     }).isRequired,
   }).isRequired).isRequired,
   city: PropTypes.string.isRequired,
+  listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
@@ -80,12 +74,12 @@ App.propTypes = {
 
 
 const mapStateToProps = (state, ownProps) => {
+  const newCity = (getCity(state) === `No cities` && getOffers(state)[0]) ?
+    getOffers(state)[0].city.name : getCity(state);
   return Object.assign({}, ownProps, {
-    city: (getCity(state) === `No cities` && getOffers(state)[0]) ?
-      getOffers(state)[0].city.name
-      :
-      getCity(state),
-    listOffers: getOffers(state),
+    city: newCity,
+    listCities: getCities(state),
+    listOffers: getOffersForCity(state, newCity),
   });
 };
 
