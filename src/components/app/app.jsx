@@ -15,12 +15,12 @@ const App = (props) => {
     onCityClick,
   } = props;
 
-  const listOffersForCity = listOffers.filter((offer) => city === offer.city);
+  const listOffersForCity = listOffers.filter((offer) => city === offer.city.name);
 
   const listCities = [];
   listOffers.forEach((offer) => {
-    if (listCities.indexOf(offer.city) < 0 && listCities.length < 6) {
-      listCities.push(offer.city);
+    if (listCities.indexOf(offer.city.name) < 0 && listCities.length < 6) {
+      listCities.push(offer.city.name);
     }
   });
 
@@ -38,14 +38,20 @@ const App = (props) => {
 App.propTypes = {
   listOffers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+    }).isRequired,
   })).isRequired,
   city: PropTypes.string.isRequired,
   onClickTitleCard: PropTypes.func.isRequired,

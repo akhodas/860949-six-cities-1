@@ -48,7 +48,10 @@ class CitiesMap extends React.PureComponent {
     offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
-          .marker(offer.coordinates, {icon: this._icon})
+          .marker(
+              [offer.city.location.latitude, offer.city.location.longitude],
+              {icon: this._icon}
+          )
           .addTo(this._map));
     });
   }
@@ -66,7 +69,10 @@ class CitiesMap extends React.PureComponent {
     offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
-          .marker(offer.coordinates, {icon: this._icon})
+          .marker(
+              [offer.city.location.latitude, offer.city.location.longitude],
+              {icon: this._icon}
+          )
           .addTo(this._map));
     });
   }
@@ -76,14 +82,20 @@ class CitiesMap extends React.PureComponent {
 CitiesMap.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+    }).isRequired,
   })).isRequired,
 };
 

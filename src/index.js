@@ -11,7 +11,7 @@ const init = () => {
   const store = createStore(
       reducer,
       {
-        city: dataOffers[0] ? dataOffers[0].city : `No cities`,
+        city: dataOffers[0] ? dataOffers[0].city.name : `No cities`,
       },
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );

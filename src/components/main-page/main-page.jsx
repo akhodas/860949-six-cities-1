@@ -112,14 +112,20 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+    }).isRequired,
   })).isRequired,
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -9,12 +9,20 @@ describe(`OfferCard`, () => {
         offer={
           {
             id: 0,
-            image: `path`,
-            premium: true,
+            previewImage: `path`,
+            isPremium: true,
             price: 0,
             title: `title`,
             type: `type`,
             rating: 0,
+            city: {
+              name: `Minsk`,
+              location: {
+                latitude: 0,
+                longitude: 0,
+                zoom: 5,
+              },
+            },
           }
         }
         onClickTitleCard={jest.fn()}
