@@ -25,5 +25,6 @@ const reducer = (state = initialState, action) =>{
 
 export {
   ActionCreator,
+  ActionType,
   reducer,
 };

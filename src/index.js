@@ -6,8 +6,7 @@ import {compose} from 'recompose';
 import {Provider} from 'react-redux';
 
 import App from './components/app/app.jsx';
-// import dataOffers from './mocks/offers';
-import {ActionCreator, Operation} from './reducer/data/data';
+import {Operation} from './reducer/data/data';
 import reducer from './reducer/index';
 import {createAPI} from './api';
 
@@ -20,8 +19,7 @@ const init = () => {
   );
   const store = createStore(reducer, enhancer);
 
-  store.dispatch(Operation.loadQuestions());
-  // store.dispatch(ActionCreator.addListOffers(dataOffers));
+  store.dispatch(Operation.loadOffers());
 
   const settings = {
     onClickTitleCard: (id) => {

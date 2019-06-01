@@ -7,7 +7,7 @@ const initialState = {
 
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,
-  LOAD_QUESTIONS: `LOAD_QUESTIONS`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
 };
 
 const ActionCreator = {
@@ -16,16 +16,16 @@ const ActionCreator = {
     payload: list,
   }),
 
-  loadQuestions: (offers) => {
+  loadOffers: (offers) => {
     return {
-      type: ActionType.LOAD_QUESTIONS,
+      type: ActionType.LOAD_OFFERS,
       payload: offers,
     };
   },
 };
 
 const Operation = {
-  loadQuestions: () => (dispatch, _getState, api) => {
+  loadOffers: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
@@ -35,7 +35,7 @@ const Operation = {
         }
       })
       .then((response) => {
-        dispatch(ActionCreator.loadQuestions(ModelOffer.parseOffers(response.data)));
+        dispatch(ActionCreator.loadOffers(ModelOffer.parseOffers(response.data)));
       })
       .catch(alert);
   },
@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) =>{
         listOffers: action.payload,
       });
 
-    case ActionType.LOAD_QUESTIONS:
+    case ActionType.LOAD_OFFERS:
       return Object.assign({}, state, {
         listOffers: action.payload,
       });
@@ -58,6 +58,7 @@ const reducer = (state = initialState, action) =>{
 
 export {
   ActionCreator,
+  ActionType,
   Operation,
   reducer,
 };
