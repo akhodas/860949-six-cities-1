@@ -62,7 +62,10 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    city: state.city,
+    city: (state.city === `No cities` && state.listOffers[0]) ?
+      state.listOffers[0].city.name
+      :
+      state.city,
     listOffers: state.listOffers,
   });
 };
