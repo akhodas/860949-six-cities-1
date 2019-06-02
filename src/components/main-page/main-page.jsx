@@ -15,7 +15,8 @@ const MainPage = (props) => {
     listCities,
     onClickTitleCard,
     onClickImageCard,
-    onCityClick
+    onCityClick,
+    // logIn,
   } = props;
 
   return <React.Fragment>
@@ -50,10 +51,17 @@ const MainPage = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <a className="header__nav-link header__nav-link--profile"
+                  href="#"
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   logIn();
+                  // }}
+                >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  {/* <span className="header__login">Sign in</span> */}
                 </a>
               </li>
             </ul>

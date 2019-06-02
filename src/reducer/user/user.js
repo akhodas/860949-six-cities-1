@@ -77,7 +77,13 @@ const reducer = (state = initialState, action) =>{
       });
 
     case ActionType.ADD_USER_DATA:
-      return Object.assign({}, state, action.payload);
+      return Object.assign({}, state, {
+        id: action.payload.id,
+        email: action.payload.email,
+        name: action.payload.name,
+        avatarUrl: action.payload[`avatar_url`],
+        isPro: action.payload[`is_pro`],
+      });
 
     case ActionType.LOG_IN:
       return Object.assign({}, state, {
@@ -85,6 +91,8 @@ const reducer = (state = initialState, action) =>{
         id: action.payload.id,
         email: action.payload.email,
         name: action.payload.name,
+        avatarUrl: action.payload[`avatar_url`],
+        isPro: action.payload[`is_pro`],
       });
 
   }
