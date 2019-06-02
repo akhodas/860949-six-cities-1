@@ -3,9 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MainPage from '../main-page/main-page.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 import {ActionCreator} from '../../reducer/user/user';
 import {getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
-import {getCity} from '../../reducer/user/selectors';
+import {getCity, getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
 const App = (props) => {
@@ -16,17 +17,23 @@ const App = (props) => {
     listCities,
     listOffers,
     onCityClick,
+    isAuthorization,
   } = props;
 
+  if (isAuthorization) {
+    return <SignIn
+    />;
+  } else {
+    return <MainPage
+      offers = {listOffers}
+      city = {city}
+      listCities = {listCities}
+      onClickTitleCard = {onClickTitleCard}
+      onClickImageCard = {onClickImageCard}
+      onCityClick = {onCityClick}
+    />;
+  }
 
-  return <MainPage
-    offers = {listOffers}
-    city = {city}
-    listCities = {listCities}
-    onClickTitleCard = {onClickTitleCard}
-    onClickImageCard = {onClickImageCard}
-    onCityClick = {onCityClick}
-  />;
 };
 
 
@@ -80,6 +87,7 @@ const mapStateToProps = (state, ownProps) => {
     city: newCity,
     listCities: getCities(state),
     listOffers: getOffersForCity(state, newCity),
+    isAuthorization: getAuthorizationStatus(state),
   });
 };
 
@@ -87,6 +95,9 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (newCity) => {
     dispatch(ActionCreator.changeCity(newCity));
   },
+  logIn: () => {
+    dispatch();
+  }
 });
 
 

@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 
 import App from './components/app/app.jsx';
 import {Operation} from './reducer/data/data';
-import reducer from './reducer/index';
+import reducer from './reducer/reducer';
 import {createAPI} from './api';
 
 const init = () => {
