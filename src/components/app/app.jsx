@@ -2,8 +2,10 @@ import {connect} from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ActionCreator} from '../../reducer';
 import MainPage from '../main-page/main-page.jsx';
+import {ActionCreator} from '../../reducer/user/user';
+import {getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
+import {getCity} from '../../reducer/user/selectors';
 
 
 const App = (props) => {
@@ -11,21 +13,14 @@ const App = (props) => {
     onClickTitleCard,
     onClickImageCard,
     city,
+    listCities,
     listOffers,
     onCityClick,
   } = props;
 
-  const listOffersForCity = listOffers.filter((offer) => city === offer.city);
-
-  const listCities = [];
-  listOffers.forEach((offer) => {
-    if (listCities.indexOf(offer.city) < 0 && listCities.length < 6) {
-      listCities.push(offer.city);
-    }
-  });
 
   return <MainPage
-    offers = {listOffersForCity}
+    offers = {listOffers}
     city = {city}
     listCities = {listCities}
     onClickTitleCard = {onClickTitleCard}
@@ -38,16 +33,40 @@ const App = (props) => {
 App.propTypes = {
   listOffers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    isFavorite: false,
+    isPremium: false,
     rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })).isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired).isRequired,
   city: PropTypes.string.isRequired,
+  listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
@@ -55,9 +74,12 @@ App.propTypes = {
 
 
 const mapStateToProps = (state, ownProps) => {
+  const newCity = (getCity(state) === `No cities` && getOffers(state)[0]) ?
+    getOffers(state)[0].city.name : getCity(state);
   return Object.assign({}, ownProps, {
-    city: state.city,
-    listOffers: state.listOffers,
+    city: newCity,
+    listCities: getCities(state),
+    listOffers: getOffersForCity(state, newCity),
   });
 };
 

@@ -1,22 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import thunk from 'redux-thunk';
+import {applyMiddleware, createStore} from 'redux';
+import {compose} from 'recompose';
 import {Provider} from 'react-redux';
 
 import App from './components/app/app.jsx';
-import dataOffers from './mocks/offers';
-import {reducer, ActionCreator} from './reducer.js';
+import {Operation} from './reducer/data/data';
+import reducer from './reducer/index';
+import {createAPI} from './api';
 
 const init = () => {
-  const store = createStore(
-      reducer,
-      {
-        city: dataOffers[0] ? dataOffers[0].city : `No cities`,
-      },
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  const api = createAPI((...args) => store.dispatch(...args));
 
-  store.dispatch(ActionCreator.addListOffers(dataOffers));
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const enhancer = composeEnhancers(
+      applyMiddleware(thunk.withExtraArgument(api))
+  );
+  const store = createStore(reducer, enhancer);
+
+  store.dispatch(Operation.loadOffers());
 
   const settings = {
     onClickTitleCard: (id) => {

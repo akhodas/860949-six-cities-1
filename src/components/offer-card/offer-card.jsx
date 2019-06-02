@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 const OfferCard = (props) => {
   const {offer, onClickTitleCard, onClickImageCard, onHoverCard} = props;
-  const {id, image, premium, price, title, type, rating} = offer;
+  const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return <article
     className="cities__place-card place-card"
     onMouseEnter={onHoverCard}>
-    {premium ?
+    {isPremium ?
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
@@ -18,7 +18,7 @@ const OfferCard = (props) => {
         e.preventDefault();
         onClickImageCard(id);
       }}>
-        <img className="place-card__image" src={image} width="260" height="200" alt="Place image"></img>
+        <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"></img>
       </a>
     </div>
     <div className="place-card__info">
@@ -36,7 +36,7 @@ const OfferCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${rating}%`}}></span>
+          <span style={{width: `${(rating * 100 / 5)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -54,12 +54,37 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,

@@ -48,7 +48,10 @@ class CitiesMap extends React.PureComponent {
     offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
-          .marker(offer.coordinates, {icon: this._icon})
+          .marker(
+              [offer.city.location.latitude, offer.city.location.longitude],
+              {icon: this._icon}
+          )
           .addTo(this._map));
     });
   }
@@ -56,8 +59,8 @@ class CitiesMap extends React.PureComponent {
   componentDidUpdate() {
     const {offers} = this.props;
 
-    const city = [52.38333, 4.91];
-    const zoom = 12.2;
+    const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
+    const zoom = offers[0].city.zoom;
 
     this._map.setView(city, zoom);
 
@@ -66,7 +69,10 @@ class CitiesMap extends React.PureComponent {
     offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
-          .marker(offer.coordinates, {icon: this._icon})
+          .marker(
+              [offer.location.latitude, offer.location.longitude],
+              {icon: this._icon}
+          )
           .addTo(this._map));
     });
   }
@@ -76,15 +82,38 @@ class CitiesMap extends React.PureComponent {
 CitiesMap.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })).isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired).isRequired,
 };
 
 export default CitiesMap;
