@@ -20,12 +20,9 @@ const App = (props) => {
     listCities,
     listOffers,
     onCityClick,
-    // isAuthorization,
     logIn,
     isAuthorizationStatus,
   } = props;
-
-  // isAuthorization();
 
   if (isAuthorizationStatus) {
     return <SignInWrapped
@@ -85,7 +82,6 @@ App.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  // isAuthorization: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
 };
 
@@ -105,8 +101,6 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (newCity) => {
     dispatch(ActionCreator.changeCity(newCity));
   },
-
-  // isAuthorization: () => dispatch(Operation.addUserData()),
 
   logIn: (data) => dispatch(Operation.logIn(data)),
 });

@@ -86,6 +86,11 @@ const SignIn = (props) => {
   );
 };
 
-SignIn.propTypes = {};
+SignIn.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  logIn: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default SignIn;
