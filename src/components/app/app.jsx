@@ -7,10 +7,11 @@ import SignIn from '../sign-in/sign-in.jsx';
 import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
 import {ActionCreator, Operation} from '../../reducer/user/user';
 import {getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
-import {getCity, getAuthorizationStatus} from '../../reducer/user/selectors';
+import {getCity, getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
 
 
 const SignInWrapped = withAuthorization(SignIn);
+let redirectStatus = false;
 
 const App = (props) => {
   const {
@@ -20,13 +21,19 @@ const App = (props) => {
     listCities,
     listOffers,
     onCityClick,
+    redirect,
     logIn,
     isAuthorizationStatus,
+    emailUser,
   } = props;
 
-  if (isAuthorizationStatus) {
+
+  if (redirectStatus) {
     return <SignInWrapped
-      logIn = {logIn}
+      logIn = {(e) => {
+        redirectStatus = false;
+        logIn(e);
+      }}
     />;
   } else {
     return <MainPage
@@ -36,6 +43,14 @@ const App = (props) => {
       onClickTitleCard = {onClickTitleCard}
       onClickImageCard = {onClickImageCard}
       onCityClick = {onCityClick}
+      redirect = {() => {
+        if (emailUser === `Oliver.conner@gmail.com`) {
+          redirectStatus = true;
+          redirect();
+        }
+      }}
+      isAuthorizationStatus = {isAuthorizationStatus}
+      emailUser = {emailUser}
     />;
   }
 
@@ -83,6 +98,8 @@ App.propTypes = {
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
+  emailUser: PropTypes.string.isRequired,
 };
 
 
@@ -90,6 +107,7 @@ const mapStateToProps = (state, ownProps) => {
   const newCity = (getCity(state) === `No cities` && getOffers(state)[0]) ?
     getOffers(state)[0].city.name : getCity(state);
   return Object.assign({}, ownProps, {
+    emailUser: getEmail(state),
     city: newCity,
     listCities: getCities(state),
     listOffers: getOffersForCity(state, newCity),
@@ -101,6 +119,8 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (newCity) => {
     dispatch(ActionCreator.changeCity(newCity));
   },
+
+  redirect: () => dispatch(ActionCreator.requireAuthorization(false)),
 
   logIn: (data) => dispatch(Operation.logIn(data)),
 });

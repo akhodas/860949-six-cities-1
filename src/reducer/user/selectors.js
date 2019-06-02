@@ -10,3 +10,7 @@ export const getCity = (state) => {
 export const getAuthorizationStatus = (state) => {
   return state[NAMESPACES].isAuthorizationRequired;
 };
+
+export const getEmail = (state) => {
+  return state[NAMESPACES].email;
+};

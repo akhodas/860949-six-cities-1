@@ -16,7 +16,9 @@ const MainPage = (props) => {
     onClickTitleCard,
     onClickImageCard,
     onCityClick,
-    // logIn,
+    redirect,
+    isAuthorizationStatus,
+    emailUser,
   } = props;
 
   return <React.Fragment>
@@ -53,15 +55,18 @@ const MainPage = (props) => {
               <li className="header__nav-item user">
                 <a className="header__nav-link header__nav-link--profile"
                   href="#"
-                  // onClick={(e) => {
-                  //   e.preventDefault();
-                  //   logIn();
-                  // }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    redirect();
+                  }}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  {/* <span className="header__login">Sign in</span> */}
+                  {isAuthorizationStatus ?
+                    <span className="header__login">Sign in</span>
+                    :
+                    <span className="header__user-name user__name">{emailUser}</span>
+                  }
                 </a>
               </li>
             </ul>
@@ -157,6 +162,9 @@ MainPage.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
+  isAuthorizationStatus: PropTypes.bool.isRequired,
+  emailUser: PropTypes.string.isRequired,
 };
 
 export default MainPage;

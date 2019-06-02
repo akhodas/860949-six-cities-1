@@ -48,6 +48,9 @@ describe(`MainPage`, () => {
       onClickTitleCard = {jest.fn()}
       onClickImageCard = {jest.fn()}
       onCityClick = {jest.fn()}
+      redirect = {jest.fn()}
+      isAuthorizationStatus = {false}
+      emailUser = {`email@email.com`}
     />)
     .toJSON();
 

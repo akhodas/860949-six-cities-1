@@ -49,6 +49,9 @@ describe(`App`, () => {
         onClickImageCard = {jest.fn()}
         onCityClick = {jest.fn()}
         logIn = {jest.fn()}
+        redirect = {jest.fn()}
+        isAuthorizationStatus = {false}
+        emailUser = {`email@email.com`}
       />)
       .toJSON();
 
