@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const {email, password, logIn, onChange} = props;
+
   return (
     <div className="page page--gray page--login">
       <div style={{display: `none`}}>
@@ -47,7 +49,10 @@ const SignIn = () => {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  required=""/>
+                  required=""
+                  value={email}
+                  onChange={onChange}
+                />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
@@ -56,9 +61,16 @@ const SignIn = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  required=""/>
+                  required=""
+                  value={password}
+                  onChange={onChange}
+                />
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button
+                className="login__submit form__submit button"
+                type="submit"
+                onClick = {logIn}
+              >Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

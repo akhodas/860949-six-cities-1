@@ -6,7 +6,8 @@ import {compose} from 'recompose';
 import {Provider} from 'react-redux';
 
 import App from './components/app/app.jsx';
-import {Operation} from './reducer/data/data';
+import {Operation as OperationData} from './reducer/data/data';
+import {Operation as OperationUser} from './reducer/user/user';
 import reducer from './reducer/reducer';
 import {createAPI} from './api';
 
@@ -19,7 +20,8 @@ const init = () => {
   );
   const store = createStore(reducer, enhancer);
 
-  store.dispatch(Operation.loadOffers());
+  store.dispatch(OperationUser.addUserData());
+  store.dispatch(OperationData.loadOffers());
 
   const settings = {
     onClickTitleCard: (id) => {

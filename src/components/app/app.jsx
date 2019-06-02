@@ -1,13 +1,16 @@
-import {connect} from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import {ActionCreator} from '../../reducer/user/user';
+import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
+import {ActionCreator, Operation} from '../../reducer/user/user';
 import {getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
 import {getCity, getAuthorizationStatus} from '../../reducer/user/selectors';
 
+
+const SignInWrapped = withAuthorization(SignIn);
 
 const App = (props) => {
   const {
@@ -17,11 +20,16 @@ const App = (props) => {
     listCities,
     listOffers,
     onCityClick,
-    isAuthorization,
+    // isAuthorization,
+    logIn,
+    isAuthorizationStatus,
   } = props;
 
-  if (isAuthorization) {
-    return <SignIn
+  // isAuthorization();
+
+  if (isAuthorizationStatus) {
+    return <SignInWrapped
+      logIn = {logIn}
     />;
   } else {
     return <MainPage
@@ -77,6 +85,8 @@ App.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
+  // isAuthorization: PropTypes.func.isRequired,
+  logIn: PropTypes.func.isRequired,
 };
 
 
@@ -87,7 +97,7 @@ const mapStateToProps = (state, ownProps) => {
     city: newCity,
     listCities: getCities(state),
     listOffers: getOffersForCity(state, newCity),
-    isAuthorization: getAuthorizationStatus(state),
+    isAuthorizationStatus: getAuthorizationStatus(state),
   });
 };
 
@@ -95,9 +105,10 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (newCity) => {
     dispatch(ActionCreator.changeCity(newCity));
   },
-  logIn: () => {
-    dispatch();
-  }
+
+  // isAuthorization: () => dispatch(Operation.addUserData()),
+
+  logIn: (data) => dispatch(Operation.logIn(data)),
 });
 
 
