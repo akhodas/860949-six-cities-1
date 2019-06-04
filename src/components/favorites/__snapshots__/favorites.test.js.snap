@@ -1,18 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Favorites correctly rendered 1`] = `
-<body
-  className="page"
->
+Array [
   <div
-    style="display: none"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
     >
       <symbol
         id="icon-arrow-select"
-        viewbox="0 0 7 4"
+        viewBox="0 0 7 4"
       >
         <path
           clipRule="evenodd"
@@ -22,7 +24,7 @@ exports[`Favorites correctly rendered 1`] = `
       </symbol>
       <symbol
         id="icon-bookmark"
-        viewbox="0 0 17 18"
+        viewBox="0 0 17 18"
       >
         <path
           d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"
@@ -30,7 +32,7 @@ exports[`Favorites correctly rendered 1`] = `
       </symbol>
       <symbol
         id="icon-star"
-        viewbox="0 0 13 12"
+        viewBox="0 0 13 12"
       >
         <path
           clipRule="evenodd"
@@ -39,7 +41,7 @@ exports[`Favorites correctly rendered 1`] = `
         />
       </symbol>
     </svg>
-  </div>
+  </div>,
   <header
     className="header"
   >
@@ -54,7 +56,8 @@ exports[`Favorites correctly rendered 1`] = `
         >
           <a
             className="header__logo-link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -76,7 +79,8 @@ exports[`Favorites correctly rendered 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/favorites"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -92,7 +96,7 @@ exports[`Favorites correctly rendered 1`] = `
         </nav>
       </div>
     </div>
-  </header>
+  </header>,
   <main
     className="page__main page__main--favorites"
   >
@@ -197,7 +201,11 @@ exports[`Favorites correctly rendered 1`] = `
                       className="place-card__stars rating__stars"
                     >
                       <span
-                        style="width: 100%"
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
                       />
                       <span
                         className="visually-hidden"
@@ -287,7 +295,11 @@ exports[`Favorites correctly rendered 1`] = `
                       className="place-card__stars rating__stars"
                     >
                       <span
-                        style="width: 80%"
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
                       />
                       <span
                         className="visually-hidden"
@@ -401,7 +413,11 @@ exports[`Favorites correctly rendered 1`] = `
                       className="place-card__stars rating__stars"
                     >
                       <span
-                        style="width: 100%"
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
                       />
                       <span
                         className="visually-hidden"
@@ -431,7 +447,7 @@ exports[`Favorites correctly rendered 1`] = `
         </ul>
       </section>
     </div>
-  </main>
+  </main>,
   <footer
     className="footer container"
   >
@@ -447,6 +463,6 @@ exports[`Favorites correctly rendered 1`] = `
         width="64"
       />
     </a>
-  </footer>
-</body>
+  </footer>,
+]
 `;

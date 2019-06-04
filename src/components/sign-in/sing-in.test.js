@@ -1,17 +1,21 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {MemoryRouter} from 'react-router';
 
 import SignIn from './sign-in.jsx';
 
 describe(`SignIn`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
-      .create(<SignIn
-        email={`email`}
-        password={`password`}
-        logIn={jest.fn()}
-        onChange={jest.fn()}
-      />)
+      .create(
+          <MemoryRouter>
+            <SignIn
+              email={`email`}
+              password={`password`}
+              logIn={jest.fn()}
+              onChange={jest.fn()}
+            />
+          </MemoryRouter>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
