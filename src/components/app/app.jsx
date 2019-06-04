@@ -1,18 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 import MainPage from '../main-page/main-page.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
-import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
-import {ActionCreator as ActionCreatorUser, Operation} from '../../reducer/user/user';
-import {getCity, getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
-import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
-
-
-const SignInWrapped = withAuthorization(SignIn);
-let redirectStatus = false;
 
 const App = (props) => {
   const {
@@ -20,46 +9,37 @@ const App = (props) => {
     onClickImageCard,
     city,
     listCities,
-    listOffers,
+    offers,
     onCityClick,
     redirect,
-    logIn,
     isAuthorizationStatus,
     emailUser,
   } = props;
 
 
-  if (redirectStatus) {
-    return <SignInWrapped
-      logIn = {(e) => {
-        redirectStatus = false;
-        logIn(e);
-      }}
-    />;
-  } else {
-    return <MainPage
-      offers = {listOffers}
-      city = {city}
-      listCities = {listCities}
-      onClickTitleCard = {onClickTitleCard}
-      onClickImageCard = {onClickImageCard}
-      onCityClick = {onCityClick}
-      redirect = {() => {
-        if (emailUser === `Oliver.conner@gmail.com`) {
-          redirectStatus = true;
-          redirect();
-        }
-      }}
-      isAuthorizationStatus = {isAuthorizationStatus}
-      emailUser = {emailUser}
-    />;
-  }
+  return <MainPage
+    offers = {offers}
+    city = {city}
+    listCities = {listCities}
+    onClickTitleCard = {onClickTitleCard}
+    onClickImageCard = {onClickImageCard}
+    onCityClick = {onCityClick}
+    redirect = {() => {
+      if (emailUser === `Oliver.conner@gmail.com`) {
+        // redirectStatus = true;
+        redirect();
+      }
+    }}
+    isAuthorizationStatus = {isAuthorizationStatus}
+    emailUser = {emailUser}
+  />;
+  // }
 
 };
 
 
 App.propTypes = {
-  listOffers: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -72,8 +52,8 @@ App.propTypes = {
     previewImage: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    isFavorite: false,
-    isPremium: false,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
@@ -92,40 +72,16 @@ App.propTypes = {
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }).isRequired,
-  }).isRequired).isRequired,
+  })).isRequired,
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  logIn: PropTypes.func.isRequired,
   redirect: PropTypes.func.isRequired,
+  isAuthorizationStatus: PropTypes.bool.isRequired,
   emailUser: PropTypes.string.isRequired,
 };
 
 
-const mapStateToProps = (state, ownProps) => {
-  const newCity = (getCity(state) === `No cities` && getOffers(state)[0]) ?
-    getOffers(state)[0].city.name : getCity(state);
-  return Object.assign({}, ownProps, {
-    emailUser: getEmail(state),
-    city: newCity,
-    listCities: getCities(state),
-    listOffers: getOffersForCity(state, newCity),
-    isAuthorizationStatus: getAuthorizationStatus(state),
-  });
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onCityClick: (newCity) => {
-    dispatch(ActionCreatorData.changeCity(newCity));
-  },
-
-  redirect: () => dispatch(ActionCreatorUser.requireAuthorization(false)),
-
-  logIn: (data) => dispatch(Operation.logIn(data)),
-});
-
-
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
