@@ -1,9 +1,9 @@
 import {combineReducers} from "redux";
 import {reducer as user} from "./user/user";
 import {reducer as data} from "./data/data";
-import Namespaces from "./namespaces";
+import Namespace from "./namespace";
 
 export default combineReducers({
-  [Namespaces.USER]: user,
-  [Namespaces.DATA]: data,
+  [Namespace.USER]: user,
+  [Namespace.DATA]: data,
 });

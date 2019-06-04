@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
-import {ActionCreator, Operation} from '../../reducer/user/user';
-import {getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
-import {getCity, getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
+import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
+import {ActionCreator as ActionCreatorUser, Operation} from '../../reducer/user/user';
+import {getCity, getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
+import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
 
 
 const SignInWrapped = withAuthorization(SignIn);
@@ -117,10 +118,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (newCity) => {
-    dispatch(ActionCreator.changeCity(newCity));
+    dispatch(ActionCreatorData.changeCity(newCity));
   },
 
-  redirect: () => dispatch(ActionCreator.requireAuthorization(false)),
+  redirect: () => dispatch(ActionCreatorUser.requireAuthorization(false)),
 
   logIn: (data) => dispatch(Operation.logIn(data)),
 });
