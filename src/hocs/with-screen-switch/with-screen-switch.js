@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 import {compose} from "recompose";
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
-// import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 
-// import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../../components/sign-in/sign-in.jsx';
 import withAuthorization from '../with-authorization/with-authorization.js';
+import Favorites from '../../components/favorites/favorites.jsx';
 import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
-import {ActionCreator as ActionCreatorUser, Operation} from '../../reducer/user/user';
+import {Operation as OperationUser} from '../../reducer/user/user';
 import {getCity, getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
-import App from '../../components/app/app.jsx';
 
 
 const SignInWrapped = withAuthorization(SignIn);
-let redirectStatus = false;
 
 const withScreenSwitch = (Component) => {
   class WithScreenSwitch extends React.PureComponent {
@@ -32,71 +29,45 @@ const withScreenSwitch = (Component) => {
         listCities,
         listOffers,
         onCityClick,
-        redirect,
         logIn,
         isAuthorizationStatus,
+        controlAuthorization,
         emailUser,
       } = this.props;
 
-      // console.log(listOffers);
 
+      return (
+        <Switch>
+          <Route path='/' exact render={() => (
+            <Component
+              offers = {listOffers}
+              city = {city}
+              listCities = {listCities}
+              onClickTitleCard = {onClickTitleCard}
+              onClickImageCard = {onClickImageCard}
+              onCityClick = {onCityClick}
+              isAuthorizationStatus = {isAuthorizationStatus}
+              controlAuthorization = {controlAuthorization}
+              emailUser = {emailUser}
+            />
+          )} />
 
-      // return (
-      //   <Switch>
-      //     <Route path='/' exact render={() => (
-      //       <Component
-      //         // {...this.props}
-      //         offers = {listOffers}
-      //         city = {city}
-      //         listCities = {listCities}
-      //         onClickTitleCard = {onClickTitleCard}
-      //         onClickImageCard = {onClickImageCard}
-      //         onCityClick = {onCityClick}
-      //         redirect = {() => {
-      //           if (emailUser === `Oliver.conner@gmail.com`) {
-      //             // redirectStatus = true;
-      //             redirect();
-      //           }
-      //         }}
-      //         isAuthorizationStatus = {isAuthorizationStatus}
-      //         emailUser = {emailUser}
-      //       />
-      //     )} />
-      //     <Route path='/login' exact render={() => (
-      //       <SignInWrapped
-      //         logIn = {(e) => {
-      //           // redirectStatus = false;
-      //           logIn(e);
-      //         }}
-      //       />
-      //     )} />
-      //   </Switch>
-      // );
-      if (redirectStatus) {
-        return <SignInWrapped
-          logIn = {(e) => {
-            redirectStatus = false;
-            logIn(e);
-          }}
-        />;
-      } else {
-        return <App
-          offers = {listOffers}
-          city = {city}
-          listCities = {listCities}
-          onClickTitleCard = {onClickTitleCard}
-          onClickImageCard = {onClickImageCard}
-          onCityClick = {onCityClick}
-          redirect = {() => {
-            if (emailUser === `Oliver.conner@gmail.com`) {
-              redirectStatus = true;
-              redirect();
-            }
-          }}
-          isAuthorizationStatus = {isAuthorizationStatus}
-          emailUser = {emailUser}
-        />;
-      }
+          <Route path="/favorites" render={() => (
+            <Favorites
+              emailUser={emailUser}
+              isAuthorizationStatus = {isAuthorizationStatus}
+            />
+          )} />
+
+          <Route path='/login' exact render={() => (
+            <SignInWrapped
+              logIn = {logIn}
+            />
+          )} />
+
+        </Switch>
+      );
+
     }
   }
 
@@ -141,9 +112,9 @@ const withScreenSwitch = (Component) => {
     onClickImageCard: PropTypes.func.isRequired,
     onCityClick: PropTypes.func.isRequired,
     logIn: PropTypes.func.isRequired,
-    redirect: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
+    controlAuthorization: PropTypes.func.isRequired,
   };
 
   return WithScreenSwitch;
@@ -166,9 +137,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreatorData.changeCity(newCity));
   },
 
-  redirect: () => dispatch(ActionCreatorUser.requireAuthorization(false)),
+  controlAuthorization: () => {
+    dispatch(OperationUser.addUserData());
+  },
 
-  logIn: (data) => dispatch(Operation.logIn(data)),
+  logIn: (data) => {
+    dispatch(OperationUser.logIn(data));
+  },
 });
 
 

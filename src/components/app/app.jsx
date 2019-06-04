@@ -4,37 +4,9 @@ import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page.jsx';
 
 const App = (props) => {
-  const {
-    onClickTitleCard,
-    onClickImageCard,
-    city,
-    listCities,
-    offers,
-    onCityClick,
-    redirect,
-    isAuthorizationStatus,
-    emailUser,
-  } = props;
-
-
   return <MainPage
-    offers = {offers}
-    city = {city}
-    listCities = {listCities}
-    onClickTitleCard = {onClickTitleCard}
-    onClickImageCard = {onClickImageCard}
-    onCityClick = {onCityClick}
-    redirect = {() => {
-      if (emailUser === `Oliver.conner@gmail.com`) {
-        // redirectStatus = true;
-        redirect();
-      }
-    }}
-    isAuthorizationStatus = {isAuthorizationStatus}
-    emailUser = {emailUser}
+    {...props}
   />;
-  // }
-
 };
 
 
@@ -78,8 +50,8 @@ App.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  redirect: PropTypes.func.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
+  controlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
 };
 

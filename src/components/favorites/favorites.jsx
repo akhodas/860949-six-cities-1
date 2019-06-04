@@ -1,27 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link, Redirect} from 'react-router-dom';
 
 
 const Favorites = (props) => {
-  const {emailUser} = props;
+  const {emailUser, isAuthorizationStatus} = props;
+
+  if (isAuthorizationStatus) {
+    return <Redirect to="/login" />;
+  }
 
   return (
-    <body className="page">
-      <div style="display: none">
+    <React.Fragment>
+      <div style={{display: `none`}}>
         <svg xmlns="http://www.w3.org/2000/svg">
-          <symbol id="icon-arrow-select" viewbox="0 0 7 4">
+          <symbol id="icon-arrow-select" viewBox="0 0 7 4">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
               d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z">
             </path>
           </symbol>
-          <symbol id="icon-bookmark" viewbox="0 0 17 18">
+          <symbol id="icon-bookmark" viewBox="0 0 17 18">
             <path
               d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z">
             </path>
           </symbol>
-          <symbol id="icon-star" viewbox="0 0 13 12">
+          <symbol id="icon-star" viewBox="0 0 13 12">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -35,7 +40,7 @@ const Favorites = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -43,18 +48,18 @@ const Favorites = (props) => {
                   width="81"
                   height="41"
                 />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">
                       {emailUser}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -103,7 +108,7 @@ const Favorites = (props) => {
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style="width: 100%"></span>
+                          <span style={{width: `100%`}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -141,7 +146,7 @@ const Favorites = (props) => {
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style="width: 80%"></span>
+                          <span style={{width: `80%`}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -190,7 +195,7 @@ const Favorites = (props) => {
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style="width: 100%"></span>
+                          <span style={{width: `100%`}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -217,12 +222,13 @@ const Favorites = (props) => {
           />
         </a>
       </footer>
-    </body>
+    </React.Fragment>
   );
 };
 
 Favorites.propTypes = {
   emailUser: PropTypes.string.isRequired,
+  isAuthorizationStatus: PropTypes.bool.isRequired,
 };
 
 export default Favorites;
