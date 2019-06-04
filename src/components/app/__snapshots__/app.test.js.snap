@@ -78,6 +78,7 @@ Array [
               <a
                 className="header__nav-link header__nav-link--profile"
                 href="#"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -85,7 +86,7 @@ Array [
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  email@email.com
                 </span>
               </a>
             </li>

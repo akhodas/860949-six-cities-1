@@ -1,11 +1,16 @@
 import {createSelector} from "reselect";
-import Namespaces from "../namespaces";
+import Namespace from "../namespace";
 
-const NAMESPACES = Namespaces.DATA;
+const NAMESPACE = Namespace.DATA;
+
+
+export const getCity = (state) => {
+  return state[NAMESPACE].city;
+};
 
 
 export const getOffers = (state) => {
-  return state[NAMESPACES].listOffers;
+  return state[NAMESPACE].listOffers;
 };
 
 

@@ -1,8 +1,11 @@
-import Namespaces from "../namespaces";
+import Namespace from "../namespace";
 
-const NAMESPACES = Namespaces.USER;
+const NAMESPACE = Namespace.USER;
 
+export const getAuthorizationStatus = (state) => {
+  return state[NAMESPACE].isAuthorizationRequired;
+};
 
-export const getCity = (state) => {
-  return state[NAMESPACES].city;
+export const getEmail = (state) => {
+  return state[NAMESPACE].email;
 };
