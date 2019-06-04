@@ -7,7 +7,15 @@ import {
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
 
+
 describe(`Action creators work correctly`, () => {
+  it(`Action creator for change city returns correct action`, () => {
+    expect(ActionCreator.changeCity(`newCity`)).toEqual({
+      type: ActionType.CHANGE_CITY,
+      payload: `newCity`,
+    });
+  });
+
   it(`Action creator for add list offers returns correct action`, () => {
     expect(ActionCreator.addListOffers([{city: `Minsk`}])).toEqual({
       type: `ADD_LIST_OFFERS`,
@@ -20,7 +28,19 @@ describe(`Action creators work correctly`, () => {
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
+      city: `No cities`,
       listOffers: [],
+    });
+  });
+
+  it(`Reducer should change city by a given name`, () => {
+    expect(reducer({
+      city: `No cities`,
+    }, {
+      type: ActionType.CHANGE_CITY,
+      payload: `newCity`,
+    })).toEqual({
+      city: `newCity`,
     });
   });
 
