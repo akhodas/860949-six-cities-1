@@ -10,7 +10,7 @@ describe(`App`, () => {
       .create(
           <MemoryRouter>
             <App
-              offers = {[
+              listOffers = {[
                 {
                   id: 0,
                   city: {
@@ -51,10 +51,10 @@ describe(`App`, () => {
               onClickTitleCard = {jest.fn()}
               onClickImageCard = {jest.fn()}
               onCityClick = {jest.fn()}
-              redirect = {jest.fn()}
+              logIn = {jest.fn()}
+              emailUser = {`email@email.com`}
               isAuthorizationStatus = {false}
               controlAuthorization = {jest.fn}
-              emailUser = {`email@email.com`}
             />
           </MemoryRouter>)
       .toJSON();

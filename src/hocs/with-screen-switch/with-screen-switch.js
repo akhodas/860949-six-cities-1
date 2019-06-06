@@ -2,74 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {compose} from "recompose";
 import {connect} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
 
-import SignIn from '../../components/sign-in/sign-in.jsx';
-import withAuthorization from '../with-authorization/with-authorization.js';
-import Favorites from '../../components/favorites/favorites.jsx';
 import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import {getCity, getCities, getOffers, getOffersForCity} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
 
 
-const SignInWrapped = withAuthorization(SignIn);
-
 const withScreenSwitch = (Component) => {
-  class WithScreenSwitch extends React.PureComponent {
-    constructor(props) {
-      super(props);
-    }
-
-    render() {
-      const {
-        onClickTitleCard,
-        onClickImageCard,
-        city,
-        listCities,
-        listOffers,
-        onCityClick,
-        logIn,
-        isAuthorizationStatus,
-        controlAuthorization,
-        emailUser,
-      } = this.props;
-
-
-      return (
-        <Switch>
-          <Route path='/' exact render={() => (
-            <Component
-              offers = {listOffers}
-              city = {city}
-              listCities = {listCities}
-              onClickTitleCard = {onClickTitleCard}
-              onClickImageCard = {onClickImageCard}
-              onCityClick = {onCityClick}
-              isAuthorizationStatus = {isAuthorizationStatus}
-              controlAuthorization = {controlAuthorization}
-              emailUser = {emailUser}
-            />
-          )} />
-
-          <Route path="/favorites" render={() => (
-            <Favorites
-              emailUser={emailUser}
-              isAuthorizationStatus = {isAuthorizationStatus}
-            />
-          )} />
-
-          <Route path='/login' exact render={() => (
-            <SignInWrapped
-              logIn = {logIn}
-            />
-          )} />
-
-        </Switch>
-      );
-
-    }
-  }
+  const WithScreenSwitch = (props) => {
+    return <Component
+      {...props}
+    />;
+  };
 
   WithScreenSwitch.propTypes = {
     listOffers: PropTypes.arrayOf(PropTypes.shape({
