@@ -20,14 +20,17 @@ class CitiesMap extends React.PureComponent {
   componentDidMount() {
     const {offers} = this.props;
 
-    const city = [52.38333, 4.9];
+    const city = offers[0] ?
+      [offers[0].city.location.latitude, offers[0].city.location.longitude]
+      : [52.38333, 4.9];
+    const zoom = offers[0] ?
+      offers[0].city.location.zoom
+      : 12;
 
     this._icon = leaflet.icon({
       iconUrl: `img/icon-markermap.svg`,
       iconSize: [30, 30]
     });
-
-    const zoom = 12;
 
     this._map = leaflet.map(`map`, {
       center: city,
@@ -43,24 +46,25 @@ class CitiesMap extends React.PureComponent {
     }).addTo(this._map);
 
     this._markersLayer = new leaflet.LayerGroup();
-    this._markersLayer.addTo(this._map);
 
     offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
-          .marker(
-              [offer.city.location.latitude, offer.city.location.longitude],
-              {icon: this._icon}
-          )
-          .addTo(this._map));
+            .marker(
+                [offer.location.latitude, offer.location.longitude],
+                {icon: this._icon}
+            )
+            .addTo(this._map));
     });
+
+    this._markersLayer.addTo(this._map);
   }
 
   componentDidUpdate() {
     const {offers} = this.props;
 
     const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
-    const zoom = offers[0].city.zoom;
+    const zoom = offers[0].city.location.zoom;
 
     this._map.setView(city, zoom);
 
@@ -69,11 +73,11 @@ class CitiesMap extends React.PureComponent {
     offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
-          .marker(
-              [offer.location.latitude, offer.location.longitude],
-              {icon: this._icon}
-          )
-          .addTo(this._map));
+            .marker(
+                [offer.location.latitude, offer.location.longitude],
+                {icon: this._icon}
+            )
+            .addTo(this._map));
     });
   }
 

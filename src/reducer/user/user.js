@@ -1,9 +1,9 @@
 const initialState = {
   isAuthorizationRequired: false,
   id: 1,
-  email: `Oliver.conner@gmail.com`,
-  name: `Oliver.conner`,
-  avatarUrl: `img/1.png`,
+  email: `mail@gmail.com`,
+  name: `Name`,
+  avatarUrl: ``,
   isPro: false
 };
 
