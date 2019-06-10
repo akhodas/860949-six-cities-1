@@ -1,8 +1,9 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const OfferCard = (props) => {
-  const {offer, onClickTitleCard, onClickImageCard, onHoverCard} = props;
+const OfferCard = withRouter((props) => {
+  const {history, offer, onClickTitleCard, onClickImageCard, onHoverCard} = props;
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return <article
@@ -43,13 +44,13 @@ const OfferCard = (props) => {
       <h2 className="place-card__name">
         <a href="#" onClick={(e) => {
           e.preventDefault();
-          onClickTitleCard(id);
+          onClickTitleCard(history, id);
         }}>{title}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
   </article>;
-};
+});
 
 OfferCard.propTypes = {
   offer: PropTypes.shape({
@@ -89,6 +90,7 @@ OfferCard.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
   onHoverCard: PropTypes.func.isRequired,
+  history: PropTypes.object,
 };
 
 export default OfferCard;

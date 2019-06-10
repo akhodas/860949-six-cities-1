@@ -6,6 +6,7 @@ import Favorites from '../favorites/favorites.jsx';
 import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
+import Room from '../room/room.jsx';
 
 
 const SignInWrapped = withAuthorization(SignIn);
@@ -51,6 +52,11 @@ const App = (props) => {
       <Route path='/login' exact render={() => (
         <SignInWrapped
           logIn = {logIn}
+        />
+      )} />
+
+      <Route path='/offer/5' exact render={() => (
+        <Room
         />
       )} />
 
