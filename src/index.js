@@ -27,7 +27,7 @@ const init = () => {
 
   const settings = {
     onClickTitleCard: (history, id) => {
-      history.push(`/offer/5`);
+      history.push(`/offer/${id}`);
       // eslint-disable-next-line no-console
       console.log(`CLICK on title card #${id}`);
     },

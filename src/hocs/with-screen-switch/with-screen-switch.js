@@ -66,6 +66,7 @@ const withScreenSwitch = (Component) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps);
   const newCity = (getCity(state) === `No cities` && getOffers(state)[0]) ?
     getOffers(state)[0].city.name : getCity(state);
   return Object.assign({}, ownProps, {

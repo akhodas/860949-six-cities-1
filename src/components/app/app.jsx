@@ -55,8 +55,9 @@ const App = (props) => {
         />
       )} />
 
-      <Route path='/offer/5' exact render={() => (
+      <Route path='/offer/:roomId' exact render={() => (
         <Room
+          room = {`17`}
         />
       )} />
 
