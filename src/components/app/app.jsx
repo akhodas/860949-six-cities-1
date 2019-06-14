@@ -57,7 +57,9 @@ const App = (props) => {
 
       <Route path='/offer/:roomId' exact render={() => (
         <Room
-          room = {`17`}
+          emailUser={emailUser}
+          isAuthorizationStatus = {isAuthorizationStatus}
+          controlAuthorization = {controlAuthorization}
         />
       )} />
 

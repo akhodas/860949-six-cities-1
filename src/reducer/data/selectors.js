@@ -27,14 +27,6 @@ export const getCities = createSelector(
     }
 );
 
-export const getRoom = createSelector(
-    getOffers,
-    (state, id) => id,
-    (offers, id) => {
-      return offers.find((offer) => offer.id === id);
-    }
-);
-
 const cityFilter = (state, city) => {
   return city;
 };
