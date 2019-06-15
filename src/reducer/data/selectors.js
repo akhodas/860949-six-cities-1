@@ -9,6 +9,11 @@ export const getCity = (state) => {
 };
 
 
+export const getIsLoadData = (state) => {
+  return state[NAMESPACE].isLoadData;
+};
+
+
 export const getOffers = (state) => {
   return state[NAMESPACE].listOffers;
 };

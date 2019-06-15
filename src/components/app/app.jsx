@@ -24,6 +24,7 @@ const App = (props) => {
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
+    isLoadData,
   } = props;
 
   return (
@@ -60,6 +61,7 @@ const App = (props) => {
           emailUser={emailUser}
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
+          isLoadData = {isLoadData}
         />
       )} />
 
@@ -112,6 +114,7 @@ App.propTypes = {
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
+  isLoadData: PropTypes.bool.isRequired,
 };
 
 
