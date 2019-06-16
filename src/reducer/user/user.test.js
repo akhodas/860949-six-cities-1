@@ -10,7 +10,7 @@ import {
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
-      isAuthorizationRequired: false,
+      isAuthorizationRequired: true,
       id: 1,
       email: `mail@gmail.com`,
       name: `Name`,

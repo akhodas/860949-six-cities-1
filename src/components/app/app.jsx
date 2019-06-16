@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Redirect, Route} from 'react-router-dom';
 
 import Favorites from '../favorites/favorites.jsx';
 import MainPage from '../main-page/main-page.jsx';
@@ -47,16 +47,26 @@ const App = (props) => {
       )} />
 
       <Route path='/favorites' render={() => (
-        <Favorites
-          emailUser={emailUser}
-          isAuthorizationStatus = {isAuthorizationStatus}
-        />
+        isAuthorizationStatus ? (
+          <Redirect to='/login'/>
+        )
+          : (
+            <Favorites
+              emailUser={emailUser}
+              isAuthorizationStatus = {isAuthorizationStatus}
+            />
+          )
       )} />
 
       <Route path='/login' exact render={() => (
-        <SignInWrapped
-          logIn = {logIn}
-        />
+        isAuthorizationStatus ? (
+          <SignInWrapped
+            logIn = {logIn}
+          />
+        )
+          : (
+            <Redirect to='/'/>
+          )
       )} />
 
       <Route path='/offer/:roomId' exact render={() => (
