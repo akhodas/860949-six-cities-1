@@ -7,9 +7,11 @@ import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
 import Room from '../room/room.jsx';
+import withRoom from '../../hocs/with-room/with-room.js';
 
 
 const SignInWrapped = withAuthorization(SignIn);
+const RoomWrapped = withRoom(Room);
 
 
 const App = (props) => {
@@ -57,7 +59,7 @@ const App = (props) => {
       )} />
 
       <Route path='/offer/:roomId' exact render={() => (
-        <Room
+        <RoomWrapped
           emailUser={emailUser}
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}

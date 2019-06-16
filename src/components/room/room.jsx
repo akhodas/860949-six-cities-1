@@ -7,25 +7,28 @@ import PropTypes from 'prop-types';
 
 const Room = (props) => {
 
-  const {match,
-    getOffer,
+  const {
+    // match,
+    // getOffer,
     emailUser,
     controlAuthorization,
     isAuthorizationStatus,
     isLoadData,
+    images,
+    room,
   } = props;
 
-  let images = [];
-  let room = {};
+  // let images = [];
+  // let room = {};
 
-  if (isLoadData) {
-    room = getOffer(+match.params.roomId);
+  // if (isLoadData) {
+  //   room = getOffer(+match.params.roomId);
 
-    images = room.images.length > 5 ?
-      room.images.slice(0, 6)
-      : room.images;
+  //   images = room.images.length > 5 ?
+  //     room.images.slice(0, 6)
+  //     : room.images;
 
-  }
+  // }
 
   return (
     <React.Fragment>
@@ -341,24 +344,24 @@ const Room = (props) => {
 };
 
 Room.propTypes = {
-  match: PropTypes.object.isRequired,
-  getOffer: PropTypes.func.isRequired,
+  // match: PropTypes.object.isRequired,
+  // getOffer: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
   isLoadData: PropTypes.bool.isRequired,
+  room: PropTypes.object,
+  images: PropTypes.array,
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(`state`);
-  console.log(state);
   return Object.assign({}, ownProps, {
     getOffer: (id) => {
-      console.log(`state1`);
-      console.log(state);
       return getOffers(state).find((offer) => offer.id === id);
     }
   });
 };
+
+export {Room};
 
 export default connect(mapStateToProps)(withRouter(Room));

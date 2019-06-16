@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const OfferCard = withRouter((props) => {
+const OfferCard = (props) => {
   const {history, offer, onClickTitleCard, onClickImageCard, onHoverCard} = props;
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
@@ -50,7 +50,7 @@ const OfferCard = withRouter((props) => {
       <p className="place-card__type">{type}</p>
     </div>
   </article>;
-});
+};
 
 OfferCard.propTypes = {
   offer: PropTypes.shape({
@@ -93,4 +93,6 @@ OfferCard.propTypes = {
   history: PropTypes.object,
 };
 
-export default OfferCard;
+export {OfferCard};
+
+export default withRouter(OfferCard);
