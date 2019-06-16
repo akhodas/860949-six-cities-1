@@ -30,6 +30,7 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(undefined, {})).toEqual({
       city: `No cities`,
       listOffers: [],
+      isLoadData: false,
     });
   });
 
@@ -125,10 +126,18 @@ describe(`Reducer works correctly`, () => {
 
     return offerLoader(dispatch, jest.fn(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.CHECK_IS_LOAD,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_OFFERS,
           payload: [mockData],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.CHECK_IS_LOAD,
+          payload: true,
         });
       });
   });
@@ -137,23 +146,27 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       city: `No cities`,
       listOffers: [{city: `London`}],
+      isLoadData: false,
     }, {
       type: `ADD_LIST_OFFERS`,
       payload: [{city: `Minsk`}],
     })).toEqual({
       city: `No cities`,
       listOffers: [{city: `Minsk`}],
+      isLoadData: false,
     });
 
     expect(reducer({
       city: `No cities`,
       listOffers: [],
+      isLoadData: false,
     }, {
       type: `ADD_LIST_OFFERS`,
       payload: [{city: `Minsk`}],
     })).toEqual({
       city: `No cities`,
       listOffers: [{city: `Minsk`}],
+      isLoadData: false,
     });
 
   });

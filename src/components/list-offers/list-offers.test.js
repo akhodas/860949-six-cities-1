@@ -1,12 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {MemoryRouter} from 'react-router';
+
 
 import ListOffers from './list-offers.jsx';
 
 describe(`ListOffers`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
-        .create(<ListOffers
+        .create(<MemoryRouter> <ListOffers
           offers={[
             {
               id: 0,
@@ -46,7 +48,7 @@ describe(`ListOffers`, () => {
           onClickTitleCard = {jest.fn()}
           onClickImageCard = {jest.fn()}
           onItemActivate = {jest.fn()}
-        />)
+        /> </MemoryRouter>)
         .toJSON();
 
     expect(tree).toMatchSnapshot();

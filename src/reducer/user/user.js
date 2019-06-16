@@ -1,5 +1,5 @@
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   id: 1,
   email: `mail@gmail.com`,
   name: `Name`,

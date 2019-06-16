@@ -4,12 +4,14 @@ import ModelOffer from '../../model-offer';
 const initialState = {
   city: `No cities`,
   listOffers: [],
+  isLoadData: false,
 };
 
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  CHECK_IS_LOAD: `CHECK_IS_LOAD`,
 };
 
 const ActionCreator = {
@@ -24,6 +26,12 @@ const ActionCreator = {
   }),
 
 
+  checkIsLoad: (flag) => ({
+    type: ActionType.CHECK_IS_LOAD,
+    payload: flag,
+  }),
+
+
   loadOffers: (offers) => {
     return {
       type: ActionType.LOAD_OFFERS,
@@ -34,6 +42,7 @@ const ActionCreator = {
 
 const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
+    dispatch(ActionCreator.checkIsLoad(false));
     return api.get(`/hotels`)
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
@@ -44,6 +53,7 @@ const Operation = {
       })
       .then((response) => {
         dispatch(ActionCreator.loadOffers(ModelOffer.parseOffers(response.data)));
+        dispatch(ActionCreator.checkIsLoad(true));
       })
       .catch(alert);
   },
@@ -59,6 +69,11 @@ const reducer = (state = initialState, action) =>{
     case ActionType.CHANGE_CITY:
       return Object.assign({}, state, {
         city: action.payload,
+      });
+
+    case ActionType.CHECK_IS_LOAD:
+      return Object.assign({}, state, {
+        isLoadData: action.payload,
       });
 
     case ActionType.LOAD_OFFERS:

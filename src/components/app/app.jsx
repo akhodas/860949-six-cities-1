@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Redirect, Route} from 'react-router-dom';
 
 import Favorites from '../favorites/favorites.jsx';
 import MainPage from '../main-page/main-page.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
+import Room from '../room/room.jsx';
+import withRoom from '../../hocs/with-room/with-room.js';
 
 
 const SignInWrapped = withAuthorization(SignIn);
+const RoomWrapped = withRoom(Room);
 
 
 const App = (props) => {
@@ -23,6 +26,7 @@ const App = (props) => {
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
+    isLoadData,
   } = props;
 
   return (
@@ -38,19 +42,38 @@ const App = (props) => {
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
           emailUser = {emailUser}
+          isLoadData = {isLoadData}
         />
       )} />
 
       <Route path='/favorites' render={() => (
-        <Favorites
-          emailUser={emailUser}
-          isAuthorizationStatus = {isAuthorizationStatus}
-        />
+        isAuthorizationStatus ? (
+          <Redirect to='/login'/>
+        )
+          : (
+            <Favorites
+              emailUser={emailUser}
+            />
+          )
       )} />
 
       <Route path='/login' exact render={() => (
-        <SignInWrapped
-          logIn = {logIn}
+        isAuthorizationStatus ? (
+          <SignInWrapped
+            logIn = {logIn}
+          />
+        )
+          : (
+            <Redirect to='/'/>
+          )
+      )} />
+
+      <Route path='/offer/:roomId' exact render={() => (
+        <RoomWrapped
+          emailUser={emailUser}
+          isAuthorizationStatus = {isAuthorizationStatus}
+          controlAuthorization = {controlAuthorization}
+          isLoadData = {isLoadData}
         />
       )} />
 
@@ -103,6 +126,7 @@ App.propTypes = {
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
+  isLoadData: PropTypes.bool.isRequired,
 };
 
 

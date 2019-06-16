@@ -1,11 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {MemoryRouter} from 'react-router';
+
 import OfferCard from './offer-card.jsx';
 
 describe(`OfferCard`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
-      .create(<OfferCard
+      .create(<MemoryRouter> <OfferCard
         offer={
           {
             id: 0,
@@ -45,7 +47,7 @@ describe(`OfferCard`, () => {
         onClickTitleCard={jest.fn()}
         onClickImageCard={jest.fn()}
         onHoverCard={jest.fn()}
-      />)
+      /> </MemoryRouter>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

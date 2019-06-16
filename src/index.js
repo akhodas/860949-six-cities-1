@@ -26,7 +26,8 @@ const init = () => {
   store.dispatch(OperationData.loadOffers());
 
   const settings = {
-    onClickTitleCard: (id) => {
+    onClickTitleCard: (history, id) => {
+      history.push(`/offer/${id}`);
       // eslint-disable-next-line no-console
       console.log(`CLICK on title card #${id}`);
     },

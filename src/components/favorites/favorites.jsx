@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 const Favorites = (props) => {
-  const {emailUser, isAuthorizationStatus} = props;
-
-  if (isAuthorizationStatus) {
-    return <Redirect to="/login" />;
-  }
+  const {emailUser} = props;
 
   return (
     <React.Fragment>
@@ -228,7 +224,6 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   emailUser: PropTypes.string.isRequired,
-  isAuthorizationStatus: PropTypes.bool.isRequired,
 };
 
 export default Favorites;

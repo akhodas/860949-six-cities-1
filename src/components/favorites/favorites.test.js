@@ -12,7 +12,6 @@ describe(`Favorites`, () => {
             <MemoryRouter>
               <Favorites
                 emailUser={`email@email.ru`}
-                isAuthorizationStatus={false}
               />
             </MemoryRouter>
         )

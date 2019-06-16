@@ -9,6 +9,11 @@ export const getCity = (state) => {
 };
 
 
+export const getIsLoadData = (state) => {
+  return state[NAMESPACE].isLoadData;
+};
+
+
 export const getOffers = (state) => {
   return state[NAMESPACE].listOffers;
 };
@@ -26,7 +31,6 @@ export const getCities = createSelector(
       return listCities;
     }
 );
-
 
 const cityFilter = (state, city) => {
   return city;
