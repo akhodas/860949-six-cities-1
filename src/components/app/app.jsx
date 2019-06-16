@@ -53,7 +53,6 @@ const App = (props) => {
           : (
             <Favorites
               emailUser={emailUser}
-              isAuthorizationStatus = {isAuthorizationStatus}
             />
           )
       )} />
