@@ -42,6 +42,7 @@ const App = (props) => {
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
           emailUser = {emailUser}
+          isLoadData = {isLoadData}
         />
       )} />
 

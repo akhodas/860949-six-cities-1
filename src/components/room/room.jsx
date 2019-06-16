@@ -1,15 +1,11 @@
 import React from 'react';
-import {withRouter, Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getOffers} from '../../reducer/data/selectors';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
 const Room = (props) => {
 
   const {
-    // match,
-    // getOffer,
     emailUser,
     controlAuthorization,
     isAuthorizationStatus,
@@ -17,18 +13,6 @@ const Room = (props) => {
     images,
     room,
   } = props;
-
-  // let images = [];
-  // let room = {};
-
-  // if (isLoadData) {
-  //   room = getOffer(+match.params.roomId);
-
-  //   images = room.images.length > 5 ?
-  //     room.images.slice(0, 6)
-  //     : room.images;
-
-  // }
 
   return (
     <React.Fragment>
@@ -337,15 +321,25 @@ const Room = (props) => {
           </div>
         </main>
         :
-        <main className="page__main page__main--property">Loading</main>
+        <main className="page__main page__main--property">
+          <div style={{
+            display: `flex`,
+            width: `100%`,
+            height: `500px`,
+          }}>
+            <div style={{
+              margin: `auto`,
+            }}>
+              <h2>Loading...</h2>
+            </div>
+          </div>
+        </main>
       }
     </React.Fragment>
   );
 };
 
 Room.propTypes = {
-  // match: PropTypes.object.isRequired,
-  // getOffer: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
@@ -354,14 +348,4 @@ Room.propTypes = {
   images: PropTypes.array,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return Object.assign({}, ownProps, {
-    getOffer: (id) => {
-      return getOffers(state).find((offer) => offer.id === id);
-    }
-  });
-};
-
-export {Room};
-
-export default connect(mapStateToProps)(withRouter(Room));
+export default Room;
