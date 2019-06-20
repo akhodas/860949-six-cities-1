@@ -1,15 +1,18 @@
-import ModelOffer from '../../model-offer';
+import ModelOffer from '../../ModalData/model-offer';
+import ModelComment from '../../ModalData/modal-comment';
 
 
 const initialState = {
   city: `No cities`,
-  listOffers: [],
   isLoadData: false,
+  listComments: [],
+  listOffers: [],
 };
 
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
+  LOAD_OCOMMENTS: `LOAD_OCOMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   CHECK_IS_LOAD: `CHECK_IS_LOAD`,
 };
@@ -32,6 +35,14 @@ const ActionCreator = {
   }),
 
 
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
+
+
   loadOffers: (offers) => {
     return {
       type: ActionType.LOAD_OFFERS,
@@ -41,6 +52,20 @@ const ActionCreator = {
 };
 
 const Operation = {
+  loadComments: (hotelId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${hotelId}`)
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          throw new Error(`Ошибка загрузки данных комментариев. Повторите позже!`);
+        }
+      })
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
+      })
+      .catch(alert);
+  },
   loadOffers: () => (dispatch, _getState, api) => {
     dispatch(ActionCreator.checkIsLoad(false));
     return api.get(`/hotels`)
@@ -48,7 +73,7 @@ const Operation = {
         if (response.status >= 200 && response.status < 300) {
           return response;
         } else {
-          throw new Error(`Ошибка загрузки данных. Повторите позже!`);
+          throw new Error(`Ошибка загрузки данных отелей. Повторите позже!`);
         }
       })
       .then((response) => {
@@ -74,6 +99,11 @@ const reducer = (state = initialState, action) =>{
     case ActionType.CHECK_IS_LOAD:
       return Object.assign({}, state, {
         isLoadData: action.payload,
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return Object.assign({}, state, {
+        listComments: action.payload,
       });
 
     case ActionType.LOAD_OFFERS:

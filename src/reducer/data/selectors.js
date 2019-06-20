@@ -14,6 +14,10 @@ export const getIsLoadData = (state) => {
 };
 
 
+export const getComments = (state) => {
+  return state[NAMESPACE].listComments;
+};
+
 export const getOffers = (state) => {
   return state[NAMESPACE].listOffers;
 };
