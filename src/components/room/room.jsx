@@ -14,6 +14,7 @@ const Room = (props) => {
     isLoadData,
     images,
     room,
+    comments,
   } = props;
 
   return (
@@ -142,7 +143,9 @@ const Room = (props) => {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ListComments />
+                  <ListComments
+                    comments={comments}
+                  />
                 </section>
               </div>
             </div>
@@ -277,6 +280,7 @@ Room.propTypes = {
   isLoadData: PropTypes.bool.isRequired,
   room: PropTypes.object,
   images: PropTypes.array,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Room;

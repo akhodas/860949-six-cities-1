@@ -29,6 +29,7 @@ describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       city: `No cities`,
+      listComments: [],
       listOffers: [],
       isLoadData: false,
     });

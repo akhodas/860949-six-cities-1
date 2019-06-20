@@ -10,7 +10,7 @@ class ListOffers extends React.PureComponent {
 
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((item) => <OfferCard
-        key={item.id}
+        key={`offer-${item.id}`}
         offer={item}
         onClickTitleCard={onClickTitleCard}
         onClickImageCard={onClickImageCard}

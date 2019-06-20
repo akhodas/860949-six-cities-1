@@ -47,6 +47,7 @@ describe(`Room`, () => {
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
         isLoadData={true}
+        comments={[]}
       /> </MemoryRouter>)
       .toJSON();
 
@@ -95,6 +96,7 @@ describe(`Room`, () => {
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
         isLoadData={true}
+        comments={[]}
       /> </MemoryRouter>)
       .toJSON();
 

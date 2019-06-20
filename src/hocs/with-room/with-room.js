@@ -4,15 +4,26 @@ import {compose} from "recompose";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {getOffers} from '../../reducer/data/selectors';
+import {getOffers, getComments} from '../../reducer/data/selectors';
+import {Operation as OperationData} from '../../reducer/data/data';
 
 
 const withRoom = (Component) => {
   class WithRoom extends React.PureComponent {
+    componentDidMount() {
+      const {match, loadComments} = this.props;
+
+      console.log(`loadComments`);
+
+      loadComments(+match.params.roomId);
+    }
+
     render() {
-      const {match,
+      const {
+        match,
         getOffer,
         isLoadData,
+        comments,
       } = this.props;
 
       let room = {};
@@ -30,6 +41,7 @@ const withRoom = (Component) => {
         {...this.props}
         room={room}
         images={images}
+        comments={comments}
       />;
     }
 
@@ -41,7 +53,9 @@ const withRoom = (Component) => {
     emailUser: PropTypes.string.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,
+    loadComments: PropTypes.func.isRequired,
     isLoadData: PropTypes.bool.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 
   return withRouter(WithRoom);
@@ -51,12 +65,19 @@ const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     getOffer: (id) => {
       return getOffers(state).find((offer) => offer.id === id);
-    }
+    },
+    comments: getComments(state),
   });
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  loadComments: (id) => {
+    dispatch(OperationData.loadComments(id));
+  },
+});
+
 export {withRoom};
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     withRoom
 );

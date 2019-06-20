@@ -1,28 +1,32 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-import Comments from '../comment/comment.jsx';
+import Comment from '../comment/comment.jsx';
 
 
 const ListComments = (props) => {
 
   const {
-    // emailUser,
-    // controlAuthorization,
-    // isAuthorizationStatus,
-    // isLoadData,
-    // images,
-    // room,
+    comments,
   } = props;
 
   return (
     <React.Fragment>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <h2 className="reviews__title">
+        Reviews &middot;
+        <span className="reviews__amount">
+          {comments.length}
+        </span>
+      </h2>
       <ul className="reviews__list">
-        <Comments />
-        <Comments />
+        {comments.map((comment) =>
+          <Comment
+            key={`comment-${comment.id}`}
+            comment={comment}
+          />
+        )}
       </ul>
+
       <form className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
@@ -74,12 +78,7 @@ const ListComments = (props) => {
 };
 
 ListComments.propTypes = {
-  // emailUser: PropTypes.string.isRequired,
-  // isAuthorizationStatus: PropTypes.bool.isRequired,
-  // controlAuthorization: PropTypes.func.isRequired,
-  // isLoadData: PropTypes.bool.isRequired,
-  // room: PropTypes.object,
-  // images: PropTypes.array,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ListComments;

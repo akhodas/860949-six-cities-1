@@ -15,7 +15,7 @@ export default class ModelComment {
     };
     this.rating = data ? data.rating : 0;
     this.comment = data ? data.comment : `No comment`;
-    this.date = data ? data.date : `2019-05-08T14:13:56.569Z`;
+    this.date = data ? new Date(data.date) : new Date();
   }
 
 

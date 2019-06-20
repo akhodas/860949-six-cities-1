@@ -1,52 +1,73 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
+const Month = {
+  0: `January`,
+  1: `February`,
+  2: `March`,
+  3: `April`,
+  4: `May`,
+  5: `June`,
+  6: `July`,
+  7: `August`,
+  8: `September`,
+  9: `October`,
+  10: `November`,
+  11: `December`,
+};
 
-const Comments = (props) => {
+const Comment = (props) => {
 
   const {
-    // emailUser,
-    // controlAuthorization,
-    // isAuthorizationStatus,
-    // isLoadData,
-    // images,
-    // room,
+    comment,
   } = props;
 
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="../img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
+          <img
+            className="reviews__avatar user__avatar"
+            src={comment.user.avatarUrl}
+            width="54"
+            height="54"
+            alt="Reviews avatar"/>
         </div>
         <span className="reviews__user-name">
-                      Max
+          {comment.user.name}
         </span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `94%`}}></span>
+            <span style={{width: `${(comment.rating * 100 / 5)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+          {comment.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime="2019-04-24">
+          {`${Month[comment.date.getMonth()]} ${comment.date.getFullYear()}`}
+        </time>
       </div>
     </li>
   );
 };
 
-Comments.propTypes = {
-  // emailUser: PropTypes.string.isRequired,
-  // isAuthorizationStatus: PropTypes.bool.isRequired,
-  // controlAuthorization: PropTypes.func.isRequired,
-  // isLoadData: PropTypes.bool.isRequired,
-  // room: PropTypes.object,
-  // images: PropTypes.array,
+Comment.propTypes = {
+  comment: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
-export default Comments;
+export default Comment;
