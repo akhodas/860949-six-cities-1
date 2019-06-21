@@ -13,8 +13,6 @@ const withRoom = (Component) => {
     componentDidMount() {
       const {match, loadComments} = this.props;
 
-      console.log(`loadComments`);
-
       loadComments(+match.params.roomId);
     }
 

@@ -19,7 +19,7 @@ const ListComments = (props) => {
         </span>
       </h2>
       <ul className="reviews__list">
-        {comments.map((comment) =>
+        {comments.slice(0, 10).map((comment) =>
           <Comment
             key={`comment-${comment.id}`}
             comment={comment}
