@@ -47,7 +47,7 @@ export const getOffersNear = createSelector(
     getOffers,
     cityFilter,
     (resultOne, resultTwo) => {
-      return resultOne.filter((it) => it.city.name === resultTwo).slice(0, 3);
+      return resultOne.filter((it) => it.city.name === resultTwo).slice(1, 4);
     }
 );
 

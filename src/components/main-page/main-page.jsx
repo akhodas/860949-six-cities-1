@@ -121,6 +121,7 @@ const MainPage = (props) => {
             </section>
             <div className="cities__right-section">
               <CitiesMap
+                currentOffer = {null}
                 offers = {offers}
                 styleClassNames = {[
                   `cities`,

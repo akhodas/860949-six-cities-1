@@ -7,22 +7,36 @@ class CitiesMap extends React.PureComponent {
     super(props);
 
     this._map = null;
-    this._icon = null;
+    this._iconNormal = null;
+    this._iconCurrent = null;
     this._markersLayer = null;
   }
 
   componentDidMount() {
-    const {offers} = this.props;
+    const {offers, currentOffer} = this.props;
 
-    const city = offers[0] ?
-      [offers[0].city.location.latitude, offers[0].city.location.longitude]
-      : [52.38333, 4.9];
-    const zoom = offers[0] ?
-      offers[0].city.location.zoom
-      : 12;
+    let city = null;
+    let zoom = null;
 
-    this._icon = leaflet.icon({
+    if (currentOffer) {
+      city = [currentOffer.city.location.latitude, currentOffer.city.location.longitude];
+      zoom = currentOffer.city.location.zoom;
+    } else {
+      city = offers[0] ?
+        [offers[0].city.location.latitude, offers[0].city.location.longitude]
+        : [52.38333, 4.9];
+      zoom = offers[0] ?
+        offers[0].city.location.zoom
+        : 12;
+    }
+
+    this._iconNormal = leaflet.icon({
       iconUrl: `img/icon-markermap.svg`,
+      iconSize: [30, 30]
+    });
+
+    this._iconCurrent = leaflet.icon({
+      iconUrl: `img/icon-markermap2.svg`,
       iconSize: [30, 30]
     });
 
@@ -46,19 +60,41 @@ class CitiesMap extends React.PureComponent {
           leaflet
             .marker(
                 [offer.location.latitude, offer.location.longitude],
-                {icon: this._icon}
+                {icon: this._iconNormal}
             )
             .addTo(this._map));
     });
+
+    if (currentOffer) {
+      this._markersLayer.addLayer(
+          leaflet
+            .marker(
+                [currentOffer.location.latitude, currentOffer.location.longitude],
+                {icon: this._iconCurrent}
+            )
+            .addTo(this._map));
+    }
 
     this._markersLayer.addTo(this._map);
   }
 
   componentDidUpdate() {
-    const {offers} = this.props;
+    const {offers, currentOffer} = this.props;
 
-    const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
-    const zoom = offers[0].city.location.zoom;
+    let city = null;
+    let zoom = null;
+
+    if (currentOffer) {
+      city = [currentOffer.city.location.latitude, currentOffer.city.location.longitude];
+      zoom = currentOffer.city.location.zoom;
+    } else {
+      city = offers[0] ?
+        [offers[0].city.location.latitude, offers[0].city.location.longitude]
+        : [52.38333, 4.9];
+      zoom = offers[0] ?
+        offers[0].city.location.zoom
+        : 12;
+    }
 
     this._map.setView(city, zoom);
 
@@ -69,10 +105,20 @@ class CitiesMap extends React.PureComponent {
           leaflet
             .marker(
                 [offer.location.latitude, offer.location.longitude],
-                {icon: this._icon}
+                {icon: this._iconNormal}
             )
             .addTo(this._map));
     });
+
+    if (currentOffer) {
+      this._markersLayer.addLayer(
+          leaflet
+            .marker(
+                [currentOffer.location.latitude, currentOffer.location.longitude],
+                {icon: this._iconCurrent}
+            )
+            .addTo(this._map));
+    }
   }
 
   render() {
