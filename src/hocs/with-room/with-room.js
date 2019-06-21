@@ -20,25 +20,19 @@ const withRoom = (Component) => {
       const {
         match,
         getOffer,
-        isLoadData,
+        flagDataIsLoading,
         comments,
       } = this.props;
 
       let room = {};
-      let images = [];
 
-      if (isLoadData) {
+      if (flagDataIsLoading) {
         room = getOffer(+match.params.roomId);
-
-        images = room.images.length > 5 ?
-          room.images.slice(0, 6)
-          : room.images;
       }
 
       return <Component
         {...this.props}
         room={room}
-        images={images}
         comments={comments}
       />;
     }
@@ -52,7 +46,7 @@ const withRoom = (Component) => {
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,
     loadComments: PropTypes.func.isRequired,
-    isLoadData: PropTypes.bool.isRequired,
+    flagDataIsLoading: PropTypes.bool.isRequired,
     comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 

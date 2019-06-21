@@ -55,7 +55,7 @@ describe(`MainPage`, () => {
             isAuthorizationStatus = {false}
             controlAuthorization = {jest.fn()}
             emailUser = {`email@email.com`}
-            isLoadData = {true}
+            flagDataIsLoading = {true}
           />
         </MemoryRouter>)
     .toJSON();

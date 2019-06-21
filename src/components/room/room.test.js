@@ -5,7 +5,7 @@ import {MemoryRouter} from 'react-router';
 import Room from './room.jsx';
 
 describe(`Room`, () => {
-  it(`correctly rendered with isLoadData=true`, () => {
+  it(`correctly rendered with flagDataIsLoading=true`, () => {
     const tree = renderer
       .create(<MemoryRouter> <Room
         room={{
@@ -46,7 +46,7 @@ describe(`Room`, () => {
         emailUser={`myEmail@mail.com`}
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
-        isLoadData={true}
+        flagDataIsLoading={true}
         comments={[]}
       /> </MemoryRouter>)
       .toJSON();
@@ -54,7 +54,7 @@ describe(`Room`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`correctly rendered with isLoadData=false`, () => {
+  it(`correctly rendered with flagDataIsLoading=false`, () => {
     const tree = renderer
       .create(<MemoryRouter> <Room
         room={{
@@ -91,11 +91,10 @@ describe(`Room`, () => {
             zoom: 8
           }
         }}
-        images={[`path1`, `path2`]}
         emailUser={`myEmail@mail.com`}
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
-        isLoadData={true}
+        flagDataIsLoading={true}
         comments={[]}
       /> </MemoryRouter>)
       .toJSON();

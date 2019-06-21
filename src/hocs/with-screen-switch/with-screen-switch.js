@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
-import {getCity, getCities, getOffers, getOffersForCity, getIsLoadData} from '../../reducer/data/selectors';
+import {getCity, getCities, getOffers, getOffersForCity, getFlagDataIsLoading} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
 
 
@@ -60,7 +60,7 @@ const withScreenSwitch = (Component) => {
     emailUser: PropTypes.string.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,
-    isLoadData: PropTypes.bool.isRequired,
+    flagDataIsLoading: PropTypes.bool.isRequired,
   };
 
   return WithScreenSwitch;
@@ -75,7 +75,7 @@ const mapStateToProps = (state, ownProps) => {
     listCities: getCities(state),
     listOffers: getOffersForCity(state, newCity),
     isAuthorizationStatus: getAuthorizationStatus(state),
-    isLoadData: getIsLoadData(state),
+    flagDataIsLoading: getFlagDataIsLoading(state),
   });
 };
 

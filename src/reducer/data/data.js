@@ -4,7 +4,7 @@ import ModelComment from '../../ModalData/modal-comment';
 
 const initialState = {
   city: `No cities`,
-  isLoadData: false,
+  flagDataIsLoading: false,
   listComments: [],
   listOffers: [],
 };
@@ -14,7 +14,7 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  CHECK_IS_LOAD: `CHECK_IS_LOAD`,
+  SET_IS_LOAD: `SET_IS_LOAD`,
 };
 
 const ActionCreator = {
@@ -29,8 +29,8 @@ const ActionCreator = {
   }),
 
 
-  checkIsLoad: (flag) => ({
-    type: ActionType.CHECK_IS_LOAD,
+  setIsLoad: (flag) => ({
+    type: ActionType.SET_IS_LOAD,
     payload: flag,
   }),
 
@@ -67,7 +67,7 @@ const Operation = {
       .catch(alert);
   },
   loadOffers: () => (dispatch, _getState, api) => {
-    dispatch(ActionCreator.checkIsLoad(false));
+    dispatch(ActionCreator.setIsLoad(false));
     return api.get(`/hotels`)
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
@@ -78,7 +78,7 @@ const Operation = {
       })
       .then((response) => {
         dispatch(ActionCreator.loadOffers(ModelOffer.parseOffers(response.data)));
-        dispatch(ActionCreator.checkIsLoad(true));
+        dispatch(ActionCreator.setIsLoad(true));
       })
       .catch(alert);
   },
@@ -96,9 +96,9 @@ const reducer = (state = initialState, action) =>{
         city: action.payload,
       });
 
-    case ActionType.CHECK_IS_LOAD:
+    case ActionType.SET_IS_LOAD:
       return Object.assign({}, state, {
-        isLoadData: action.payload,
+        flagDataIsLoading: action.payload,
       });
 
     case ActionType.LOAD_COMMENTS:

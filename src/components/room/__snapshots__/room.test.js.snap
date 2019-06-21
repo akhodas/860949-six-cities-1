@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Room correctly rendered with isLoadData=false 1`] = `
+exports[`Room correctly rendered with flagDataIsLoading=false 1`] = `
 Array [
   " ",
   <div
@@ -786,7 +786,7 @@ Array [
 ]
 `;
 
-exports[`Room correctly rendered with isLoadData=true 1`] = `
+exports[`Room correctly rendered with flagDataIsLoading=true 1`] = `
 Array [
   " ",
   <div

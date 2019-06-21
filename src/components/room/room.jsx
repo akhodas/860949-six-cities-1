@@ -11,8 +11,7 @@ const Room = (props) => {
     emailUser,
     controlAuthorization,
     isAuthorizationStatus,
-    isLoadData,
-    images,
+    flagDataIsLoading,
     room,
     comments,
   } = props;
@@ -59,12 +58,12 @@ const Room = (props) => {
         </div>
       </header>
 
-      {isLoadData ?
+      {flagDataIsLoading ?
         <main className="page__main page__main--property">
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {images.map((image) => (
+                {room.images.slice(0, 6).map((image) => (
                   <div key={image + room.id} className="property__image-wrapper">
                     <img className="property__image" src={image} alt="Photo studio"/>
                   </div>
@@ -277,9 +276,8 @@ Room.propTypes = {
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
-  isLoadData: PropTypes.bool.isRequired,
+  flagDataIsLoading: PropTypes.bool.isRequired,
   room: PropTypes.object,
-  images: PropTypes.array,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
