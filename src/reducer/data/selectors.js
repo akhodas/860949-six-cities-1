@@ -39,22 +39,29 @@ export const getCities = createSelector(
     }
 );
 
-const cityFilter = (state, city) => {
-  return city;
-};
-
-export const getOffersNear = createSelector(
-    getOffers,
-    cityFilter,
-    (resultOne, resultTwo) => {
-      return resultOne.filter((it) => it.city.name === resultTwo).slice(1, 4);
-    }
-);
-
 export const getOffersForCity = createSelector(
     getOffers,
-    cityFilter,
+    (state, city) => city,
     (resultOne, resultTwo) => {
       return resultOne.filter((it) => it.city.name === resultTwo);
     }
 );
+
+export const getOffersNear = createSelector(
+    (state, offer) => {
+      return getOffersForCity(state, offer.city.name);
+    },
+    (state, offer) => offer,
+    (resultOne, resultTwo) => {
+      return resultOne.sort((a, b) => {
+        return distanceBetweenOffers(a, resultTwo)
+        - distanceBetweenOffers(b, resultTwo);
+      }).slice(1, 4);
+    }
+);
+
+function distanceBetweenOffers(offer1, offer2) {
+  return Math.sqrt(
+      Math.pow((offer1.location.latitude - offer2.location.latitude), 2)
+    + Math.pow((offer1.location.longitude - offer2.location.longitude), 2));
+}

@@ -3,46 +3,15 @@ import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router';
 
 import Room from './room.jsx';
+import {mockOffer, mockOffers} from '../../mocks/mockOffer.js';
+
 
 describe(`Room`, () => {
   it(`correctly rendered with flagDataIsLoading=true`, () => {
     const tree = renderer
       .create(<MemoryRouter> <Room
-        room={{
-          id: 0,
-          city: {
-            name: `Minsk`,
-            location: {
-              latitude: 0,
-              longitude: 0,
-              zoom: 5,
-            },
-          },
-          previewImage: `path`,
-          images: [`path1`, `path2`],
-          title: `title`,
-          isFavorite: true,
-          isPremium: true,
-          rating: 0,
-          type: `type`,
-          bedrooms: 0,
-          maxAdults: 0,
-          price: 0,
-          goods: [`goods1`, `goods2`],
-          host: {
-            id: 1,
-            isPro: true,
-            name: `name`,
-            avatarUrl: `pathAvatar`
-          },
-          description: `description`,
-          location: {
-            latitude: 1,
-            longitude: 1,
-            zoom: 8
-          }
-        }}
-        images={[`path1`, `path2`]}
+        offer={mockOffer}
+        offersNear={mockOffers}
         emailUser={`myEmail@mail.com`}
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
@@ -57,40 +26,8 @@ describe(`Room`, () => {
   it(`correctly rendered with flagDataIsLoading=false`, () => {
     const tree = renderer
       .create(<MemoryRouter> <Room
-        room={{
-          id: 0,
-          city: {
-            name: `Minsk`,
-            location: {
-              latitude: 0,
-              longitude: 0,
-              zoom: 5,
-            },
-          },
-          previewImage: `path`,
-          images: [`path1`, `path2`],
-          title: `title`,
-          isFavorite: true,
-          isPremium: true,
-          rating: 0,
-          type: `type`,
-          bedrooms: 0,
-          maxAdults: 0,
-          price: 0,
-          goods: [`goods1`, `goods2`],
-          host: {
-            id: 1,
-            isPro: true,
-            name: `name`,
-            avatarUrl: `pathAvatar`
-          },
-          description: `description`,
-          location: {
-            latitude: 1,
-            longitude: 1,
-            zoom: 8
-          }
-        }}
+        offer={mockOffer}
+        offersNear={mockOffers}
         emailUser={`myEmail@mail.com`}
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}

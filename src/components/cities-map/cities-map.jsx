@@ -10,22 +10,21 @@ class CitiesMap extends React.PureComponent {
     this._iconNormal = null;
     this._iconCurrent = null;
     this._markersLayer = null;
+    this._city = null;
+    this._zoom = null;
   }
 
   componentDidMount() {
     const {offers, currentOffer} = this.props;
 
-    let city = null;
-    let zoom = null;
-
     if (currentOffer) {
-      city = [currentOffer.city.location.latitude, currentOffer.city.location.longitude];
-      zoom = currentOffer.city.location.zoom;
+      this._city = [currentOffer.location.latitude, currentOffer.location.longitude];
+      this._zoom = currentOffer.location.zoom - 2;
     } else {
-      city = offers[0] ?
+      this._city = offers[0] ?
         [offers[0].city.location.latitude, offers[0].city.location.longitude]
         : [52.38333, 4.9];
-      zoom = offers[0] ?
+      this._zoom = offers[0] ?
         offers[0].city.location.zoom
         : 12;
     }
@@ -41,13 +40,13 @@ class CitiesMap extends React.PureComponent {
     });
 
     this._map = leaflet.map(`map`, {
-      center: city,
-      zoom,
+      center: this._city,
+      zoom: this._zoom,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, zoom);
+    this._map.setView(this._city, this._zoom);
 
     leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -81,22 +80,19 @@ class CitiesMap extends React.PureComponent {
   componentDidUpdate() {
     const {offers, currentOffer} = this.props;
 
-    let city = null;
-    let zoom = null;
-
     if (currentOffer) {
-      city = [currentOffer.city.location.latitude, currentOffer.city.location.longitude];
-      zoom = currentOffer.city.location.zoom;
+      this._city = [currentOffer.location.latitude, currentOffer.location.longitude];
+      this._zoom = currentOffer.location.zoom - 2;
     } else {
-      city = offers[0] ?
+      this._city = offers[0] ?
         [offers[0].city.location.latitude, offers[0].city.location.longitude]
         : [52.38333, 4.9];
-      zoom = offers[0] ?
+      this._zoom = offers[0] ?
         offers[0].city.location.zoom
         : 12;
     }
 
-    this._map.setView(city, zoom);
+    this._map.setView(this._city, this._zoom);
 
     this._markersLayer.clearLayers();
 

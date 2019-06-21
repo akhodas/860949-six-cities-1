@@ -65,7 +65,7 @@ const mapStateToProps = (state, ownProps) => {
     },
     comments: getComments(state),
     getThreeOffersNear: (currentOffer) => {
-      return getOffersNear(state, currentOffer.city.name);
+      return getOffersNear(state, currentOffer);
     },
   });
 };
