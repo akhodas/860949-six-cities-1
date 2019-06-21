@@ -1,17 +1,20 @@
-import ModelOffer from '../../model-offer';
+import ModelOffer from '../../ModalData/model-offer';
+import ModelComment from '../../ModalData/modal-comment';
 
 
 const initialState = {
   city: `No cities`,
+  flagDataIsLoading: false,
+  listComments: [],
   listOffers: [],
-  isLoadData: false,
 };
 
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  CHECK_IS_LOAD: `CHECK_IS_LOAD`,
+  SET_IS_LOAD: `SET_IS_LOAD`,
 };
 
 const ActionCreator = {
@@ -26,10 +29,18 @@ const ActionCreator = {
   }),
 
 
-  checkIsLoad: (flag) => ({
-    type: ActionType.CHECK_IS_LOAD,
+  setIsLoad: (flag) => ({
+    type: ActionType.SET_IS_LOAD,
     payload: flag,
   }),
+
+
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
 
 
   loadOffers: (offers) => {
@@ -41,19 +52,33 @@ const ActionCreator = {
 };
 
 const Operation = {
+  loadComments: (hotelId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${hotelId}`)
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          throw new Error(`Ошибка загрузки данных комментариев. Повторите позже!`);
+        }
+      })
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
+      })
+      .catch(alert);
+  },
   loadOffers: () => (dispatch, _getState, api) => {
-    dispatch(ActionCreator.checkIsLoad(false));
+    dispatch(ActionCreator.setIsLoad(false));
     return api.get(`/hotels`)
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           return response;
         } else {
-          throw new Error(`Ошибка загрузки данных. Повторите позже!`);
+          throw new Error(`Ошибка загрузки данных отелей. Повторите позже!`);
         }
       })
       .then((response) => {
         dispatch(ActionCreator.loadOffers(ModelOffer.parseOffers(response.data)));
-        dispatch(ActionCreator.checkIsLoad(true));
+        dispatch(ActionCreator.setIsLoad(true));
       })
       .catch(alert);
   },
@@ -71,9 +96,14 @@ const reducer = (state = initialState, action) =>{
         city: action.payload,
       });
 
-    case ActionType.CHECK_IS_LOAD:
+    case ActionType.SET_IS_LOAD:
       return Object.assign({}, state, {
-        isLoadData: action.payload,
+        flagDataIsLoading: action.payload,
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return Object.assign({}, state, {
+        listComments: action.payload,
       });
 
     case ActionType.LOAD_OFFERS:

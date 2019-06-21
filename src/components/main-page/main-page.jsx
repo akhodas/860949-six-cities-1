@@ -20,7 +20,7 @@ const MainPage = (props) => {
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
-    isLoadData,
+    flagDataIsLoading,
   } = props;
 
   return <React.Fragment>
@@ -78,7 +78,7 @@ const MainPage = (props) => {
       </div>
     </header>
 
-    {isLoadData ?
+    {flagDataIsLoading ?
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="cities tabs">
@@ -112,11 +112,20 @@ const MainPage = (props) => {
                 offers = {offers}
                 onClickTitleCard = {onClickTitleCard}
                 onClickImageCard = {onClickImageCard}
+                styleClassNames = {[
+                  `cities__places-list places__list tabs__content`,
+                  `cities__place-`,
+                  `cities__`
+                ]}
               />
             </section>
             <div className="cities__right-section">
               <CitiesMap
+                currentOffer = {null}
                 offers = {offers}
+                styleClassNames = {[
+                  `cities`,
+                ]}
               />
             </div>
           </div>
@@ -185,7 +194,7 @@ MainPage.propTypes = {
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
-  isLoadData: PropTypes.bool.isRequired,
+  flagDataIsLoading: PropTypes.bool.isRequired,
 };
 
 export default MainPage;

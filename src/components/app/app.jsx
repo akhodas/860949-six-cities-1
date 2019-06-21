@@ -26,7 +26,7 @@ const App = (props) => {
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
-    isLoadData,
+    flagDataIsLoading,
   } = props;
 
   return (
@@ -42,7 +42,7 @@ const App = (props) => {
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
           emailUser = {emailUser}
-          isLoadData = {isLoadData}
+          flagDataIsLoading = {flagDataIsLoading}
         />
       )} />
 
@@ -73,7 +73,7 @@ const App = (props) => {
           emailUser={emailUser}
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
-          isLoadData = {isLoadData}
+          flagDataIsLoading = {flagDataIsLoading}
         />
       )} />
 
@@ -126,7 +126,7 @@ App.propTypes = {
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
-  isLoadData: PropTypes.bool.isRequired,
+  flagDataIsLoading: PropTypes.bool.isRequired,
 };
 
 

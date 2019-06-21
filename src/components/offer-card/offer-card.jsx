@@ -3,18 +3,25 @@ import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const OfferCard = (props) => {
-  const {history, offer, onClickTitleCard, onClickImageCard, onHoverCard} = props;
+  const {
+    history,
+    offer,
+    onClickTitleCard,
+    onClickImageCard,
+    onHoverCard,
+    styleClassNames
+  } = props;
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return <article
-    className="cities__place-card place-card"
+    className={`${styleClassNames[1]}card place-card`}
     onMouseEnter={onHoverCard}>
     {isPremium ?
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       : null}
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${styleClassNames[2]}image-wrapper place-card__image-wrapper`}>
       <a href="#" onClick={(e) => {
         e.preventDefault();
         onClickImageCard(id);
@@ -91,6 +98,7 @@ OfferCard.propTypes = {
   onClickImageCard: PropTypes.func.isRequired,
   onHoverCard: PropTypes.func.isRequired,
   history: PropTypes.object,
+  styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export {OfferCard};

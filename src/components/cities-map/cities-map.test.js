@@ -8,6 +8,9 @@ describe(`CitiesMap`, () => {
     const tree = renderer
       .create(<CitiesMap
         offers={[]}
+        styleClassNames = {[
+          `cities`,
+        ]}
       />)
       .toJSON();
 
