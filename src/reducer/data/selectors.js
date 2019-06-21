@@ -20,8 +20,7 @@ export const getComments = (state) => {
   );
 };
 
-const qwer = [];
-qwer.sort((a, b) => (b.date - a.date)).slice(0, 10);
+
 export const getOffers = (state) => {
   return state[NAMESPACE].listOffers;
 };
@@ -43,6 +42,14 @@ export const getCities = createSelector(
 const cityFilter = (state, city) => {
   return city;
 };
+
+export const getOffersNear = createSelector(
+    getOffers,
+    cityFilter,
+    (resultOne, resultTwo) => {
+      return resultOne.filter((it) => it.city.name === resultTwo).slice(0, 3);
+    }
+);
 
 export const getOffersForCity = createSelector(
     getOffers,

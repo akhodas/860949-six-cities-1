@@ -4,15 +4,15 @@ import {compose} from "recompose";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {getOffers, getComments} from '../../reducer/data/selectors';
+import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
 
 
 const withRoom = (Component) => {
   class WithRoom extends React.PureComponent {
+
     componentDidMount() {
       const {match, loadComments} = this.props;
-
       loadComments(+match.params.roomId);
     }
 
@@ -20,19 +20,23 @@ const withRoom = (Component) => {
       const {
         match,
         getOffer,
+        getThreeOffersNear,
         flagDataIsLoading,
         comments,
       } = this.props;
 
-      let room = {};
+      let offer = {};
+      let offersNear = [];
 
       if (flagDataIsLoading) {
-        room = getOffer(+match.params.roomId);
+        offer = getOffer(+match.params.roomId);
+        offersNear = getThreeOffersNear(offer);
       }
 
       return <Component
         {...this.props}
-        room={room}
+        offer={offer}
+        offersNear={offersNear}
         comments={comments}
       />;
     }
@@ -43,6 +47,7 @@ const withRoom = (Component) => {
     match: PropTypes.object.isRequired,
     getOffer: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
+    getThreeOffersNear: PropTypes.func.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,
     loadComments: PropTypes.func.isRequired,
@@ -59,6 +64,9 @@ const mapStateToProps = (state, ownProps) => {
       return getOffers(state).find((offer) => offer.id === id);
     },
     comments: getComments(state),
+    getThreeOffersNear: (currentOffer) => {
+      return getOffersNear(state, currentOffer.city.name);
+    },
   });
 };
 

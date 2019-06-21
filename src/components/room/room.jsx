@@ -3,7 +3,12 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ListComments from '../list-comments/list-comments.jsx';
+import ListOffers from '../list-offers/list-offers.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
+import CitiesMap from '../cities-map/cities-map.jsx';
 
+
+const ListOffersWrapped = withActiveItem(ListOffers);
 
 const Room = (props) => {
 
@@ -12,8 +17,9 @@ const Room = (props) => {
     controlAuthorization,
     isAuthorizationStatus,
     flagDataIsLoading,
-    room,
+    offer,
     comments,
+    offersNear,
   } = props;
 
   return (
@@ -63,8 +69,8 @@ const Room = (props) => {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {room.images.slice(0, 6).map((image) => (
-                  <div key={image + room.id} className="property__image-wrapper">
+                {offer.images.slice(0, 6).map((image) => (
+                  <div key={image + offer.id} className="property__image-wrapper">
                     <img className="property__image" src={image} alt="Photo studio"/>
                   </div>
                 ))}
@@ -72,14 +78,14 @@ const Room = (props) => {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {room.isPremium ?
+                {offer.isPremium ?
                   <div className="property__mark">
                     <span>Premium</span>
                   </div>
                   : ``}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    {room.title}
+                    {offer.title}
                   </h1>
                   <button className="property__bookmark-button button" type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
@@ -90,31 +96,31 @@ const Room = (props) => {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `${100 * room.rating / 5}%`}}></span>
+                    <span style={{width: `${100 * offer.rating / 5}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">{room.rating}</span>
+                  <span className="property__rating-value rating__value">{offer.rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    {room.type}
+                    {offer.type}
                   </li>
-                  <li className="property__feature property__feature--bedrooms">
-                    {room.bedrooms} Bedrooms
+                  <li className="property__feature property__feature--bedoffers">
+                    {offer.bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max {room.maxAdults} adults
+                    Max {offer.maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">&euro;{room.price}</b>
+                  <b className="property__price-value">&euro;{offer.price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {room.goods.map((item) => (
-                      <li key={item + room.id} className="property__inside-item">
+                    {offer.goods.map((item) => (
+                      <li key={item + offer.id} className="property__inside-item">
                         {item}
                       </li>
                     ))}
@@ -124,12 +130,12 @@ const Room = (props) => {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={room.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                      <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
-                      {room.host.name}
+                      {offer.host.name}
                     </span>
-                    {room.host.isPro ? (
+                    {offer.host.isPro ? (
                       <span className="property__user-status">
                         Pro
                       </span>
@@ -137,7 +143,7 @@ const Room = (props) => {
                   </div>
                   <div className="property__description">
                     <p className="property__text">
-                      {room.description}
+                      {offer.description}
                     </p>
                   </div>
                 </div>
@@ -148,8 +154,40 @@ const Room = (props) => {
                 </section>
               </div>
             </div>
-            <section className="property__map map"></section>
+
+            <div style={{width: `90%`, margin: `auto`}}>
+              <section className="property__map map"></section>
+              <CitiesMap
+                currentOffer = {offer}
+                offers = {offersNear}
+                styleClassNames = {[
+                  `property`,
+                ]}
+              />
+            </div>
           </section>
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <ListOffersWrapped
+                offers = {offersNear}
+                onClickTitleCard = {(history, id) => {
+                  history.push(`/offer/${id}`);
+                  // eslint-disable-next-line no-console
+                  console.log(`CLICK on title card NEAR #${id}`);
+                }}
+                onClickImageCard = { (id) => {
+                  // eslint-disable-next-line no-console
+                  console.log(`CLICK on image card NEAR: "${id}"`);
+                }}
+                styleClassNames = {[
+                  `near-places__list places__list`,
+                  `near-places__`,
+                  `near-places__`
+                ]}
+              />
+            </section>
+          </div>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -277,7 +315,8 @@ Room.propTypes = {
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
-  room: PropTypes.object,
+  offer: PropTypes.object,
+  offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

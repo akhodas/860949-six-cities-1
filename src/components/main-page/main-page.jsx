@@ -112,11 +112,19 @@ const MainPage = (props) => {
                 offers = {offers}
                 onClickTitleCard = {onClickTitleCard}
                 onClickImageCard = {onClickImageCard}
+                styleClassNames = {[
+                  `cities__places-list places__list tabs__content`,
+                  `cities__place-`,
+                  `cities__`
+                ]}
               />
             </section>
             <div className="cities__right-section">
               <CitiesMap
                 offers = {offers}
+                styleClassNames = {[
+                  `cities`,
+                ]}
               />
             </div>
           </div>
