@@ -179,6 +179,10 @@ const Room = (props) => {
                   // eslint-disable-next-line no-console
                   console.log(`CLICK on image card NEAR: "${id}"`);
                 }}
+                onChangeActiveOffer = {(activeOffer) => {
+                  // eslint-disable-next-line no-console
+                  console.log(`CLICK on title card NEAR #${activeOffer.id}`);
+                }}
                 styleClassNames = {[
                   `near-places__list places__list`,
                   `near-places__`,

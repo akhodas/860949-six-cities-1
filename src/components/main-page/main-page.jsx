@@ -7,7 +7,7 @@ import ListCities from '../list-cities/list-cities.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import OptionSort from '../option-sort/option-sort.jsx';
-import withOptionSort from '../../hocs/with-room/with-option-sort.js';
+import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
 
 const ListOffersWrapped = withActiveItem(ListOffers);
 const OptionSortWrapped = withOptionSort(OptionSort);
@@ -24,6 +24,8 @@ const MainPage = (props) => {
     controlAuthorization,
     emailUser,
     flagDataIsLoading,
+    activeOffer,
+    onChangeActiveOffer,
   } = props;
 
   return <React.Fragment>
@@ -103,6 +105,7 @@ const MainPage = (props) => {
                 offers = {offers}
                 onClickTitleCard = {onClickTitleCard}
                 onClickImageCard = {onClickImageCard}
+                onChangeActiveOffer = {onChangeActiveOffer}
                 styleClassNames = {[
                   `cities__places-list places__list tabs__content`,
                   `cities__place-`,
@@ -112,7 +115,7 @@ const MainPage = (props) => {
             </section>
             <div className="cities__right-section">
               <CitiesMap
-                currentOffer = {null}
+                currentOffer = {activeOffer}
                 offers = {offers}
                 styleClassNames = {[
                   `cities`,
@@ -186,6 +189,8 @@ MainPage.propTypes = {
   controlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
+  activeOffer: PropTypes.object,
+  onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
 export default MainPage;

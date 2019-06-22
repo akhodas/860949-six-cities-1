@@ -31,6 +31,7 @@ describe(`MainPage`, () => {
               listCities = {[`Minsk`]}
               onClickTitleCard = {jest.fn()}
               onClickImageCard = {jest.fn()}
+              onChangeActiveOffer = {jest.fn()}
               onCityClick = {jest.fn()}
               redirect = {jest.fn()}
               isAuthorizationStatus = {false}

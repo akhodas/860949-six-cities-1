@@ -6,7 +6,14 @@ import OfferCard from '../offer-card/offer-card.jsx';
 class ListOffers extends React.PureComponent {
 
   render() {
-    const {offers, onClickTitleCard, onClickImageCard, onItemActivate, styleClassNames} = this.props;
+    const {
+      offers,
+      onClickTitleCard,
+      onClickImageCard,
+      onItemActivate,
+      styleClassNames,
+      onChangeActiveOffer,
+    } = this.props;
 
     return <div className={styleClassNames[0]}>
       {offers.map((item) => <OfferCard
@@ -14,6 +21,7 @@ class ListOffers extends React.PureComponent {
         offer={item}
         onClickTitleCard={onClickTitleCard}
         onClickImageCard={onClickImageCard}
+        onChangeActiveOffer={onChangeActiveOffer}
         onHoverCard={(e) => {
           onItemActivate(item, e);
         }}
@@ -61,6 +69,7 @@ ListOffers.propTypes = {
   }).isRequired).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
+  onChangeActiveOffer: PropTypes.func.isRequired,
   onItemActivate: PropTypes.func.isRequired,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

@@ -8,6 +8,7 @@ const OfferCard = (props) => {
     offer,
     onClickTitleCard,
     onClickImageCard,
+    onChangeActiveOffer,
     onHoverCard,
     styleClassNames
   } = props;
@@ -25,6 +26,7 @@ const OfferCard = (props) => {
       <a href="#" onClick={(e) => {
         e.preventDefault();
         onClickImageCard(id);
+        onChangeActiveOffer(offer);
       }}>
         <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"></img>
       </a>
@@ -96,6 +98,7 @@ OfferCard.propTypes = {
   }).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,
+  onChangeActiveOffer: PropTypes.func.isRequired,
   onHoverCard: PropTypes.func.isRequired,
   history: PropTypes.object,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
