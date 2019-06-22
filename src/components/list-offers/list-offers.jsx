@@ -10,7 +10,7 @@ class ListOffers extends React.PureComponent {
 
     return <div className={styleClassNames[0]}>
       {offers.map((item) => <OfferCard
-        key={`offer-${item.id}`}
+        key={item.id}
         offer={item}
         onClickTitleCard={onClickTitleCard}
         onClickImageCard={onClickImageCard}

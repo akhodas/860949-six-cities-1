@@ -42,15 +42,13 @@ const withOptionSort = (Component) => {
       />;
     }
 
-    _onChange(e) {
-      e.preventDefault();
+    _onChange() {
       this.setState({
         isMenuSelect: !this.state.isMenuSelect,
       });
     }
 
     _onSelect(e) {
-      e.preventDefault();
       this.setState({
         isMenuSelect: !this.state.isMenuSelect,
         optionSort: e.nativeEvent.target.textContent,
