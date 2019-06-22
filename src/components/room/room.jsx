@@ -173,15 +173,7 @@ const Room = (props) => {
                 onClickTitleCard = {(history, id) => {
                   history.push(`/offer/${id}`);
                   // eslint-disable-next-line no-console
-                  console.log(`CLICK on title card NEAR #${id}`);
-                }}
-                onClickImageCard = { (id) => {
-                  // eslint-disable-next-line no-console
-                  console.log(`CLICK on image card NEAR: "${id}"`);
-                }}
-                onChangeActiveOffer = {(activeOffer) => {
-                  // eslint-disable-next-line no-console
-                  console.log(`CLICK on title card NEAR #${activeOffer.id}`);
+                  console.log(`CLICK on card NEAR #${id}`);
                 }}
                 styleClassNames = {[
                   `near-places__list places__list`,

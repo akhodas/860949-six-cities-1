@@ -68,8 +68,8 @@ ListOffers.propTypes = {
     }).isRequired,
   }).isRequired).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func.isRequired,
-  onChangeActiveOffer: PropTypes.func.isRequired,
+  onClickImageCard: PropTypes.func,
+  onChangeActiveOffer: PropTypes.func,
   onItemActivate: PropTypes.func.isRequired,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
