@@ -12,6 +12,10 @@ const Month = {
   10: `November`,
   11: `December`,
 };
+
+const DEFAULT_COUNT_COMMITS = 10;
+
 export {
+  DEFAULT_COUNT_COMMITS,
   Month,
 };

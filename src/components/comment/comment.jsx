@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Month} from '../../constanty/constants';
+import {Month} from '../../constants/constants';
 
 
 const Comment = (props) => {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Comment from '../comment/comment.jsx';
+import {DEFAULT_COUNT_COMMITS} from '../../constants/constants.js';
 
 
 const ListComments = (props) => {
@@ -19,7 +20,7 @@ const ListComments = (props) => {
         </span>
       </h2>
       <ul className="reviews__list">
-        {comments.slice(0, 10).map((comment) =>
+        {comments.slice(0, DEFAULT_COUNT_COMMITS).map((comment) =>
           <Comment
             key={`comment-${comment.id}`}
             comment={comment}

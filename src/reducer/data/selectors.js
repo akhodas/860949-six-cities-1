@@ -3,6 +3,12 @@ import Namespace from "../namespace";
 
 const NAMESPACE = Namespace.DATA;
 
+const _distanceBetweenOffers = (offer1, offer2) => {
+  return Math.sqrt(
+      Math.pow((offer1.location.latitude - offer2.location.latitude), 2)
+    + Math.pow((offer1.location.longitude - offer2.location.longitude), 2));
+};
+
 
 export const getCity = (state) => {
   return state[NAMESPACE].city;
@@ -54,14 +60,8 @@ export const getOffersNear = createSelector(
     (state, offer) => offer,
     (resultOne, resultTwo) => {
       return resultOne.sort((a, b) => {
-        return distanceBetweenOffers(a, resultTwo)
-        - distanceBetweenOffers(b, resultTwo);
+        return _distanceBetweenOffers(a, resultTwo)
+        - _distanceBetweenOffers(b, resultTwo);
       }).slice(1, 4);
     }
 );
-
-function distanceBetweenOffers(offer1, offer2) {
-  return Math.sqrt(
-      Math.pow((offer1.location.latitude - offer2.location.latitude), 2)
-    + Math.pow((offer1.location.longitude - offer2.location.longitude), 2));
-}
