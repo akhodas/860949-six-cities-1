@@ -1,5 +1,7 @@
 import {createSelector} from "reselect";
 import Namespace from "../namespace";
+import {TypeSort} from "./data";
+
 
 const NAMESPACE = Namespace.DATA;
 
@@ -9,9 +11,26 @@ const _distanceBetweenOffers = (offer1, offer2) => {
     + Math.pow((offer1.location.longitude - offer2.location.longitude), 2));
 };
 
+const _sort = (arr, typeSort) => {
+  switch (typeSort) {
+    case TypeSort.LOW_TO_HIGH:
+      return arr.sort((a, b) => a.price - b.price);
+    case TypeSort.HIGH_TO_LOW:
+      return arr.sort((a, b) => b.price - a.price);
+    case TypeSort.TOP_RATER_FIRST:
+      return arr.sort((a, b) => b.rating - a.rating);
+    default:
+      return arr;
+  }
+};
 
 export const getCity = (state) => {
   return state[NAMESPACE].city;
+};
+
+
+export const getTypeSort = (state) => {
+  return state[NAMESPACE].typeSort;
 };
 
 
@@ -47,9 +66,12 @@ export const getCities = createSelector(
 
 export const getOffersForCity = createSelector(
     getOffers,
+    (state) => state,
     (state, city) => city,
-    (resultOne, resultTwo) => {
-      return resultOne.filter((it) => it.city.name === resultTwo);
+    (resultOne, resultTwo, resultThree) => {
+      return _sort(resultOne.filter(
+          (it) => it.city.name === resultThree), resultTwo[NAMESPACE].typeSort
+      );
     }
 );
 

@@ -1,5 +1,11 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import {compose} from "recompose";
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
+import {getTypeSort} from '../../reducer/data/selectors';
+import {ActionCreator} from '../../reducer/data/data';
+
 
 const withOptionSort = (Component) => {
   class WithOptionSort extends React.PureComponent {
@@ -7,19 +13,19 @@ const withOptionSort = (Component) => {
       super(props);
 
       this.state = {
-        optionSort: `popular`,
-        isMenuSelect: false,
+        typeSort: props.typeSort,
+        showMenuSort: false,
       };
 
       this.escFunction = ((e) => {
         if (e.keyCode === 27) {
           this.setState({
-            isMenuSelect: !this.state.isMenuSelect,
+            showMenuSort: !this.state.showMenuSort,
           });
         }
       });
 
-      this._onSelect = this._onSelect.bind(this);
+      this._onChangeTypeSort = this._onChangeTypeSort.bind(this);
       this._onChange = this._onChange.bind(this);
     }
 
@@ -35,67 +41,54 @@ const withOptionSort = (Component) => {
     render() {
       return <Component
         {...this.props}
-        optionSort={this.state.optionSort}
-        isMenuSelect={this.state.isMenuSelect}
-        onSelect={this._onSelect}
+        typeSort={this.state.typeSort}
+        showMenuSort={this.state.showMenuSort}
+        onSelect={this._onChangeTypeSort}
         onChange={this._onChange}
       />;
     }
 
     _onChange() {
       this.setState({
-        isMenuSelect: !this.state.isMenuSelect,
+        showMenuSort: !this.state.showMenuSort,
       });
     }
 
-    _onSelect(e) {
+    _onChangeTypeSort(e) {
+      const selectTypeSort = e.nativeEvent.target.textContent;
+      this.props.onChangeTypeSort(selectTypeSort);
       this.setState({
-        isMenuSelect: !this.state.isMenuSelect,
-        optionSort: e.nativeEvent.target.textContent,
+        showMenuSort: !this.state.showMenuSort,
+        typeSort: selectTypeSort,
       });
     }
   }
 
   WithOptionSort.propTypes = {
+    typeSort: PropTypes.string.isRequired,
+    onChangeTypeSort: PropTypes.func.isRequired,
   };
 
   return WithOptionSort;
 };
 
-// const mapStateToProps = (state, ownProps) => {
-//     const newCity = (getCity(state) === `No cities` && getOffers(state)[0]) ?
-//       getOffers(state)[0].city.name : getCity(state);
-//     return Object.assign({}, ownProps, {
-//       emailUser: getEmail(state),
-//       city: newCity,
-//       listCities: getCities(state),
-//       listOffers: getOffersForCity(state, newCity),
-//       isAuthorizationStatus: getAuthorizationStatus(state),
-//       flagDataIsLoading: getFlagDataIsLoading(state),
-//     });
-//   };
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    typeSort: getTypeSort(state),
+  });
+};
 
-//   const mapDispatchToProps = (dispatch) => ({
-//     onCityClick: (newCity) => {
-//       dispatch(ActionCreatorData.changeCity(newCity));
-//     },
-
-//     controlAuthorization: () => {
-//       dispatch(OperationUser.addUserData());
-//     },
-
-//     logIn: (data) => {
-//       dispatch(OperationUser.logIn(data));
-//     },
-//   });
+const mapDispatchToProps = (dispatch) => ({
+  onChangeTypeSort: (typeSort) => {
+    dispatch(ActionCreator.setTypeSort(typeSort));
+  },
+});
 
 
-//   export {withScreenSwitch};
+export {withOptionSort};
 
-//   export default compose(
-//       connect(mapStateToProps, mapDispatchToProps),
-//       withScreenSwitch
-//   );
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withOptionSort
+);
 
-
-export default withOptionSort;

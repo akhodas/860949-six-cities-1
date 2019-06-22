@@ -1,12 +1,19 @@
 import ModelOffer from '../../ModalData/model-offer';
 import ModelComment from '../../ModalData/modal-comment';
 
+export const TypeSort = {
+  POPULAR: `Popular`,
+  LOW_TO_HIGH: `Price: low to high`,
+  HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATER_FIRST: `Top rated first`,
+};
 
 const initialState = {
   city: `No cities`,
   flagDataIsLoading: false,
   listComments: [],
   listOffers: [],
+  typeSort: TypeSort.POPULAR,
 };
 
 const ActionType = {
@@ -15,6 +22,7 @@ const ActionType = {
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   SET_IS_LOAD: `SET_IS_LOAD`,
+  SET_TYPE_SORT: `SET_TYPE_SORT`,
 };
 
 const ActionCreator = {
@@ -32,6 +40,12 @@ const ActionCreator = {
   setIsLoad: (flag) => ({
     type: ActionType.SET_IS_LOAD,
     payload: flag,
+  }),
+
+
+  setTypeSort: (option) => ({
+    type: ActionType.SET_TYPE_SORT,
+    payload: option,
   }),
 
 
@@ -99,6 +113,11 @@ const reducer = (state = initialState, action) =>{
     case ActionType.SET_IS_LOAD:
       return Object.assign({}, state, {
         flagDataIsLoading: action.payload,
+      });
+
+    case ActionType.SET_TYPE_SORT:
+      return Object.assign({}, state, {
+        typeSort: action.payload,
       });
 
     case ActionType.LOAD_COMMENTS:
