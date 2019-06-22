@@ -86,7 +86,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export {withOptionSort};
-
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withOptionSort
