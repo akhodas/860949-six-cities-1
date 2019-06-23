@@ -9,7 +9,7 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import OptionSort from '../option-sort/option-sort.jsx';
 import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
-import EmptyMainPage from '../main-empty/main-empty.jsx';
+import EmptyMain from '../main-empty/main-empty.jsx';
 
 const ListOffersWrapped = withActiveItem(ListOffers);
 const OptionSortWrapped = withOptionSort(OptionSort);
@@ -84,13 +84,13 @@ const MainPage = (props) => {
       </div>
     </header>
 
-
     <main className={
       offers.length ? (
         `page__main page__main--index`
       ) : (
         `page__main page__main--index page__main--index-empty`
       )}>
+
       <h1 className="visually-hidden">Cities</h1>
       <div className="cities tabs">
         <ListCities
@@ -99,6 +99,7 @@ const MainPage = (props) => {
           onCityClick = {onCityClick}
         />
       </div>
+
       {offers.length ? (
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
@@ -132,9 +133,8 @@ const MainPage = (props) => {
           </div>
         </div>
       ) : (
-        <EmptyMainPage />
-      )
-      }
+        <EmptyMain />
+      )}
     </main>
   </React.Fragment>;
 };

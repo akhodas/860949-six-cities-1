@@ -2,6 +2,7 @@ import {createSelector} from "reselect";
 import Namespace from "../namespace";
 import {TypeSort} from "./data";
 
+export const DefaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const NAMESPACE = Namespace.DATA;
 
@@ -62,8 +63,7 @@ export const getCities = createSelector(
       });
 
       if (listCities.length < 6) {
-        const defaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
-        defaultCities.forEach((city) => {
+        DefaultCities.forEach((city) => {
           if (listCities.indexOf(city) < 0) {
             listCities.push(city);
           }
