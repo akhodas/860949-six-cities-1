@@ -2,6 +2,7 @@ import {createSelector} from "reselect";
 import Namespace from "../namespace";
 import {TypeSort} from "./data";
 
+export const DefaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const NAMESPACE = Namespace.DATA;
 
@@ -60,6 +61,15 @@ export const getCities = createSelector(
           listCities.push(offer.city.name);
         }
       });
+
+      if (listCities.length < 6) {
+        DefaultCities.forEach((city) => {
+          if (listCities.indexOf(city) < 0) {
+            listCities.push(city);
+          }
+        });
+      }
+
       return listCities;
     }
 );
@@ -68,9 +78,9 @@ export const getOffersForCity = createSelector(
     getOffers,
     (state) => state,
     (state, city) => city,
-    (resultOne, resultTwo, resultThree) => {
-      return _sort(resultOne.filter(
-          (it) => it.city.name === resultThree), resultTwo[NAMESPACE].typeSort
+    (offers, state, city) => {
+      return _sort(offers.filter(
+          (it) => it.city.name === city), state[NAMESPACE].typeSort
       );
     }
 );
@@ -80,10 +90,10 @@ export const getOffersNear = createSelector(
       return getOffersForCity(state, offer.city.name);
     },
     (state, offer) => offer,
-    (resultOne, resultTwo) => {
-      return resultOne.sort((a, b) => {
-        return _distanceBetweenOffers(a, resultTwo)
-        - _distanceBetweenOffers(b, resultTwo);
+    (offers, currentOffer) => {
+      return offers.sort((a, b) => {
+        return _distanceBetweenOffers(a, currentOffer)
+        - _distanceBetweenOffers(b, currentOffer);
       }).slice(1, 4);
     }
 );

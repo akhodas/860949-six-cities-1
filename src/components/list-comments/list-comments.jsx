@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Comment from '../comment/comment.jsx';
 
-const DEFAULT_COUNT_COMMITS = 10;
+const DEFAULT_COUNT_COMMENTS = 10;
 
 
 const ListComments = (props) => {
@@ -21,7 +21,7 @@ const ListComments = (props) => {
         </span>
       </h2>
       <ul className="reviews__list">
-        {comments.slice(0, DEFAULT_COUNT_COMMITS).map((comment) =>
+        {comments.slice(0, DEFAULT_COUNT_COMMENTS).map((comment) =>
           <Comment
             key={comment.id}
             comment={comment}

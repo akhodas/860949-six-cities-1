@@ -9,6 +9,7 @@ import withAuthorization from '../../hocs/with-authorization/with-authorization.
 import Room from '../room/room.jsx';
 import withRoom from '../../hocs/with-room/with-room.js';
 import withMain from '../../hocs/with-main/with-main.js';
+import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 
 
 const SignInWrapped = withAuthorization(SignIn);
@@ -85,40 +86,7 @@ const App = (props) => {
 
 
 App.propTypes = {
-  listOffers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: false,
-    isPremium: false,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired).isRequired,
+  listOffers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,

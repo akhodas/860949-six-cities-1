@@ -12,6 +12,7 @@ import {Operation as OperationUser} from './reducer/user/user';
 import reducer from './reducer/reducer';
 import {createAPI} from './api';
 import withScreenSwitch from './hocs/with-screen-switch/with-screen-switch.js';
+import ScrollToTop from './components/scrool-to-top/scroll-to-top.jsx';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
@@ -42,9 +43,11 @@ const init = () => {
   ReactDOM.render(
       <Provider store={store} >
         <BrowserRouter>
-          <AppWrapped
-            {...settings}
-          />
+          <ScrollToTop>
+            <AppWrapped
+              {...settings}
+            />
+          </ScrollToTop>
         </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)

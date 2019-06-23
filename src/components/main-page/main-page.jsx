@@ -8,6 +8,8 @@ import ListOffers from '../list-offers/list-offers.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import OptionSort from '../option-sort/option-sort.jsx';
 import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
+import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import EmptyMain from '../main-empty/main-empty.jsx';
 
 const ListOffersWrapped = withActiveItem(ListOffers);
 const OptionSortWrapped = withOptionSort(OptionSort);
@@ -23,7 +25,6 @@ const MainPage = (props) => {
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
-    flagDataIsLoading,
     activeOffer,
     onChangeActiveOffer,
   } = props;
@@ -83,16 +84,23 @@ const MainPage = (props) => {
       </div>
     </header>
 
-    {flagDataIsLoading ?
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="cities tabs">
-          <ListCities
-            selectedCity = {city}
-            listCities = {listCities}
-            onCityClick = {onCityClick}
-          />
-        </div>
+    <main className={
+      offers.length ? (
+        `page__main page__main--index`
+      ) : (
+        `page__main page__main--index page__main--index-empty`
+      )}>
+
+      <h1 className="visually-hidden">Cities</h1>
+      <div className="cities tabs">
+        <ListCities
+          selectedCity = {city}
+          listCities = {listCities}
+          onCityClick = {onCityClick}
+        />
+      </div>
+
+      {offers.length ? (
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -124,62 +132,15 @@ const MainPage = (props) => {
             </div>
           </div>
         </div>
-
-      </main>
-      :
-      <main className="page__main page__main--index">
-        <div style={{
-          display: `flex`,
-          width: `100%`,
-          height: `500px`,
-        }}>
-          <div style={{
-            margin: `auto`,
-          }}>
-            <h2>Loading...</h2>
-          </div>
-        </div>
-      </main>
-    }
-
+      ) : (
+        <EmptyMain />
+      )}
+    </main>
   </React.Fragment>;
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  })).isRequired,
+  offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
@@ -189,7 +150,7 @@ MainPage.propTypes = {
   controlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
-  activeOffer: PropTypes.object,
+  activeOffer: offerProp,
   onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
