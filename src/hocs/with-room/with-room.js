@@ -6,10 +6,18 @@ import PropTypes from 'prop-types';
 
 import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
+import Loading from '../../components/loading/loading.jsx';
 
 
 const withRoom = (Component) => {
   class WithRoom extends React.PureComponent {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        successSendComment: false,
+      };
+    }
 
     componentDidMount() {
       const {match, loadComments} = this.props;
@@ -23,6 +31,9 @@ const withRoom = (Component) => {
         getThreeOffersNear,
         flagDataIsLoading,
         comments,
+        isAuthorizationStatus,
+        controlAuthorization,
+        emailUser
       } = this.props;
 
       let offer = {};
@@ -33,12 +44,24 @@ const withRoom = (Component) => {
         offersNear = getThreeOffersNear(offer);
       }
 
-      return <Component
-        {...this.props}
-        offer={offer}
-        offersNear={offersNear}
-        comments={comments}
-      />;
+      return flagDataIsLoading ? (
+        <Component
+          {...this.props}
+          offer={offer}
+          offersNear={offersNear}
+          comments={comments}
+          sendComment={() => {
+            this.setState({successSendComment: !this.state.successSendComment});
+          }}
+          successSend={this.state.successSendComment}
+        />
+      ) : (
+        <Loading
+          isAuthorizationStatus={isAuthorizationStatus}
+          controlAuthorization={controlAuthorization}
+          emailUser={emailUser}
+        />
+      );
     }
 
   }

@@ -62,7 +62,7 @@ export const getCities = createSelector(
         }
       });
 
-      if (listCities.length < 6) {
+      while (listCities.length < 6) {
         DefaultCities.forEach((city) => {
           if (listCities.indexOf(city) < 0) {
             listCities.push(city);
