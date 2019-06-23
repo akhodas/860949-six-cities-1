@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
 const withMain = (Component) => {
   class WithMain extends React.PureComponent {
@@ -36,40 +37,7 @@ const withMain = (Component) => {
   }
 
   WithMain.propTypes = {
-    offers: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      city: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-      previewImage: PropTypes.string.isRequired,
-      images: PropTypes.arrayOf(PropTypes.string.isRequired),
-      title: PropTypes.string.isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-      isPremium: PropTypes.bool.isRequired,
-      rating: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      maxAdults: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-      host: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        isPro: PropTypes.bool.isRequired,
-        name: PropTypes.string.isRequired,
-        avatarUrl: PropTypes.string.isRequired,
-      }).isRequired,
-      description: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    })).isRequired,
+    offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
     city: PropTypes.string.isRequired,
     listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
     onClickTitleCard: PropTypes.func.isRequired,
@@ -79,7 +47,7 @@ const withMain = (Component) => {
     controlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
-    activeOffer: PropTypes.object,
+    activeOffer: offerProp,
   };
 
   return WithMain;

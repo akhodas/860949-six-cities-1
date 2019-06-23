@@ -6,6 +6,7 @@ import ListComments from '../list-comments/list-comments.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import CitiesMap from '../cities-map/cities-map.jsx';
+import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 
 
 const ListOffersWrapped = withActiveItem(ListOffers);
@@ -208,7 +209,7 @@ Room.propTypes = {
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
-  offer: PropTypes.object,
+  offer: offerProp.isRequired,
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
 class CitiesMap extends React.PureComponent {
   constructor(props) {
@@ -126,74 +127,8 @@ class CitiesMap extends React.PureComponent {
 }
 
 CitiesMap.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired).isRequired,
-  currentOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-  }),
+  offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
+  currentOffer: offerProp,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

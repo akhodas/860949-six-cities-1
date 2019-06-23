@@ -1,32 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
-import CitiesMap from '../cities-map/cities-map.jsx';
-import ListCities from '../list-cities/list-cities.jsx';
-import ListOffers from '../list-offers/list-offers.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import OptionSort from '../option-sort/option-sort.jsx';
-import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
-import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
-
-const ListOffersWrapped = withActiveItem(ListOffers);
-const OptionSortWrapped = withOptionSort(OptionSort);
-
-const MainPage = (props) => {
+const EmptyMainPage = (props) => {
   const {
-    offers,
-    city,
-    listCities,
-    onClickTitleCard,
-    onClickImageCard,
-    onCityClick,
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
-    flagDataIsLoading,
-    activeOffer,
-    onChangeActiveOffer,
   } = props;
 
   return <React.Fragment>
@@ -84,69 +65,62 @@ const MainPage = (props) => {
       </div>
     </header>
 
-    {flagDataIsLoading ?
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="cities tabs">
-          <ListCities
-            selectedCity = {city}
-            listCities = {listCities}
-            onCityClick = {onCityClick}
-          />
-        </div>
-        <div className="cities__places-wrapper">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {city}</b>
-
-              <OptionSortWrapped />
-
-              <ListOffersWrapped
-                offers = {offers}
-                onClickTitleCard = {onClickTitleCard}
-                onClickImageCard = {onClickImageCard}
-                onChangeActiveOffer = {onChangeActiveOffer}
-                styleClassNames = {[
-                  `cities__places-list places__list tabs__content`,
-                  `cities__place-`,
-                  `cities__`
-                ]}
-              />
-            </section>
-            <div className="cities__right-section">
-              <CitiesMap
-                currentOffer = {activeOffer}
-                offers = {offers}
-                styleClassNames = {[
-                  `cities`,
-                ]}
-              />
+    <main className="page__main page__main--index page__main--index-empty">
+      <h1 className="visually-hidden">Cities</h1>
+      <div className="cities tabs">
+        <section className="locations container">
+          <ul className="locations__list tabs__list">
+            <li className="locations__item">
+              <a className="locations__item-link tabs__item" href="#">
+                <span>Paris</span>
+              </a>
+            </li>
+            <li claclassNamess="locations__item">
+              <a className="locations__item-link tabs__item" href="#">
+                <span>Cologne</span>
+              </a>
+            </li>
+            <li className="locations__item">
+              <a className="locations__item-link tabs__item" href="#">
+                <span>Brussels</span>
+              </a>
+            </li>
+            <li className="locations__item">
+              <a className="locations__item-link tabs__item">
+                <span>Amsterdam</span>
+              </a>
+            </li>
+            <li className="locations__item">
+              <a className="locations__item-link tabs__item" href="#">
+                <span>Hamburg</span>
+              </a>
+            </li>
+            <li className="locations__item">
+              <a className="locations__item-link tabs__item tabs__item--active" href="#">
+                <span>Dusseldorf</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <div className="cities__places-wrapper">
+        <div className="cities__places-container cities__places-container--empty container">
+          <section className="cities__no-places">
+            <div className="cities__status-wrapper tabs__content">
+              <b className="cities__status">No places to stay available</b>
+              <p className="cities__status-description">We could not find any property availbale at the moment in Dusseldorf</p>
             </div>
+          </section>
+          <div className="cities__right-section">
           </div>
         </div>
-
-      </main>
-      :
-      <main className="page__main page__main--index">
-        <div style={{
-          display: `flex`,
-          width: `100%`,
-          height: `500px`,
-        }}>
-          <div style={{
-            margin: `auto`,
-          }}>
-            <h2>Loading...</h2>
-          </div>
-        </div>
-      </main>
-    }
+      </div>
+    </main>
 
   </React.Fragment>;
 };
 
-MainPage.propTypes = {
+EmptyMainPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -161,4 +135,4 @@ MainPage.propTypes = {
   onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+export default EmptyMainPage;

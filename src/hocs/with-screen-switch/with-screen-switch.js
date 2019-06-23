@@ -7,6 +7,7 @@ import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import {getCity, getCities, getOffers, getOffersForCity, getFlagDataIsLoading} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
+import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
 
 const withScreenSwitch = (Component) => {
@@ -17,40 +18,7 @@ const withScreenSwitch = (Component) => {
   };
 
   WithScreenSwitch.propTypes = {
-    listOffers: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      city: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-      previewImage: PropTypes.string.isRequired,
-      images: PropTypes.arrayOf(PropTypes.string.isRequired),
-      title: PropTypes.string.isRequired,
-      isFavorite: false,
-      isPremium: false,
-      rating: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      maxAdults: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-      host: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        isPro: PropTypes.bool.isRequired,
-        name: PropTypes.string.isRequired,
-        avatarUrl: PropTypes.string.isRequired,
-      }).isRequired,
-      description: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired).isRequired,
+    listOffers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
     city: PropTypes.string.isRequired,
     listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
     onClickTitleCard: PropTypes.func.isRequired,
