@@ -8,6 +8,7 @@ const OfferCard = (props) => {
     offer,
     onClickTitleCard,
     onClickImageCard,
+    onChangeActiveOffer,
     onHoverCard,
     styleClassNames
   } = props;
@@ -24,7 +25,14 @@ const OfferCard = (props) => {
     <div className={`${styleClassNames[2]}image-wrapper place-card__image-wrapper`}>
       <a href="#" onClick={(e) => {
         e.preventDefault();
-        onClickImageCard(id);
+        if (onClickImageCard) {
+          onClickImageCard(id);
+        } else {
+          onClickTitleCard(history, id);
+        }
+        if (onChangeActiveOffer) {
+          onChangeActiveOffer(offer);
+        }
       }}>
         <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"></img>
       </a>
@@ -95,7 +103,8 @@ OfferCard.propTypes = {
     }).isRequired,
   }).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func.isRequired,
+  onClickImageCard: PropTypes.func,
+  onChangeActiveOffer: PropTypes.func,
   onHoverCard: PropTypes.func.isRequired,
   history: PropTypes.object,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,

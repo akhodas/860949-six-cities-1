@@ -8,10 +8,12 @@ import SignIn from '../sign-in/sign-in.jsx';
 import withAuthorization from '../../hocs/with-authorization/with-authorization.js';
 import Room from '../room/room.jsx';
 import withRoom from '../../hocs/with-room/with-room.js';
+import withMain from '../../hocs/with-main/with-main.js';
 
 
 const SignInWrapped = withAuthorization(SignIn);
 const RoomWrapped = withRoom(Room);
+const MainPageWrapped = withMain(MainPage);
 
 
 const App = (props) => {
@@ -32,7 +34,7 @@ const App = (props) => {
   return (
     <Switch>
       <Route path='/' exact render={() => (
-        <MainPage
+        <MainPageWrapped
           offers = {listOffers}
           city = {city}
           listCities = {listCities}

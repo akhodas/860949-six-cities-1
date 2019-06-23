@@ -1,11 +1,13 @@
+import MockAdapter from "axios-mock-adapter";
+import {createAPI} from "../../api";
+
 import {
   ActionCreator,
   ActionType,
   Operation,
   reducer,
+  TypeSort,
 } from './data';
-import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api";
 
 
 describe(`Action creators work correctly`, () => {
@@ -32,6 +34,7 @@ describe(`Reducer works correctly`, () => {
       listComments: [],
       listOffers: [],
       flagDataIsLoading: false,
+      typeSort: TypeSort.POPULAR,
     });
   });
 

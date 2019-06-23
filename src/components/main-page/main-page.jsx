@@ -6,8 +6,11 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import ListCities from '../list-cities/list-cities.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import OptionSort from '../option-sort/option-sort.jsx';
+import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
 
 const ListOffersWrapped = withActiveItem(ListOffers);
+const OptionSortWrapped = withOptionSort(OptionSort);
 
 const MainPage = (props) => {
   const {
@@ -21,6 +24,8 @@ const MainPage = (props) => {
     controlAuthorization,
     emailUser,
     flagDataIsLoading,
+    activeOffer,
+    onChangeActiveOffer,
   } = props;
 
   return <React.Fragment>
@@ -93,25 +98,14 @@ const MainPage = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
+
+              <OptionSortWrapped />
+
               <ListOffersWrapped
                 offers = {offers}
                 onClickTitleCard = {onClickTitleCard}
                 onClickImageCard = {onClickImageCard}
+                onChangeActiveOffer = {onChangeActiveOffer}
                 styleClassNames = {[
                   `cities__places-list places__list tabs__content`,
                   `cities__place-`,
@@ -121,7 +115,7 @@ const MainPage = (props) => {
             </section>
             <div className="cities__right-section">
               <CitiesMap
-                currentOffer = {null}
+                currentOffer = {activeOffer}
                 offers = {offers}
                 styleClassNames = {[
                   `cities`,
@@ -195,6 +189,8 @@ MainPage.propTypes = {
   controlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
+  activeOffer: PropTypes.object,
+  onChangeActiveOffer: PropTypes.func.isRequired,
 };
 
 export default MainPage;

@@ -3,7 +3,7 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import {OfferCard} from './offer-card.jsx';
-import { mockOffer } from '../../mocks/mockOffer.js';
+import {mockOffer} from '../../mocks/mockOffer.js';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -15,6 +15,7 @@ describe(`OfferCard`, () => {
       offer={mockOffer}
       onClickTitleCard={clickHandler}
       onClickImageCard={jest.fn()}
+      onChangeActiveOffer = {jest.fn()}
       onHoverCard={jest.fn()}
       styleClassNames = {[
         `cities__places-list places__list tabs__content`,
@@ -37,6 +38,7 @@ describe(`OfferCard`, () => {
       offer={mockOffer}
       onClickTitleCard={jest.fn()}
       onClickImageCard={clickHandler}
+      onChangeActiveOffer = {jest.fn()}
       onHoverCard={jest.fn()}
       styleClassNames = {[
         `cities__places-list places__list tabs__content`,
@@ -59,6 +61,7 @@ describe(`OfferCard`, () => {
       offer={mockOffer}
       onClickTitleCard={jest.fn()}
       onClickImageCard={clickHandler}
+      onChangeActiveOffer = {jest.fn()}
       onHoverCard={jest.fn()}
       styleClassNames = {[
         `cities__places-list places__list tabs__content`,
