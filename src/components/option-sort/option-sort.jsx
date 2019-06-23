@@ -16,19 +16,14 @@ const OptionSort = (props) => {
         </svg>
       </span>
       {showMenuSort ?
-        <ul className="places__options places__options--custom places__options--opened" onClick={onSelect}>
-          <li className={TypeSort.POPULAR === typeSort ?
-            `places__option places__option--active` : `places__option`}
-          tabIndex="0">{TypeSort.POPULAR}</li>
-          <li className={TypeSort.LOW_TO_HIGH === typeSort ?
-            `places__option places__option--active` : `places__option`}
-          tabIndex="1">{TypeSort.LOW_TO_HIGH}</li>
-          <li className={TypeSort.HIGH_TO_LOW === typeSort ?
-            `places__option places__option--active` : `places__option`}
-          tabIndex="2">{TypeSort.HIGH_TO_LOW}</li>
-          <li className={TypeSort.TOP_RATER_FIRST === typeSort ?
-            `places__option places__option--active` : `places__option`}
-          tabIndex="3">{TypeSort.TOP_RATER_FIRST}</li>
+        <ul className="places__options places__options--custom places__options--opened"
+          onClick={onSelect}>
+          {Object.values(TypeSort).map((item, i) => (
+            <li className={item === typeSort ?
+              `places__option places__option--active` : `places__option`}
+            tabIndex={`${i}`}
+            key={item}>{item}</li>))
+          }
         </ul>
         : null}
     </form>
