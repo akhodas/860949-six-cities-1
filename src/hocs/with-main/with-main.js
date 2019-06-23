@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
+import Loading from '../../components/loading/loading.jsx';
 
 const withMain = (Component) => {
   class WithMain extends React.PureComponent {
@@ -22,13 +23,26 @@ const withMain = (Component) => {
     }
 
     render() {
-      return (
+      const {
+        flagDataIsLoading,
+        isAuthorizationStatus,
+        controlAuthorization,
+        emailUser
+      } = this.props;
+
+      return (flagDataIsLoading ? (
         <Component
           {...this.props}
           activeOffer={this.state.activeOffer}
           onChangeActiveOffer={this._onChangeActiveOffer}
         />
-      );
+      ) : (
+        <Loading
+          isAuthorizationStatus={isAuthorizationStatus}
+          controlAuthorization={controlAuthorization}
+          emailUser={emailUser}
+        />
+      ));
     }
 
     _onChangeActiveOffer(offer) {

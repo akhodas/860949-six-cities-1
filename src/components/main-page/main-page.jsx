@@ -9,6 +9,7 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import OptionSort from '../option-sort/option-sort.jsx';
 import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import EmptyMainPage from '../main-empty/main-empty.jsx';
 
 const ListOffersWrapped = withActiveItem(ListOffers);
 const OptionSortWrapped = withOptionSort(OptionSort);
@@ -24,7 +25,6 @@ const MainPage = (props) => {
     isAuthorizationStatus,
     controlAuthorization,
     emailUser,
-    flagDataIsLoading,
     activeOffer,
     onChangeActiveOffer,
   } = props;
@@ -84,16 +84,22 @@ const MainPage = (props) => {
       </div>
     </header>
 
-    {flagDataIsLoading ?
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="cities tabs">
-          <ListCities
-            selectedCity = {city}
-            listCities = {listCities}
-            onCityClick = {onCityClick}
-          />
-        </div>
+
+    <main className={
+      offers.length ? (
+        `page__main page__main--index`
+      ) : (
+        `page__main page__main--index page__main--index-empty`
+      )}>
+      <h1 className="visually-hidden">Cities</h1>
+      <div className="cities tabs">
+        <ListCities
+          selectedCity = {city}
+          listCities = {listCities}
+          onCityClick = {onCityClick}
+        />
+      </div>
+      {offers.length ? (
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -125,24 +131,11 @@ const MainPage = (props) => {
             </div>
           </div>
         </div>
-
-      </main>
-      :
-      <main className="page__main page__main--index">
-        <div style={{
-          display: `flex`,
-          width: `100%`,
-          height: `500px`,
-        }}>
-          <div style={{
-            margin: `auto`,
-          }}>
-            <h2>Loading...</h2>
-          </div>
-        </div>
-      </main>
-    }
-
+      ) : (
+        <EmptyMainPage />
+      )
+      }
+    </main>
   </React.Fragment>;
 };
 

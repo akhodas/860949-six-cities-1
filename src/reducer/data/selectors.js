@@ -60,6 +60,16 @@ export const getCities = createSelector(
           listCities.push(offer.city.name);
         }
       });
+
+      if (listCities.length < 6) {
+        const defaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+        defaultCities.forEach((city) => {
+          if (listCities.indexOf(city) < 0) {
+            listCities.push(city);
+          }
+        });
+      }
+
       return listCities;
     }
 );

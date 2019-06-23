@@ -127,7 +127,8 @@ const reducer = (state = initialState, action) =>{
 
     case ActionType.LOAD_OFFERS:
       return Object.assign({}, state, {
-        listOffers: action.payload,
+        listOffers: [],
+        // listOffers: action.payload,
       });
   }
   return state;
