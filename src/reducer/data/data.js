@@ -21,6 +21,7 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  SEND_COMMENT: `SEND_COMMENT`,
   SET_IS_LOAD: `SET_IS_LOAD`,
   SET_TYPE_SORT: `SET_TYPE_SORT`,
 };
@@ -95,6 +96,16 @@ const Operation = {
         dispatch(ActionCreator.setIsLoad(true));
       })
       .catch(alert);
+  },
+  sendComment: (data, id) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${id}`, data)
+        .then((response) => {
+          dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
+          return true;
+        })
+        .catch((err) => {
+          throw err;
+        });
   },
 };
 

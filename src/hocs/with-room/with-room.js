@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
+import Loading from '../../components/loading/loading.jsx';
 
 
 const withRoom = (Component) => {
@@ -23,6 +24,10 @@ const withRoom = (Component) => {
         getThreeOffersNear,
         flagDataIsLoading,
         comments,
+        isAuthorizationStatus,
+        controlAuthorization,
+        emailUser,
+        sendComment,
       } = this.props;
 
       let offer = {};
@@ -33,12 +38,24 @@ const withRoom = (Component) => {
         offersNear = getThreeOffersNear(offer);
       }
 
-      return <Component
-        {...this.props}
-        offer={offer}
-        offersNear={offersNear}
-        comments={comments}
-      />;
+      return flagDataIsLoading ? (
+        <Component
+          {...this.props}
+          offer={offer}
+          offersNear={offersNear}
+          comments={comments}
+          sendComment={(newComment) => sendComment({
+            comment: newComment,
+            id: offer.id,
+          })}
+        />
+      ) : (
+        <Loading
+          isAuthorizationStatus={isAuthorizationStatus}
+          controlAuthorization={controlAuthorization}
+          emailUser={emailUser}
+        />
+      );
     }
 
   }
@@ -53,6 +70,7 @@ const withRoom = (Component) => {
     loadComments: PropTypes.func.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+    sendComment: PropTypes.func.isRequired,
   };
 
   return withRouter(WithRoom);
@@ -74,6 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadComments: (id) => {
     dispatch(OperationData.loadComments(id));
   },
+
+  sendComment: (data) => dispatch(OperationData.sendComment(data.comment, data.id)),
 });
 
 export {withRoom};

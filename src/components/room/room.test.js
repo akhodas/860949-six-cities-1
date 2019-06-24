@@ -17,6 +17,7 @@ describe(`Room`, () => {
         controlAuthorization={jest.fn()}
         flagDataIsLoading={true}
         comments={[]}
+        sendComment={jest.fn()}
       /> </MemoryRouter>)
       .toJSON();
 
@@ -33,6 +34,7 @@ describe(`Room`, () => {
         controlAuthorization={jest.fn()}
         flagDataIsLoading={true}
         comments={[]}
+        sendComment={jest.fn()}
       /> </MemoryRouter>)
       .toJSON();
 

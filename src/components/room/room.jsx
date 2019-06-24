@@ -7,9 +7,12 @@ import ListOffers from '../list-offers/list-offers.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import CommentSubmitionForm from '../comment-submition-form/comment-submition-form.jsx';
+import withCommentSubmitionForm from '../../hocs/with-comment-submition-form/with-comment-submition-form.js';
 
 
 const ListOffersWrapped = withActiveItem(ListOffers);
+const CommentSubmitionFormWrapped = withCommentSubmitionForm(CommentSubmitionForm);
 
 const Room = (props) => {
 
@@ -17,10 +20,10 @@ const Room = (props) => {
     emailUser,
     controlAuthorization,
     isAuthorizationStatus,
-    flagDataIsLoading,
     offer,
     comments,
     offersNear,
+    sendComment,
   } = props;
 
   return (
@@ -65,141 +68,130 @@ const Room = (props) => {
         </div>
       </header>
 
-      {flagDataIsLoading ?
-        <main className="page__main page__main--property">
-          <section className="property">
-            <div className="property__gallery-container container">
-              <div className="property__gallery">
-                {offer.images.slice(0, 6).map((image) => (
-                  <div key={image + offer.id} className="property__image-wrapper">
-                    <img className="property__image" src={image} alt="Photo studio"/>
-                  </div>
-                ))}
-              </div>
+      <main className="page__main page__main--property">
+        <section className="property">
+          <div className="property__gallery-container container">
+            <div className="property__gallery">
+              {offer.images.slice(0, 6).map((image) => (
+                <div key={image + offer.id} className="property__image-wrapper">
+                  <img className="property__image" src={image} alt="Photo studio"/>
+                </div>
+              ))}
             </div>
-            <div className="property__container container">
-              <div className="property__wrapper">
-                {offer.isPremium ?
-                  <div className="property__mark">
-                    <span>Premium</span>
-                  </div>
-                  : ``}
-                <div className="property__name-wrapper">
-                  <h1 className="property__name">
-                    {offer.title}
-                  </h1>
-                  <button className="property__bookmark-button button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+          </div>
+          <div className="property__container container">
+            <div className="property__wrapper">
+              {offer.isPremium ?
+                <div className="property__mark">
+                  <span>Premium</span>
                 </div>
-                <div className="property__rating rating">
-                  <div className="property__stars rating__stars">
-                    <span style={{width: `${100 * offer.rating / 5}%`}}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                  <span className="property__rating-value rating__value">{offer.rating}</span>
+                : ``}
+              <div className="property__name-wrapper">
+                <h1 className="property__name">
+                  {offer.title}
+                </h1>
+                <button className="property__bookmark-button button" type="button">
+                  <svg className="property__bookmark-icon" width="31" height="33">
+                    <use xlinkHref="#icon-bookmark"></use>
+                  </svg>
+                  <span className="visually-hidden">To bookmarks</span>
+                </button>
+              </div>
+              <div className="property__rating rating">
+                <div className="property__stars rating__stars">
+                  <span style={{width: `${100 * offer.rating / 5}%`}}></span>
+                  <span className="visually-hidden">Rating</span>
                 </div>
-                <ul className="property__features">
-                  <li className="property__feature property__feature--entire">
-                    {offer.type}
-                  </li>
-                  <li className="property__feature property__feature--bedoffers">
-                    {offer.bedrooms} Bedrooms
-                  </li>
-                  <li className="property__feature property__feature--adults">
+                <span className="property__rating-value rating__value">{offer.rating}</span>
+              </div>
+              <ul className="property__features">
+                <li className="property__feature property__feature--entire">
+                  {offer.type}
+                </li>
+                <li className="property__feature property__feature--bedoffers">
+                  {offer.bedrooms} Bedrooms
+                </li>
+                <li className="property__feature property__feature--adults">
                     Max {offer.maxAdults} adults
-                  </li>
-                </ul>
-                <div className="property__price">
-                  <b className="property__price-value">&euro;{offer.price}</b>
-                  <span className="property__price-text">&nbsp;night</span>
-                </div>
-                <div className="property__inside">
-                  <h2 className="property__inside-title">What&apos;s inside</h2>
-                  <ul className="property__inside-list">
-                    {offer.goods.map((item) => (
-                      <li key={item + offer.id} className="property__inside-item">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="property__host">
-                  <h2 className="property__host-title">Meet the host</h2>
-                  <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
-                    </div>
-                    <span className="property__user-name">
-                      {offer.host.name}
-                    </span>
-                    {offer.host.isPro ? (
-                      <span className="property__user-status">
-                        Pro
-                      </span>
-                    ) : ``}
-                  </div>
-                  <div className="property__description">
-                    <p className="property__text">
-                      {offer.description}
-                    </p>
-                  </div>
-                </div>
-                <section className="property__reviews reviews">
-                  <ListComments
-                    comments={comments}
-                  />
-                </section>
+                </li>
+              </ul>
+              <div className="property__price">
+                <b className="property__price-value">&euro;{offer.price}</b>
+                <span className="property__price-text">&nbsp;night</span>
               </div>
+              <div className="property__inside">
+                <h2 className="property__inside-title">What&apos;s inside</h2>
+                <ul className="property__inside-list">
+                  {offer.goods.map((item) => (
+                    <li key={item + offer.id} className="property__inside-item">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="property__host">
+                <h2 className="property__host-title">Meet the host</h2>
+                <div className="property__host-user user">
+                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                  </div>
+                  <span className="property__user-name">
+                    {offer.host.name}
+                  </span>
+                  {offer.host.isPro ? (
+                    <span className="property__user-status">
+                        Pro
+                    </span>
+                  ) : ``}
+                </div>
+                <div className="property__description">
+                  <p className="property__text">
+                    {offer.description}
+                  </p>
+                </div>
+              </div>
+              <section className="property__reviews reviews">
+                <ListComments
+                  comments={comments}
+                />
+                {!isAuthorizationStatus ? (
+                  <CommentSubmitionFormWrapped
+                    sendComment={sendComment}
+                  />) : null }
+              </section>
             </div>
+          </div>
 
-            <div style={{width: `990px`, margin: `auto`}}>
-              <CitiesMap
-                currentOffer = {offer}
-                offers = {offersNear}
-                styleClassNames = {[
-                  `property`,
-                ]}
-              />
-            </div>
+          <div style={{width: `990px`, margin: `auto`}}>
+            <CitiesMap
+              currentOffer = {offer}
+              offers = {offersNear}
+              styleClassNames = {[
+                `property`,
+              ]}
+            />
+          </div>
+        </section>
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <ListOffersWrapped
+              offers = {offersNear}
+              onClickTitleCard = {(history, id) => {
+                history.push(`/offer/${id}`);
+                // eslint-disable-next-line no-console
+                console.log(`CLICK on card NEAR #${id}`);
+              }}
+              styleClassNames = {[
+                `near-places__list places__list`,
+                `near-places__`,
+                `near-places__`
+              ]}
+            />
           </section>
-          <div className="container">
-            <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <ListOffersWrapped
-                offers = {offersNear}
-                onClickTitleCard = {(history, id) => {
-                  history.push(`/offer/${id}`);
-                  // eslint-disable-next-line no-console
-                  console.log(`CLICK on card NEAR #${id}`);
-                }}
-                styleClassNames = {[
-                  `near-places__list places__list`,
-                  `near-places__`,
-                  `near-places__`
-                ]}
-              />
-            </section>
-          </div>
-        </main>
-        :
-        <main className="page__main page__main--property">
-          <div style={{
-            display: `flex`,
-            width: `100%`,
-            height: `500px`,
-          }}>
-            <div style={{
-              margin: `auto`,
-            }}>
-              <h2>Loading...</h2>
-            </div>
-          </div>
-        </main>
-      }
+        </div>
+      </main>
+
     </React.Fragment>
   );
 };
@@ -208,10 +200,10 @@ Room.propTypes = {
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
-  flagDataIsLoading: PropTypes.bool.isRequired,
   offer: offerProp.isRequired,
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sendComment: PropTypes.func.isRequired,
 };
 
 export default Room;
