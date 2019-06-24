@@ -18,6 +18,7 @@ const initialState = {
 
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,
+  CHANGE_FAVORITES_STATUS: `CHANGE_FAVORITES_STATUS`,
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -30,6 +31,11 @@ const ActionCreator = {
   addListOffers: (list) => ({
     type: ActionType.ADD_LIST_OFFERS,
     payload: list,
+  }),
+
+  changeFavoritesStatus: (offer) => ({
+    type: ActionType.ADD_LIST_OFFERS,
+    payload: offer,
   }),
 
   changeCity: (newCity) => ({
@@ -67,6 +73,20 @@ const ActionCreator = {
 };
 
 const Operation = {
+  changeFavoritesStatus: (hotelId, status) => (dispatch, _getState, api) => {
+    return api.get(`/favorite/${hotelId}/${status}`)
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          throw new Error(`Ошибка отправки данных избранных предложение. Повторите позже!`);
+        }
+      })
+      .then((response) => {
+        dispatch(ActionCreator.changeFavoritesStatus(ModelOffer.parseOffer(response.data)));
+      })
+      .catch(alert);
+  },
   loadComments: (hotelId) => (dispatch, _getState, api) => {
     return api.get(`/comments/${hotelId}`)
       .then((response) => {
@@ -120,6 +140,11 @@ const reducer = (state = initialState, action) =>{
       return Object.assign({}, state, {
         city: action.payload,
       });
+
+    case ActionType.CHANGE_FAVORITES_STATUS:
+      const offer = state.listOffers.find((item) => item.id === action.payload.id);
+      offer.isFavorite = action.payload.isFavorite;
+      return state;
 
     case ActionType.SET_IS_LOAD:
       return Object.assign({}, state, {

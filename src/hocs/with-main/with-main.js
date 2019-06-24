@@ -27,7 +27,7 @@ const withMain = (Component) => {
         flagDataIsLoading,
         isAuthorizationStatus,
         controlAuthorization,
-        emailUser
+        emailUser,
       } = this.props;
 
       return (flagDataIsLoading ? (
@@ -62,6 +62,7 @@ const withMain = (Component) => {
     emailUser: PropTypes.string.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     activeOffer: offerProp,
+    onClickBookmark: PropTypes.func.isRequired,
   };
 
   return WithMain;

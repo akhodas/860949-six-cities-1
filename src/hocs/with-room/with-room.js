@@ -71,6 +71,7 @@ const withRoom = (Component) => {
     flagDataIsLoading: PropTypes.bool.isRequired,
     comments: PropTypes.arrayOf(PropTypes.object).isRequired,
     sendComment: PropTypes.func.isRequired,
+    onClickBookmark: PropTypes.func.isRequired,
   };
 
   return withRouter(WithRoom);

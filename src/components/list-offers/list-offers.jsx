@@ -14,6 +14,7 @@ class ListOffers extends React.PureComponent {
       onItemActivate,
       styleClassNames,
       onChangeActiveOffer,
+      onClickBookmark,
     } = this.props;
 
     return <div className={styleClassNames[0]}>
@@ -23,6 +24,7 @@ class ListOffers extends React.PureComponent {
         onClickTitleCard={onClickTitleCard}
         onClickImageCard={onClickImageCard}
         onChangeActiveOffer={onChangeActiveOffer}
+        onClickBookmark={onClickBookmark}
         onHoverCard={(e) => {
           onItemActivate(item, e);
         }}
@@ -40,6 +42,7 @@ ListOffers.propTypes = {
   onChangeActiveOffer: PropTypes.func,
   onItemActivate: PropTypes.func.isRequired,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
 export default ListOffers;

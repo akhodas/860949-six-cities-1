@@ -24,6 +24,7 @@ const Room = (props) => {
     comments,
     offersNear,
     sendComment,
+    onClickBookmark,
   } = props;
 
   return (
@@ -90,7 +91,11 @@ const Room = (props) => {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className="property__bookmark-button button"
+                  type="button"
+                  onClick={onClickBookmark}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -177,6 +182,7 @@ const Room = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <ListOffersWrapped
               offers = {offersNear}
+              onClickBookmark = {onClickBookmark}
               onClickTitleCard = {(history, id) => {
                 history.push(`/offer/${id}`);
                 // eslint-disable-next-line no-console
@@ -204,6 +210,7 @@ Room.propTypes = {
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   sendComment: PropTypes.func.isRequired,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
 export default Room;

@@ -27,6 +27,7 @@ const MainPage = (props) => {
     emailUser,
     activeOffer,
     onChangeActiveOffer,
+    onClickBookmark,
   } = props;
 
   return <React.Fragment>
@@ -114,6 +115,7 @@ const MainPage = (props) => {
                 onClickTitleCard = {onClickTitleCard}
                 onClickImageCard = {onClickImageCard}
                 onChangeActiveOffer = {onChangeActiveOffer}
+                onClickBookmark = {onClickBookmark}
                 styleClassNames = {[
                   `cities__places-list places__list tabs__content`,
                   `cities__place-`,
@@ -152,6 +154,7 @@ MainPage.propTypes = {
   flagDataIsLoading: PropTypes.bool.isRequired,
   activeOffer: offerProp,
   onChangeActiveOffer: PropTypes.func.isRequired,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
 export default MainPage;

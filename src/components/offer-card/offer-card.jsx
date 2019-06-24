@@ -10,6 +10,7 @@ const OfferCard = (props) => {
     onClickTitleCard,
     onClickImageCard,
     onChangeActiveOffer,
+    onClickBookmark,
     onHoverCard,
     styleClassNames
   } = props;
@@ -44,7 +45,11 @@ const OfferCard = (props) => {
           <b className="place-card__price-value">&euro;{price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className="place-card__bookmark-button button" type="button">
+        <button
+          className="place-card__bookmark-button button"
+          type="button"
+          onClick={onClickBookmark}
+        >
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>
           </svg>
@@ -73,6 +78,7 @@ OfferCard.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func,
   onChangeActiveOffer: PropTypes.func,
+  onClickBookmark: PropTypes.func.isRequired,
   onHoverCard: PropTypes.func.isRequired,
   history: PropTypes.object,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -30,6 +30,7 @@ const App = (props) => {
     controlAuthorization,
     emailUser,
     flagDataIsLoading,
+    onClickBookmark,
   } = props;
 
   return (
@@ -41,6 +42,7 @@ const App = (props) => {
           listCities = {listCities}
           onClickTitleCard = {onClickTitleCard}
           onClickImageCard = {onClickImageCard}
+          onClickBookmark = {onClickBookmark}
           onCityClick = {onCityClick}
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
@@ -77,6 +79,7 @@ const App = (props) => {
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
           flagDataIsLoading = {flagDataIsLoading}
+          onClickBookmark = {onClickBookmark}
         />
       )} />
 
@@ -97,6 +100,7 @@ App.propTypes = {
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
 

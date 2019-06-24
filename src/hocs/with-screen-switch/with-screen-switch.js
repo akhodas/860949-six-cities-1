@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import {compose} from "recompose";
 import {connect} from 'react-redux';
 
-import {ActionCreator as ActionCreatorData} from '../../reducer/data/data';
+import {
+  ActionCreator as ActionCreatorData,
+  Operation as OperationData
+} from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
 import {getCity, getCities, getOffers, getOffersForCity, getFlagDataIsLoading} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
@@ -29,6 +32,7 @@ const withScreenSwitch = (Component) => {
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
+    onClickBookmark: PropTypes.func.isRequired,
   };
 
   return WithScreenSwitch;
@@ -58,6 +62,13 @@ const mapDispatchToProps = (dispatch) => ({
 
   logIn: (data) => {
     dispatch(OperationUser.logIn(data));
+  },
+
+  onClickBookmark: (data) => {
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    console.log(`add onClickBookmark`);
+    console.log(data);
+    // dispatch(OperationData.changeFavoritesStatus(data.id, data.isFavorites));
   },
 });
 
