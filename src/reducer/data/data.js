@@ -11,7 +11,6 @@ export const TypeSort = {
 const initialState = {
   city: `No cities`,
   flagDataIsLoading: false,
-  statusSendComment: false,
   listComments: [],
   listOffers: [],
   typeSort: TypeSort.POPULAR,

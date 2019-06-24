@@ -10,7 +10,7 @@ const withCommentSubmitionForm = (Component) => {
         rating: 0,
         commentText: ``,
         blockForm: false,
-        successSend: false,
+        successSend: true,
       };
 
       this._onSubmit = this._onSubmit.bind(this);
@@ -57,13 +57,13 @@ const withCommentSubmitionForm = (Component) => {
           rating: 0,
           commentText: ``,
           blockForm: false,
-          successSend: false,
+          successSend: true,
         });
       })
       .catch(() => {
         this.setState({
           blockForm: false,
-          successSend: true,
+          successSend: false,
         });
       });
     }

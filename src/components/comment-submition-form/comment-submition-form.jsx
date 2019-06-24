@@ -16,7 +16,7 @@ const CommentSubmitionForm = (props) => {
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      {successSend ? (
+      {!successSend ? (
         <p className="reviews__help">
           <b className="reviews__text-amount" style={{color: `red`, fontSize: `16px`}}>
             Error sending data!!!
