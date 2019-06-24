@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const CommentSubmitionForm = (props) => {
   const {
-    raiting,
+    rating,
     commentText,
     blockForm,
     successSend,
-    onChangeRaiting,
+    onChangeRating,
     onChangeText,
     onSubmit
   } = props;
@@ -31,9 +31,9 @@ const CommentSubmitionForm = (props) => {
               value={star}
               id={`${star}-stars`}
               type="radio"
-              onChange={onChangeRaiting}
+              onChange={onChangeRating}
               disabled={blockForm}
-              checked={raiting === star}
+              checked={rating === star}
             />
             <label
               htmlFor={`${star}-stars`}
@@ -67,7 +67,7 @@ const CommentSubmitionForm = (props) => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!(raiting > 0
+          disabled={!(rating > 0
             && commentText.length >= 50
             && commentText.length <= 300
             && !blockForm)}
@@ -79,13 +79,13 @@ const CommentSubmitionForm = (props) => {
 };
 
 CommentSubmitionForm.propTypes = {
-  raiting: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
   commentText: PropTypes.string.isRequired,
   blockForm: PropTypes.bool.isRequired,
   successSend: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
-  onChangeRaiting: PropTypes.func.isRequired,
+  onChangeRating: PropTypes.func.isRequired,
 };
 
 export default CommentSubmitionForm;

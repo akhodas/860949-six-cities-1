@@ -33,7 +33,8 @@ const withRoom = (Component) => {
         comments,
         isAuthorizationStatus,
         controlAuthorization,
-        emailUser
+        emailUser,
+        sendComment,
       } = this.props;
 
       let offer = {};
@@ -50,8 +51,21 @@ const withRoom = (Component) => {
           offer={offer}
           offersNear={offersNear}
           comments={comments}
-          sendComment={(value) => {
-            if (value > 100) {
+          sendComment={(data) => {
+            return sendComment({
+              comment: data,
+              id: offer.id,
+            })
+            .then((response) => {
+              console.log(`response`);
+              console.log(response);
+            })
+            .catch((response) => {
+              console.log(`zxcv`);
+              console.log(response);
+            });
+
+            if (data.rating > 3) {
               this.setState({successSendComment: false});
             } else {
               this.setState({successSendComment: true});
@@ -103,9 +117,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(OperationData.loadComments(id));
   },
 
-  // sendComment: (data) => {
-  //   dispatch(OperationData.logIn(data));
-  // },
+  sendComment: (data) => {
+    return dispatch(OperationData.sendComment(data.comment, data.id));
+  },
 });
 
 export {withRoom};

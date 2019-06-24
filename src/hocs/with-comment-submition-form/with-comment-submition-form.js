@@ -7,14 +7,14 @@ const withCommentSubmitionForm = (Component) => {
       super(props);
 
       this.state = {
-        raiting: 0,
+        rating: 0,
         commentText: ``,
         blockForm: false,
       };
 
       this._onSubmit = this._onSubmit.bind(this);
       this._onChangeText = this._onChangeText.bind(this);
-      this._onChangeRaiting = this._onChangeRaiting.bind(this);
+      this._onChangeRating = this._onChangeRating.bind(this);
     }
 
     render() {
@@ -22,13 +22,13 @@ const withCommentSubmitionForm = (Component) => {
 
       return <Component
         {...this.props}
-        raiting={this.state.raiting}
+        rating={this.state.rating}
         commentText={this.state.commentText}
         blockForm={this.state.blockForm}
         successSend={successSend}
         onSubmit={this._onSubmit}
         onChangeText={this._onChangeText}
-        onChangeRaiting={this._onChangeRaiting}
+        onChangeRating={this._onChangeRating}
       />;
     }
 
@@ -38,33 +38,31 @@ const withCommentSubmitionForm = (Component) => {
       });
     }
 
-    _onChangeRaiting(e) {
+    _onChangeRating(e) {
       this.setState({
-        raiting: +e.target.value,
+        rating: +e.target.value,
       });
     }
 
     _onSubmit(e) {
       e.preventDefault();
-      this.setState({blockForm: true});
 
-      this.props.sendComment(this.state.commentText.length);
+      this.props.sendComment({
+        rating: this.state.rating,
+        comment: this.state.commentText,
+      });
 
-      if (this.state.commentText.length >= 100) {
+      if (this.state.rating > 3) {
         this.setState({
-          raiting: 0,
+          rating: 0,
           commentText: ``,
           blockForm: false,
         });
-        console.log(true);
       } else {
         this.setState({
           blockForm: true,
         });
-        console.log(false);
       }
-      console.log(this.state.commentText.length);
-      console.log(this.state.raiting);
 
       setTimeout(() => {
         this.setState({blockForm: false});
