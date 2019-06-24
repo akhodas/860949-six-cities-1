@@ -11,13 +11,6 @@ import Loading from '../../components/loading/loading.jsx';
 
 const withRoom = (Component) => {
   class WithRoom extends React.PureComponent {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        successSendComment: false,
-      };
-    }
 
     componentDidMount() {
       const {match, loadComments} = this.props;
@@ -51,27 +44,10 @@ const withRoom = (Component) => {
           offer={offer}
           offersNear={offersNear}
           comments={comments}
-          sendComment={(data) => {
-            return sendComment({
-              comment: data,
-              id: offer.id,
-            })
-            .then((response) => {
-              console.log(`response`);
-              console.log(response);
-            })
-            .catch((response) => {
-              console.log(`zxcv`);
-              console.log(response);
-            });
-
-            if (data.rating > 3) {
-              this.setState({successSendComment: false});
-            } else {
-              this.setState({successSendComment: true});
-            }
-          }}
-          successSend={this.state.successSendComment}
+          sendComment={(newComment) => sendComment({
+            comment: newComment,
+            id: offer.id,
+          })}
         />
       ) : (
         <Loading
@@ -117,9 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(OperationData.loadComments(id));
   },
 
-  sendComment: (data) => {
-    return dispatch(OperationData.sendComment(data.comment, data.id));
-  },
+  sendComment: (data) => dispatch(OperationData.sendComment(data.comment, data.id)),
 });
 
 export {withRoom};

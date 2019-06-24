@@ -24,7 +24,6 @@ const Room = (props) => {
     comments,
     offersNear,
     sendComment,
-    successSend,
   } = props;
 
   return (
@@ -157,7 +156,6 @@ const Room = (props) => {
                 />
                 {!isAuthorizationStatus ? (
                   <CommentSubmitionFormWrapped
-                    successSend={successSend}
                     sendComment={sendComment}
                   />) : null }
               </section>
@@ -206,7 +204,6 @@ Room.propTypes = {
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   sendComment: PropTypes.func.isRequired,
-  successSend: PropTypes.bool.isRequired,
 };
 
 export default Room;

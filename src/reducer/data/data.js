@@ -104,9 +104,8 @@ const Operation = {
           dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
           return true;
         })
-        .catch(() => {
-          console.log(`err`);
-          throw new Error();
+        .catch((err) => {
+          throw err;
         });
   },
 };
