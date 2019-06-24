@@ -18,11 +18,14 @@ const withCommentSubmitionForm = (Component) => {
     }
 
     render() {
+      const {successSend} = this.props;
+
       return <Component
         {...this.props}
         raiting={this.state.raiting}
         commentText={this.state.commentText}
         blockForm={this.state.blockForm}
+        successSend={successSend}
         onSubmit={this._onSubmit}
         onChangeText={this._onChangeText}
         onChangeRaiting={this._onChangeRaiting}
@@ -44,6 +47,9 @@ const withCommentSubmitionForm = (Component) => {
     _onSubmit(e) {
       e.preventDefault();
       this.setState({blockForm: true});
+
+      this.props.sendComment(this.state.commentText.length);
+
       if (this.state.commentText.length >= 100) {
         this.setState({
           raiting: 0,
@@ -63,15 +69,12 @@ const withCommentSubmitionForm = (Component) => {
       setTimeout(() => {
         this.setState({blockForm: false});
       }, 3000);
-      // this.props.sendComment({
-      //   raiting: this.state.raiting,
-      //   commentText: this.state.commentText,
-      // });
     }
   }
 
   WithCommentSubmitionForm.propTypes = {
     sendComment: PropTypes.func.isRequired,
+    successSend: PropTypes.bool.isRequired,
   };
 
   return WithCommentSubmitionForm;

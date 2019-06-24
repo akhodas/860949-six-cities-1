@@ -2,12 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CommentSubmitionForm = (props) => {
-  const {raiting, commentText, blockForm, onChangeRaiting, onChangeText, onSubmit} = props;
+  const {
+    raiting,
+    commentText,
+    blockForm,
+    successSend,
+    onChangeRaiting,
+    onChangeText,
+    onSubmit
+  } = props;
   const stars = [5, 4, 3, 2, 1];
 
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
+      {successSend ? (
+        <p className="reviews__help">
+          <b className="reviews__text-amount" style={{color: `red`, fontSize: `16px`}}>
+            Error sending data!!!
+          </b>
+        </p>) : null}
       <div className="reviews__rating-form form__rating">
         {stars.map((star) => (
           <React.Fragment key={`key-${star}`}>
@@ -68,6 +82,7 @@ CommentSubmitionForm.propTypes = {
   raiting: PropTypes.number.isRequired,
   commentText: PropTypes.string.isRequired,
   blockForm: PropTypes.bool.isRequired,
+  successSend: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
   onChangeRaiting: PropTypes.func.isRequired,

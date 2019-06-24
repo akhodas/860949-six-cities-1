@@ -50,8 +50,12 @@ const withRoom = (Component) => {
           offer={offer}
           offersNear={offersNear}
           comments={comments}
-          sendComment={() => {
-            this.setState({successSendComment: !this.state.successSendComment});
+          sendComment={(value) => {
+            if (value > 100) {
+              this.setState({successSendComment: false});
+            } else {
+              this.setState({successSendComment: true});
+            }
           }}
           successSend={this.state.successSendComment}
         />
@@ -76,6 +80,7 @@ const withRoom = (Component) => {
     loadComments: PropTypes.func.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+    sendComment: PropTypes.func.isRequired,
   };
 
   return withRouter(WithRoom);
@@ -97,6 +102,10 @@ const mapDispatchToProps = (dispatch) => ({
   loadComments: (id) => {
     dispatch(OperationData.loadComments(id));
   },
+
+  // sendComment: (data) => {
+  //   dispatch(OperationData.logIn(data));
+  // },
 });
 
 export {withRoom};
