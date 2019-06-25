@@ -40,7 +40,11 @@ const ActionCreator = {
 const Operation = {
   addUserData: () => (dispatch, _getState, api) => {
     return api.get(`/login`)
-        .then((response) => dispatch(ActionCreator.addUserData(response.data)))
+        .then((response) => {
+          if (response.status !== 403) {
+            dispatch(ActionCreator.addUserData(response.data));
+          }
+        })
         .catch(() => {
           // eslint-disable-next-line no-console
           console.log(`Ошибка авторизации. Повторите позже!`);
@@ -66,6 +70,7 @@ const reducer = (state = initialState, action) =>{
 
     case ActionType.ADD_USER_DATA:
       return Object.assign({}, state, {
+        isAuthorizationRequired: false,
         id: action.payload.id,
         email: action.payload.email,
         name: action.payload.name,

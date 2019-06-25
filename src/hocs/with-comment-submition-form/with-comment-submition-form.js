@@ -52,13 +52,17 @@ const withCommentSubmitionForm = (Component) => {
         rating: this.state.rating,
         comment: this.state.commentText,
       })
-      .then(() => {
-        this.setState({
-          rating: 0,
-          commentText: ``,
-          blockForm: false,
-          successSend: true,
-        });
+      .then((response) => {
+        if (response.status === 403) {
+          this.props.history.push(`/login`);
+        } else {
+          this.setState({
+            rating: 0,
+            commentText: ``,
+            blockForm: false,
+            successSend: true,
+          });
+        }
       })
       .catch(() => {
         this.setState({
@@ -71,6 +75,7 @@ const withCommentSubmitionForm = (Component) => {
 
   WithCommentSubmitionForm.propTypes = {
     sendComment: PropTypes.func.isRequired,
+    history: PropTypes.object,
   };
 
   return WithCommentSubmitionForm;

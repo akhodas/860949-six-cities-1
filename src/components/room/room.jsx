@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ListComments from '../list-comments/list-comments.jsx';
@@ -17,6 +17,7 @@ const CommentSubmitionFormWrapped = withCommentSubmitionForm(CommentSubmitionFor
 const Room = (props) => {
 
   const {
+    history,
     emailUser,
     controlAuthorization,
     isAuthorizationStatus,
@@ -92,9 +93,18 @@ const Room = (props) => {
                   {offer.title}
                 </h1>
                 <button
-                  className="property__bookmark-button button"
+                  className={offer.isFavorite ?
+                    `property__bookmark-button property__bookmark-button--active button`
+                    : `property__bookmark-button button`
+                  }
                   type="button"
-                  onClick={onClickBookmark}
+                  onClick={() => {
+                    onClickBookmark({
+                      idOffer: offer.id,
+                      favoriteStatus: +!offer.isFavorite,
+                      objHistory: history,
+                    });
+                  }}
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -162,6 +172,7 @@ const Room = (props) => {
                 {!isAuthorizationStatus ? (
                   <CommentSubmitionFormWrapped
                     sendComment={sendComment}
+                    history={history}
                   />) : null }
               </section>
             </div>
@@ -183,8 +194,8 @@ const Room = (props) => {
             <ListOffersWrapped
               offers = {offersNear}
               onClickBookmark = {onClickBookmark}
-              onClickTitleCard = {(history, id) => {
-                history.push(`/offer/${id}`);
+              onClickTitleCard = {(objHistory, id) => {
+                objHistory.push(`/offer/${id}`);
                 // eslint-disable-next-line no-console
                 console.log(`CLICK on card NEAR #${id}`);
               }}
@@ -210,7 +221,8 @@ Room.propTypes = {
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   sendComment: PropTypes.func.isRequired,
+  history: PropTypes.object,
   onClickBookmark: PropTypes.func.isRequired,
 };
 
-export default Room;
+export default withRouter(Room);

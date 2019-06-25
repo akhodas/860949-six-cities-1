@@ -9,7 +9,7 @@ const CommentSubmitionForm = (props) => {
     successSend,
     onChangeRating,
     onChangeText,
-    onSubmit
+    onSubmit,
   } = props;
   const stars = [5, 4, 3, 2, 1];
 

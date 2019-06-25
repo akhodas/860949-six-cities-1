@@ -34,7 +34,7 @@ const ActionCreator = {
   }),
 
   changeFavoritesStatus: (offer) => ({
-    type: ActionType.ADD_LIST_OFFERS,
+    type: ActionType.CHANGE_FAVORITES_STATUS,
     payload: offer,
   }),
 
@@ -73,24 +73,34 @@ const ActionCreator = {
 };
 
 const Operation = {
-  changeFavoritesStatus: (hotelId, status) => (dispatch, _getState, api) => {
-    return api.get(`/favorite/${hotelId}/${status}`)
+  changeFavoritesStatus: (hotelId, status, history) => (dispatch, _getState, api) => {
+    return api.post(`/favorite/${hotelId}/${status}`)
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
+        console.log(`1`);
+        if (response.status >= 200 && response.status < 300 || response.status === 403) {
           return response;
         } else {
           throw new Error(`Ошибка отправки данных избранных предложение. Повторите позже!`);
         }
       })
       .then((response) => {
-        dispatch(ActionCreator.changeFavoritesStatus(ModelOffer.parseOffer(response.data)));
+        if (response.status === 403) {
+          history.push(`/login`);
+        } else {
+          dispatch(ActionCreator.changeFavoritesStatus(ModelOffer.parseOffer(response.data)));
+        }
       })
       .catch(alert);
   },
+
   loadComments: (hotelId) => (dispatch, _getState, api) => {
     return api.get(`/comments/${hotelId}`)
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
+        console.log(`2`);
+        if (response.status >= 200
+          && response.status < 300
+          || response.status === 403
+          || response.status === 400) {
           return response;
         } else {
           throw new Error(`Ошибка загрузки данных комментариев. Повторите позже!`);
@@ -101,10 +111,12 @@ const Operation = {
       })
       .catch(alert);
   },
+
   loadOffers: () => (dispatch, _getState, api) => {
     dispatch(ActionCreator.setIsLoad(false));
     return api.get(`/hotels`)
       .then((response) => {
+        console.log(`3`);
         if (response.status >= 200 && response.status < 300) {
           return response;
         } else {
@@ -117,11 +129,17 @@ const Operation = {
       })
       .catch(alert);
   },
+
   sendComment: (data, id) => (dispatch, _getState, api) => {
+    console.log(`4`);
     return api.post(`/comments/${id}`, data)
         .then((response) => {
-          dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
-          return true;
+          if (response.status === 403) {
+            return response;
+          } else {
+            dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
+            return response;
+          }
         })
         .catch((err) => {
           throw err;
@@ -144,7 +162,7 @@ const reducer = (state = initialState, action) =>{
     case ActionType.CHANGE_FAVORITES_STATUS:
       const offer = state.listOffers.find((item) => item.id === action.payload.id);
       offer.isFavorite = action.payload.isFavorite;
-      return state;
+      return Object.assign({}, state, {});
 
     case ActionType.SET_IS_LOAD:
       return Object.assign({}, state, {

@@ -14,7 +14,7 @@ const OfferCard = (props) => {
     onHoverCard,
     styleClassNames
   } = props;
-  const {id, previewImage, isPremium, price, title, type, rating} = offer;
+  const {id, previewImage, isPremium, price, title, type, rating, isFavorite} = offer;
 
   return <article
     className={`${styleClassNames[1]}card place-card`}
@@ -46,9 +46,18 @@ const OfferCard = (props) => {
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
         <button
-          className="place-card__bookmark-button button"
+          className={isFavorite ?
+            `place-card__bookmark-button place-card__bookmark-button--active button`
+            : `place-card__bookmark-button button`
+          }
           type="button"
-          onClick={onClickBookmark}
+          onClick={() => {
+            onClickBookmark({
+              idOffer: id,
+              favoriteStatus: +!isFavorite,
+              objHistory: history,
+            });
+          }}
         >
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark"></use>

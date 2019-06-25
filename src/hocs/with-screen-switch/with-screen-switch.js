@@ -65,10 +65,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onClickBookmark: (data) => {
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    console.log(`add onClickBookmark`);
-    console.log(data);
-    // dispatch(OperationData.changeFavoritesStatus(data.id, data.isFavorites));
+    dispatch(
+        OperationData.changeFavoritesStatus(
+            data.idOffer,
+            data.favoriteStatus,
+            data.objHistory
+        )
+    );
   },
 });
 
