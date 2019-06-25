@@ -32,6 +32,7 @@ describe(`MainPage`, () => {
               onClickTitleCard = {jest.fn()}
               onClickImageCard = {jest.fn()}
               onChangeActiveOffer = {jest.fn()}
+              onClickBookmark = {jest.fn()}
               onCityClick = {jest.fn()}
               redirect = {jest.fn()}
               isAuthorizationStatus = {false}

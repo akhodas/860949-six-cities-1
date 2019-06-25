@@ -16,6 +16,7 @@ describe(`OfferCard`, () => {
       onClickTitleCard={clickHandler}
       onClickImageCard={jest.fn()}
       onChangeActiveOffer = {jest.fn()}
+      onClickBookmark = {jest.fn()}
       onHoverCard={jest.fn()}
       styleClassNames = {[
         `cities__places-list places__list tabs__content`,
@@ -39,6 +40,7 @@ describe(`OfferCard`, () => {
       onClickTitleCard={jest.fn()}
       onClickImageCard={clickHandler}
       onChangeActiveOffer = {jest.fn()}
+      onClickBookmark = {jest.fn()}
       onHoverCard={jest.fn()}
       styleClassNames = {[
         `cities__places-list places__list tabs__content`,
@@ -62,6 +64,7 @@ describe(`OfferCard`, () => {
       onClickTitleCard={jest.fn()}
       onClickImageCard={clickHandler}
       onChangeActiveOffer = {jest.fn()}
+      onClickBookmark = {jest.fn()}
       onHoverCard={jest.fn()}
       styleClassNames = {[
         `cities__places-list places__list tabs__content`,

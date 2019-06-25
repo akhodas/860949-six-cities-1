@@ -14,6 +14,7 @@ describe(`ListOffers`, () => {
           onClickTitleCard = {jest.fn()}
           onClickImageCard = {jest.fn()}
           onChangeActiveOffer = {jest.fn()}
+          onClickBookmark = {jest.fn()}
           onItemActivate = {jest.fn()}
           styleClassNames = {[
             `cities__places-list places__list tabs__content`,
