@@ -48,6 +48,7 @@ export const getComments = (state) => {
 
 
 export const getOffers = (state) => {
+  console.log('getOffers');
   return state[NAMESPACE].listOffers;
 };
 
@@ -70,6 +71,7 @@ export const getCities = createSelector(
         });
       }
 
+      console.log('getCities');
       return listCities;
     }
 );
@@ -79,6 +81,7 @@ export const getOffersForCity = createSelector(
     (state) => state,
     (state, city) => city,
     (offers, state, city) => {
+      console.log('getOffersForCity');
       return _sort(offers.filter(
           (it) => it.city.name === city), state[NAMESPACE].typeSort
       );
@@ -91,9 +94,22 @@ export const getOffersNear = createSelector(
     },
     (state, offer) => offer,
     (offers, currentOffer) => {
+      console.log('getOffersNear');
       return offers.sort((a, b) => {
         return _distanceBetweenOffers(a, currentOffer)
         - _distanceBetweenOffers(b, currentOffer);
       }).slice(1, 4);
+    }
+);
+
+export const getFavoriteOffers = createSelector(
+    getOffers,
+    (offers) => {
+      console.log('hello');
+      return offers.filter(
+          (offer) => offer.isFavorite
+      ).sort(
+          (a, b) => (a.city.name < b.city.name) ? -1 : 1
+      );
     }
 );

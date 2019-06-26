@@ -36,10 +36,16 @@ const OfferCard = (props) => {
           onChangeActiveOffer(offer);
         }
       }}>
-        <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"></img>
+        <img
+          className="place-card__image"
+          src={previewImage}
+          width={styleClassNames[3] ? `150` : `260`}
+          height={styleClassNames[3] ? `110` : `200`}
+          alt="Place image">
+        </img>
       </a>
     </div>
-    <div className="place-card__info">
+    <div className={`${styleClassNames[3] ? styleClassNames[3] : null} place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>

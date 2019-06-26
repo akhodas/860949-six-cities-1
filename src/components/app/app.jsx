@@ -31,6 +31,7 @@ const App = (props) => {
     emailUser,
     flagDataIsLoading,
     onClickBookmark,
+    favoriteOffers,
   } = props;
 
   return (
@@ -58,6 +59,10 @@ const App = (props) => {
           : (
             <Favorites
               emailUser={emailUser}
+              favoriteOffers={favoriteOffers}
+              onClickTitleCard = {onClickTitleCard}
+              onClickImageCard = {onClickImageCard}
+              onClickBookmark = {onClickBookmark}
             />
           )
       )} />
@@ -90,6 +95,7 @@ const App = (props) => {
 
 App.propTypes = {
   listOffers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
+  favoriteOffers: PropTypes.arrayOf(offerProp),
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,

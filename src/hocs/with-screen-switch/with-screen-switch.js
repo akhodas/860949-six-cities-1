@@ -8,7 +8,13 @@ import {
   Operation as OperationData
 } from '../../reducer/data/data';
 import {Operation as OperationUser} from '../../reducer/user/user';
-import {getCity, getCities, getOffers, getOffersForCity, getFlagDataIsLoading} from '../../reducer/data/selectors';
+import {
+  getCity,
+  getCities,
+  getOffers,
+  getOffersForCity,
+  getFlagDataIsLoading,
+  getFavoriteOffers} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
@@ -46,6 +52,7 @@ const mapStateToProps = (state, ownProps) => {
     city: newCity,
     listCities: getCities(state),
     listOffers: getOffersForCity(state, newCity),
+    favoriteOffers: getFavoriteOffers(state),
     isAuthorizationStatus: getAuthorizationStatus(state),
     flagDataIsLoading: getFlagDataIsLoading(state),
   });
