@@ -14,7 +14,7 @@ import {
   getOffers,
   getOffersForCity,
   getFlagDataIsLoading,
-  getFavoriteOffers} from '../../reducer/data/selectors';
+} from '../../reducer/data/selectors';
 import {getAuthorizationStatus, getEmail} from '../../reducer/user/selectors';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
@@ -52,7 +52,6 @@ const mapStateToProps = (state, ownProps) => {
     city: newCity,
     listCities: getCities(state),
     listOffers: getOffersForCity(state, newCity),
-    favoriteOffers: getFavoriteOffers(state),
     isAuthorizationStatus: getAuthorizationStatus(state),
     flagDataIsLoading: getFlagDataIsLoading(state),
   });

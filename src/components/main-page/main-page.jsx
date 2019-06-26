@@ -5,13 +5,11 @@ import {Link} from 'react-router-dom';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import ListCities from '../list-cities/list-cities.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import OptionSort from '../option-sort/option-sort.jsx';
 import withOptionSort from '../../hocs/with-option-sort/with-option-sort.js';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 import EmptyMain from '../main-empty/main-empty.jsx';
 
-const ListOffersWrapped = withActiveItem(ListOffers);
 const OptionSortWrapped = withOptionSort(OptionSort);
 
 const MainPage = (props) => {
@@ -110,7 +108,7 @@ const MainPage = (props) => {
 
               <OptionSortWrapped />
 
-              <ListOffersWrapped
+              <ListOffers
                 offers = {offers}
                 onClickTitleCard = {onClickTitleCard}
                 onClickImageCard = {onClickImageCard}

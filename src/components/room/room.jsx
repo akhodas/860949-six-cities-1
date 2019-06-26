@@ -4,14 +4,12 @@ import PropTypes from 'prop-types';
 
 import ListComments from '../list-comments/list-comments.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import CitiesMap from '../cities-map/cities-map.jsx';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 import CommentSubmitionForm from '../comment-submition-form/comment-submition-form.jsx';
 import withCommentSubmitionForm from '../../hocs/with-comment-submition-form/with-comment-submition-form.js';
 
 
-const ListOffersWrapped = withActiveItem(ListOffers);
 const CommentSubmitionFormWrapped = withCommentSubmitionForm(CommentSubmitionForm);
 
 const Room = (props) => {
@@ -191,13 +189,11 @@ const Room = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <ListOffersWrapped
+            <ListOffers
               offers = {offersNear}
               onClickBookmark = {onClickBookmark}
               onClickTitleCard = {(objHistory, id) => {
                 objHistory.push(`/offer/${id}`);
-                // eslint-disable-next-line no-console
-                console.log(`CLICK on card NEAR #${id}`);
               }}
               styleClassNames = {[
                 `near-places__list places__list`,

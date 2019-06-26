@@ -109,15 +109,3 @@ export const getOffersNear = createSelector(
       }).slice(1, 4);
     }
 );
-
-// export const getFavoriteOffers = createSelector(
-//     getOffers,
-//     (offers) => {
-//       console.log('getFavoriteOffers');
-//       return offers.filter(
-//           (offer) => offer.isFavorite
-//       ).sort(
-//           (a, b) => (a.city.name < b.city.name) ? -1 : 1
-//       );
-//     }
-// );

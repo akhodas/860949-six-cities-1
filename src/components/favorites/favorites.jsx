@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import ListOffers from '../list-offers/list-offers.jsx';
-
-const ListOffersWrapped = withActiveItem(ListOffers);
 
 
 const Favorites = (props) => {
@@ -91,7 +88,7 @@ const Favorites = (props) => {
                         </div>
                       </div>
 
-                      <ListOffersWrapped
+                      <ListOffers
                         offers = {city}
                         onClickTitleCard = {onClickTitleCard}
                         onClickImageCard = {onClickImageCard}

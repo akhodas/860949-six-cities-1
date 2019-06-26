@@ -11,14 +11,12 @@ const OfferCard = (props) => {
     onClickImageCard,
     onChangeActiveOffer,
     onClickBookmark,
-    onHoverCard,
     styleClassNames
   } = props;
   const {id, previewImage, isPremium, price, title, type, rating, isFavorite} = offer;
 
   return <article
-    className={`${styleClassNames[1]}card place-card`}
-    onMouseEnter={onHoverCard}>
+    className={`${styleClassNames[1]}card place-card`}>
     {isPremium ?
       <div className="place-card__mark">
         <span>Premium</span>
@@ -94,7 +92,6 @@ OfferCard.propTypes = {
   onClickImageCard: PropTypes.func,
   onChangeActiveOffer: PropTypes.func,
   onClickBookmark: PropTypes.func.isRequired,
-  onHoverCard: PropTypes.func.isRequired,
   history: PropTypes.object,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
