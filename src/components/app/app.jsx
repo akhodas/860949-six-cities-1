@@ -10,11 +10,13 @@ import Room from '../room/room.jsx';
 import withRoom from '../../hocs/with-room/with-room.js';
 import withMain from '../../hocs/with-main/with-main.js';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import withFavorite from '../../hocs/with-favorite/with-favorite.js';
 
 
 const SignInWrapped = withAuthorization(SignIn);
 const RoomWrapped = withRoom(Room);
 const MainPageWrapped = withMain(MainPage);
+const FavoritesWrapped = withFavorite(Favorites);
 
 
 const App = (props) => {
@@ -31,7 +33,6 @@ const App = (props) => {
     emailUser,
     flagDataIsLoading,
     onClickBookmark,
-    favoriteOffers,
   } = props;
 
   return (
@@ -57,9 +58,11 @@ const App = (props) => {
           <Redirect to='/login'/>
         )
           : (
-            <Favorites
+            <FavoritesWrapped
               emailUser={emailUser}
-              favoriteOffers={favoriteOffers}
+              isAuthorizationStatus = {isAuthorizationStatus}
+              controlAuthorization = {controlAuthorization}
+              flagDataIsLoading = {flagDataIsLoading}
               onClickTitleCard = {onClickTitleCard}
               onClickImageCard = {onClickImageCard}
               onClickBookmark = {onClickBookmark}
@@ -95,7 +98,6 @@ const App = (props) => {
 
 App.propTypes = {
   listOffers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
-  favoriteOffers: PropTypes.arrayOf(offerProp),
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,

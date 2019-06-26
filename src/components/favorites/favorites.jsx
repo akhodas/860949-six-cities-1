@@ -17,25 +17,6 @@ const Favorites = (props) => {
     onClickBookmark,
   } = props;
 
-  console.log(favoriteOffers.map((item) => ({id: item.id, city: item.city.name})));
-
-  const myarrout = [];
-  for (let i = 0; i < favoriteOffers.length; i++) {
-    const myarr = [favoriteOffers[i]];
-    i++;
-
-    while (i < favoriteOffers.length
-        && favoriteOffers[i - 1].city.name === favoriteOffers[i].city.name) {
-      myarr.push(favoriteOffers[i]);
-      i++;
-    }
-
-    myarrout.push(myarr);
-  }
-
-  console.log(myarrout);
-  // console.log(!!myarrout && myarrout.map((item) => ({id: item.id, city: item.city.name})));
-
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -93,13 +74,13 @@ const Favorites = (props) => {
         </div>
       </header>
 
-      {myarrout.length ? (
+      {favoriteOffers.length ? (
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {myarrout.map((city) => {
+                {favoriteOffers.map((city) => {
                   return (
                     <li className="favorites__locations-items" key={city[0].city.name}>
                       <div className="favorites__locations locations locations--current">
@@ -160,7 +141,7 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(offerProp),
+  favoriteOffers: PropTypes.arrayOf(PropTypes.arrayOf(offerProp)),
   emailUser: PropTypes.string.isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onClickImageCard: PropTypes.func.isRequired,

@@ -48,8 +48,16 @@ export const getComments = (state) => {
 
 
 export const getOffers = (state) => {
-  console.log('getOffers');
+  console.log(`getOffers`);
   return state[NAMESPACE].listOffers;
+};
+
+
+export const getFavoriteOffers = (state) => {
+  console.log(`getFavoriteOffers`);
+  return state[NAMESPACE].listFavoriteOffers.sort(
+      (a, b) => (a.city.name < b.city.name) ? -1 : 1
+  );
 };
 
 
@@ -71,7 +79,7 @@ export const getCities = createSelector(
         });
       }
 
-      console.log('getCities');
+      console.log(`getCities`);
       return listCities;
     }
 );
@@ -81,7 +89,7 @@ export const getOffersForCity = createSelector(
     (state) => state,
     (state, city) => city,
     (offers, state, city) => {
-      console.log('getOffersForCity');
+      console.log(`getOffersForCity`);
       return _sort(offers.filter(
           (it) => it.city.name === city), state[NAMESPACE].typeSort
       );
@@ -94,7 +102,7 @@ export const getOffersNear = createSelector(
     },
     (state, offer) => offer,
     (offers, currentOffer) => {
-      console.log('getOffersNear');
+      console.log(`getOffersNear`);
       return offers.sort((a, b) => {
         return _distanceBetweenOffers(a, currentOffer)
         - _distanceBetweenOffers(b, currentOffer);
@@ -102,14 +110,14 @@ export const getOffersNear = createSelector(
     }
 );
 
-export const getFavoriteOffers = createSelector(
-    getOffers,
-    (offers) => {
-      console.log('hello');
-      return offers.filter(
-          (offer) => offer.isFavorite
-      ).sort(
-          (a, b) => (a.city.name < b.city.name) ? -1 : 1
-      );
-    }
-);
+// export const getFavoriteOffers = createSelector(
+//     getOffers,
+//     (offers) => {
+//       console.log('getFavoriteOffers');
+//       return offers.filter(
+//           (offer) => offer.isFavorite
+//       ).sort(
+//           (a, b) => (a.city.name < b.city.name) ? -1 : 1
+//       );
+//     }
+// );

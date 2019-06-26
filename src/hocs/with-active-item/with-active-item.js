@@ -26,12 +26,9 @@ const withActiveItem = (Component) => {
 
     _handleCardActivate(item, e) {
       this.setState({activeItem: item});
-      // eslint-disable-next-line no-console
       console.log(`Activate card #${item.id}`);
-      // eslint-disable-next-line no-console
       console.log(`Title last ativate card: "${
         this.state.activeItem.title}"!!! (because "setState" asynk)`);
-      // eslint-disable-next-line no-console
       console.log(`event: "${e}"`);
     }
   }

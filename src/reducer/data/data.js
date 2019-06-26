@@ -13,6 +13,7 @@ const initialState = {
   flagDataIsLoading: false,
   listComments: [],
   listOffers: [],
+  listFavoriteOffers: [],
   typeSort: TypeSort.POPULAR,
 };
 
@@ -22,6 +23,7 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
   SEND_COMMENT: `SEND_COMMENT`,
   SET_IS_LOAD: `SET_IS_LOAD`,
   SET_TYPE_SORT: `SET_TYPE_SORT`,
@@ -67,6 +69,14 @@ const ActionCreator = {
   loadOffers: (offers) => {
     return {
       type: ActionType.LOAD_OFFERS,
+      payload: offers,
+    };
+  },
+
+
+  loadFavoriteOffers: (offers) => {
+    return {
+      type: ActionType.LOAD_FAVORITE_OFFERS,
       payload: offers,
     };
   },
@@ -130,8 +140,26 @@ const Operation = {
       .catch(alert);
   },
 
+  loadFavoriteOffers: () => (dispatch, _getState, api) => {
+    dispatch(ActionCreator.setIsLoad(false));
+    return api.get(`/favorite`)
+      .then((response) => {
+        console.log(`4`);
+        if (response.status >= 200 && response.status < 300) {
+          return response;
+        } else {
+          throw new Error(`Ошибка загрузки данных отелей*. Повторите позже!`);
+        }
+      })
+      .then((response) => {
+        dispatch(ActionCreator.loadFavoriteOffers(ModelOffer.parseOffers(response.data)));
+        dispatch(ActionCreator.setIsLoad(true));
+      })
+      .catch(alert);
+  },
+
   sendComment: (data, id) => (dispatch, _getState, api) => {
-    console.log(`4`);
+    console.log(`5`);
     return api.post(`/comments/${id}`, data)
         .then((response) => {
           if (response.status === 403) {
@@ -161,7 +189,13 @@ const reducer = (state = initialState, action) =>{
 
     case ActionType.CHANGE_FAVORITES_STATUS:
       const offer = state.listOffers.find((item) => item.id === action.payload.id);
-      offer.isFavorite = action.payload.isFavorite;
+      if (offer) {
+        offer.isFavorite = action.payload.isFavorite;
+      }
+      const offerFavorite = state.listFavoriteOffers.find((item) => item.id === action.payload.id);
+      if (offerFavorite) {
+        offerFavorite.isFavorite = action.payload.isFavorite;
+      }
       return Object.assign({}, state, {});
 
     case ActionType.SET_IS_LOAD:
@@ -182,6 +216,11 @@ const reducer = (state = initialState, action) =>{
     case ActionType.LOAD_OFFERS:
       return Object.assign({}, state, {
         listOffers: action.payload,
+      });
+
+    case ActionType.LOAD_FAVORITE_OFFERS:
+      return Object.assign({}, state, {
+        listFavoriteOffers: action.payload,
       });
   }
   return state;
