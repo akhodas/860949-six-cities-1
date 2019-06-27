@@ -1,5 +1,5 @@
-import {createSelector} from "reselect";
 import Namespace from "../namespace";
+import {createSelector} from "reselect";
 import {TypeSort} from "./data";
 
 export const DefaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
@@ -76,7 +76,7 @@ export const getCities = createSelector(
           }
         });
       }
-      
+
       return listCities;
     }
 );

@@ -24,6 +24,10 @@ const init = () => {
   const store = createStore(reducer, enhancer);
 
   store.dispatch(OperationUser.addUserData());
+  // setInterval(() => {
+  //   store.dispatch(OperationUser.addUserData());
+  // }, 30000);
+
   store.dispatch(OperationData.loadOffers());
 
   const settings = {

@@ -16,7 +16,6 @@ const withFavorite = (Component) => {
 
       this.state = {
         flagFavoriteOffersIsLoading: false,
-        password: `password`,
       };
     }
 
@@ -32,6 +31,25 @@ const withFavorite = (Component) => {
       }
     }
 
+    _sortByCities(initial) {
+      const listSortByCities = [];
+
+      for (let i = 0; i < initial.length; i++) {
+        const listfavoriteOffersForCity = [initial[i]];
+        i++;
+
+        while (i < initial.length
+        && initial[i - 1].city.name === initial[i].city.name) {
+          listfavoriteOffersForCity.push(initial[i]);
+          i++;
+        }
+
+        listSortByCities.push(listfavoriteOffersForCity);
+      }
+
+      return listSortByCities;
+    }
+
     render() {
       const {
         favoriteOffers,
@@ -41,25 +59,13 @@ const withFavorite = (Component) => {
         emailUser,
       } = this.props;
 
-      const listFavoriteOffersSortByCities = [];
-
-      for (let i = 0; i < favoriteOffers.length; i++) {
-        const listfavoriteOffersForCity = [favoriteOffers[i]];
-        i++;
-
-        while (i < favoriteOffers.length
-        && favoriteOffers[i - 1].city.name === favoriteOffers[i].city.name) {
-          listfavoriteOffersForCity.push(favoriteOffers[i]);
-          i++;
-        }
-
-        listFavoriteOffersSortByCities.push(listfavoriteOffersForCity);
-      }
+      console.log(`flagDataIsLoading`);
+      console.log(flagDataIsLoading, this.state.flagFavoriteOffersIsLoading);
 
       return flagDataIsLoading && this.state.flagFavoriteOffersIsLoading ? (
         <Component
           {...this.props}
-          favoriteOffers={listFavoriteOffersSortByCities}
+          favoriteOffers={this._sortByCities(favoriteOffers)}
         />
       ) : (
         <Loading

@@ -48,7 +48,10 @@ const Operation = {
           }
           return response;
         })
-        .catch(errorMessage);
+        .catch((err) => {
+          errorMessage(err);
+          throw new Error(`not authorized`);
+        });
   },
   logIn: (data) => (dispatch, _getState, api) => {
     return api.post(`/login`, data)
