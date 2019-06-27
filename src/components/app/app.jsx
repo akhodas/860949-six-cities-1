@@ -22,7 +22,6 @@ const FavoritesWrapped = withFavorite(Favorites);
 const App = (props) => {
   const {
     onClickTitleCard,
-    onClickImageCard,
     city,
     listCities,
     listOffers,
@@ -43,7 +42,6 @@ const App = (props) => {
           city = {city}
           listCities = {listCities}
           onClickTitleCard = {onClickTitleCard}
-          onClickImageCard = {onClickImageCard}
           onClickBookmark = {onClickBookmark}
           onCityClick = {onCityClick}
           isAuthorizationStatus = {isAuthorizationStatus}
@@ -64,7 +62,6 @@ const App = (props) => {
               controlAuthorization = {controlAuthorization}
               flagDataIsLoading = {flagDataIsLoading}
               onClickTitleCard = {onClickTitleCard}
-              onClickImageCard = {onClickImageCard}
               onClickBookmark = {onClickBookmark}
             />
           )
@@ -101,7 +98,6 @@ App.propTypes = {
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,

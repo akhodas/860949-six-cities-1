@@ -55,7 +55,6 @@ const withMain = (Component) => {
     city: PropTypes.string.isRequired,
     listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
     onClickTitleCard: PropTypes.func.isRequired,
-    onClickImageCard: PropTypes.func.isRequired,
     onCityClick: PropTypes.func.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,

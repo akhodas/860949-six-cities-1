@@ -8,7 +8,6 @@ const OfferCard = (props) => {
     history,
     offer,
     onClickTitleCard,
-    onClickImageCard,
     onChangeActiveOffer,
     onClickBookmark,
     styleClassNames
@@ -25,11 +24,6 @@ const OfferCard = (props) => {
     <div className={`${styleClassNames[2]}image-wrapper place-card__image-wrapper`}>
       <a href="#" onClick={(e) => {
         e.preventDefault();
-        if (onClickImageCard) {
-          onClickImageCard(id);
-        } else {
-          onClickTitleCard(history, id);
-        }
         if (onChangeActiveOffer) {
           onChangeActiveOffer(offer);
         }
@@ -71,7 +65,7 @@ const OfferCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${(rating * 100 / 5)}%`}}></span>
+          <span style={{width: `${(Math.round(rating) * 100 / 5)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -89,7 +83,6 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offer: offerProp.isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func,
   onChangeActiveOffer: PropTypes.func,
   onClickBookmark: PropTypes.func.isRequired,
   history: PropTypes.object,

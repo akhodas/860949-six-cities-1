@@ -30,7 +30,6 @@ describe(`MainPage`, () => {
               city = {`Minsk`}
               listCities = {[`Minsk`]}
               onClickTitleCard = {jest.fn()}
-              onClickImageCard = {jest.fn()}
               onChangeActiveOffer = {jest.fn()}
               onClickBookmark = {jest.fn()}
               onCityClick = {jest.fn()}

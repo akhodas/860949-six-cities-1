@@ -1,3 +1,5 @@
+import {errorMessage} from '../data/data';
+
 const initialState = {
   isAuthorizationRequired: true,
   id: 1,
@@ -44,18 +46,16 @@ const Operation = {
           if (response.status !== 403) {
             dispatch(ActionCreator.addUserData(response.data));
           }
+          return response;
         })
-        .catch(() => {
-          // eslint-disable-next-line no-console
-          console.log(`Ошибка авторизации. Повторите позже!`);
-        });
+        .catch(errorMessage);
   },
   logIn: (data) => (dispatch, _getState, api) => {
     return api.post(`/login`, data)
         .then((response) => {
           dispatch(ActionCreator.logIn(response.data));
         })
-        .catch(alert);
+        .catch(errorMessage);
   },
 
 };

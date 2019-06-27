@@ -10,7 +10,6 @@ const Favorites = (props) => {
     emailUser,
     favoriteOffers,
     onClickTitleCard,
-    onClickImageCard,
     onClickBookmark,
   } = props;
 
@@ -91,7 +90,6 @@ const Favorites = (props) => {
                       <ListOffers
                         offers = {city}
                         onClickTitleCard = {onClickTitleCard}
-                        onClickImageCard = {onClickImageCard}
                         onClickBookmark = {onClickBookmark}
                         styleClassNames = {[
                           `favorites__places`,
@@ -141,7 +139,6 @@ Favorites.propTypes = {
   favoriteOffers: PropTypes.arrayOf(PropTypes.arrayOf(offerProp)),
   emailUser: PropTypes.string.isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func.isRequired,
   onClickBookmark: PropTypes.func.isRequired,
 };
 

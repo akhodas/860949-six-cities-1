@@ -112,10 +112,12 @@ const Room = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${100 * offer.rating / 5}%`}}></span>
+                  <span style={{width: `${Math.round(offer.rating) * 100 / 5}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{offer.rating}</span>
+                <span className="property__rating-value rating__value">
+                  {Math.round(offer.rating)}
+                </span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">

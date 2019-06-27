@@ -10,7 +10,6 @@ class ListOffers extends React.PureComponent {
     const {
       offers,
       onClickTitleCard,
-      onClickImageCard,
       styleClassNames,
       onChangeActiveOffer,
       onClickBookmark,
@@ -21,7 +20,6 @@ class ListOffers extends React.PureComponent {
         key={item.id}
         offer={item}
         onClickTitleCard={onClickTitleCard}
-        onClickImageCard={onClickImageCard}
         onChangeActiveOffer={onChangeActiveOffer}
         onClickBookmark={onClickBookmark}
         styleClassNames = {styleClassNames}
@@ -34,7 +32,6 @@ class ListOffers extends React.PureComponent {
 ListOffers.propTypes = {
   offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func,
   onChangeActiveOffer: PropTypes.func,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickBookmark: PropTypes.func.isRequired,

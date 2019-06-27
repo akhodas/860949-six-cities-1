@@ -29,12 +29,6 @@ const init = () => {
   const settings = {
     onClickTitleCard: (history, id) => {
       history.push(`/offer/${id}`);
-      // eslint-disable-next-line no-console
-      console.log(`CLICK on title card #${id}`);
-    },
-    onClickImageCard: (id) => {
-      // eslint-disable-next-line no-console
-      console.log(`CLICK on image card: "${id}"`);
     }
   };
 

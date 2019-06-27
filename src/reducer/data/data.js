@@ -86,7 +86,6 @@ const Operation = {
   changeFavoritesStatus: (hotelId, status, history) => (dispatch, _getState, api) => {
     return api.post(`/favorite/${hotelId}/${status}`)
       .then((response) => {
-        console.log(`1`);
         if (response.status >= 200 && response.status < 300 || response.status === 403) {
           return response;
         } else {
@@ -100,13 +99,12 @@ const Operation = {
           dispatch(ActionCreator.changeFavoritesStatus(ModelOffer.parseOffer(response.data)));
         }
       })
-      .catch(alert);
+      .catch((err) => errorMessage(err, alert));
   },
 
   loadComments: (hotelId) => (dispatch, _getState, api) => {
     return api.get(`/comments/${hotelId}`)
       .then((response) => {
-        console.log(`2`);
         if (response.status >= 200
           && response.status < 300
           || response.status === 403
@@ -119,47 +117,53 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.loadComments(ModelComment.parseOffers(response.data)));
       })
-      .catch(alert);
+      .catch((err) => errorMessage(err, alert));
   },
 
   loadOffers: () => (dispatch, _getState, api) => {
     dispatch(ActionCreator.setIsLoad(false));
     return api.get(`/hotels`)
       .then((response) => {
-        console.log(`3`);
         if (response.status >= 200 && response.status < 300) {
           return response;
         } else {
-          throw new Error(`Ошибка загрузки данных отелей. Повторите позже!`);
+          throw new Error(`Error loading hotel data. Will try again later!`);
         }
       })
       .then((response) => {
         dispatch(ActionCreator.loadOffers(ModelOffer.parseOffers(response.data)));
         dispatch(ActionCreator.setIsLoad(true));
       })
-      .catch(alert);
+      .catch((err) => {
+        errorMessage(err, alert);
+        dispatch(ActionCreator.setIsLoad(true));
+      });
   },
 
   loadFavoriteOffers: () => (dispatch, _getState, api) => {
     dispatch(ActionCreator.setIsLoad(false));
     return api.get(`/favorite`)
       .then((response) => {
-        console.log(`4`);
         if (response.status >= 200 && response.status < 300) {
           return response;
+        } else if (response.status === 403) {
+          throw new Error(`This information is available to authorized users.
+          Please login!`);
         } else {
-          throw new Error(`Ошибка загрузки данных отелей*. Повторите позже!`);
+          throw new Error(`Error loading hotel data*. Will try again later!`);
         }
       })
       .then((response) => {
         dispatch(ActionCreator.loadFavoriteOffers(ModelOffer.parseOffers(response.data)));
         dispatch(ActionCreator.setIsLoad(true));
       })
-      .catch(alert);
+      .catch((err) => {
+        errorMessage(err, alert);
+        dispatch(ActionCreator.setIsLoad(true));
+      });
   },
 
   sendComment: (data, id) => (dispatch, _getState, api) => {
-    console.log(`5`);
     return api.post(`/comments/${id}`, data)
         .then((response) => {
           if (response.status === 403) {
@@ -169,9 +173,7 @@ const Operation = {
             return response;
           }
         })
-        .catch((err) => {
-          throw err;
-        });
+        .catch((err) => errorMessage(err, alert));
   },
 };
 
@@ -233,3 +235,5 @@ export {
   reducer,
 };
 
+
+export const errorMessage = (message, cb) => cb(message);

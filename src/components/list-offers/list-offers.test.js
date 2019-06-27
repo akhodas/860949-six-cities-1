@@ -12,7 +12,6 @@ describe(`ListOffers`, () => {
         .create(<MemoryRouter> <ListOffers
           offers={[mockOffer]}
           onClickTitleCard = {jest.fn()}
-          onClickImageCard = {jest.fn()}
           onChangeActiveOffer = {jest.fn()}
           onClickBookmark = {jest.fn()}
           onItemActivate = {jest.fn()}

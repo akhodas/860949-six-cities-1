@@ -18,10 +18,10 @@ export const createAPI = (dispatch) => {
         return err.response;
 
       case 400:
-        throw new Error(`Неправильно указаны данные!`);
+        throw new Error(`Incorrect data!`);
 
       default:
-        throw err;
+        throw new Error(`Ooooppppssss!`);
     }
   };
 
