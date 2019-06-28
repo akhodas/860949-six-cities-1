@@ -3,7 +3,8 @@ import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router';
 
 import OfferCard from './offer-card.jsx';
-import {mockOffer} from '../../mocks/mockOffer.js';
+import {mockOffer} from '../../mocks/mock-offer.js';
+
 
 describe(`OfferCard`, () => {
   it(`correctly rendered`, () => {

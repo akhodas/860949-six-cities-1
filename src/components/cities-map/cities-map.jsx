@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
+
 
 class CitiesMap extends React.PureComponent {
   constructor(props) {
@@ -120,6 +122,7 @@ class CitiesMap extends React.PureComponent {
 
   render() {
     const {styleClassNames} = this.props;
+
     return <section className={`${styleClassNames}__map map`}>
       <div id="map" style={{height: `100%`}}></div>
     </section>;

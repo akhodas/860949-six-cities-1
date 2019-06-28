@@ -8,10 +8,9 @@ import {BrowserRouter} from 'react-router-dom';
 
 import App from './components/app/app.jsx';
 import {Operation as OperationData} from './reducer/data/data';
-import {Operation as OperationUser} from './reducer/user/user';
 import reducer from './reducer/reducer';
 import {createAPI} from './api';
-import withScreenSwitch from './hocs/with-screen-switch/with-screen-switch.js';
+import withStart from './hocs/with-start/with-start.js';
 import ScrollToTop from './components/scrool-to-top/scroll-to-top.jsx';
 
 const init = () => {
@@ -23,11 +22,6 @@ const init = () => {
   );
   const store = createStore(reducer, enhancer);
 
-  store.dispatch(OperationUser.addUserData());
-  // setInterval(() => {
-  //   store.dispatch(OperationUser.addUserData());
-  // }, 30000);
-
   store.dispatch(OperationData.loadOffers());
 
   const settings = {
@@ -36,7 +30,7 @@ const init = () => {
     }
   };
 
-  const AppWrapped = withScreenSwitch(App);
+  const AppWrapped = withStart(App);
 
   ReactDOM.render(
       <Provider store={store} >

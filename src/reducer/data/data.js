@@ -89,7 +89,7 @@ const Operation = {
         if (response.status >= 200 && response.status < 300 || response.status === 403) {
           return response;
         } else {
-          throw new Error(`Ошибка отправки данных избранных предложение. Повторите позже!`);
+          throw new Error(`Error sending data of selected offer. Will try again later!`);
         }
       })
       .then((response) => {
@@ -111,7 +111,7 @@ const Operation = {
           || response.status === 400) {
           return response;
         } else {
-          throw new Error(`Ошибка загрузки данных комментариев. Повторите позже!`);
+          throw new Error(`Error loading these comments. Will try again later!`);
         }
       })
       .then((response) => {
@@ -148,7 +148,7 @@ const Operation = {
           return response;
         } else if (response.status === 403) {
           throw new Error(`This information is available to authorized users.
-          Please login!`);
+          Your session has ended. Please login!`);
         } else {
           throw new Error(`Error loading hotel data*. Will try again later!`);
         }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const CommentSubmitionForm = (props) => {
   const {
     rating,
@@ -11,7 +12,7 @@ const CommentSubmitionForm = (props) => {
     onChangeText,
     onSubmit,
   } = props;
-  const stars = [5, 4, 3, 2, 1];
+  const Stars = [5, 4, 3, 2, 1];
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -23,7 +24,7 @@ const CommentSubmitionForm = (props) => {
           </b>
         </p>) : null}
       <div className="reviews__rating-form form__rating">
-        {stars.map((star) => (
+        {Stars.map((star) => (
           <React.Fragment key={`key-${star}`}>
             <input
               className="form__rating-input visually-hidden"

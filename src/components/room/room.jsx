@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ListComments from '../list-comments/list-comments.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
 import CitiesMap from '../cities-map/cities-map.jsx';
-import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import {offerProp, commentProp} from '../../interface-prop-types/interface-prop-types.js';
 import CommentSubmitionForm from '../comment-submition-form/comment-submition-form.jsx';
 import withCommentSubmitionForm from '../../hocs/with-comment-submition-form/with-comment-submition-form.js';
 
@@ -217,7 +217,7 @@ Room.propTypes = {
   controlAuthorization: PropTypes.func.isRequired,
   offer: offerProp.isRequired,
   offersNear: PropTypes.array.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.arrayOf(commentProp).isRequired,
   sendComment: PropTypes.func.isRequired,
   history: PropTypes.object,
   onClickBookmark: PropTypes.func.isRequired,

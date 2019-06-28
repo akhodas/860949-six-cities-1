@@ -31,25 +31,6 @@ const withFavorite = (Component) => {
       }
     }
 
-    _sortByCities(initial) {
-      const listSortByCities = [];
-
-      for (let i = 0; i < initial.length; i++) {
-        const listfavoriteOffersForCity = [initial[i]];
-        i++;
-
-        while (i < initial.length
-        && initial[i - 1].city.name === initial[i].city.name) {
-          listfavoriteOffersForCity.push(initial[i]);
-          i++;
-        }
-
-        listSortByCities.push(listfavoriteOffersForCity);
-      }
-
-      return listSortByCities;
-    }
-
     render() {
       const {
         favoriteOffers,
@@ -58,9 +39,6 @@ const withFavorite = (Component) => {
         controlAuthorization,
         emailUser,
       } = this.props;
-
-      console.log(`flagDataIsLoading`);
-      console.log(flagDataIsLoading, this.state.flagFavoriteOffersIsLoading);
 
       return flagDataIsLoading && this.state.flagFavoriteOffersIsLoading ? (
         <Component
@@ -76,6 +54,25 @@ const withFavorite = (Component) => {
       );
     }
 
+    _sortByCities(initial) {
+      const listSortByCities = [];
+
+      for (let i = 0; i < initial.length; i++) {
+        const listfavoriteOffersForCity = [initial[i]];
+        i++;
+
+        while (i < initial.length
+        && initial[i - 1].city.name === initial[i].city.name) {
+          listfavoriteOffersForCity.push(initial[i]);
+          i++;
+        }
+        i--;
+
+        listSortByCities.push(listfavoriteOffersForCity);
+      }
+
+      return listSortByCities;
+    }
   }
 
   WithFavorite.propTypes = {

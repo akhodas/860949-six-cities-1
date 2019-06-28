@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const EmptyMain = () => {
   return (
     <div className="cities__places-wrapper">

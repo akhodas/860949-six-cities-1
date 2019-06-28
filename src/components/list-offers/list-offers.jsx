@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 
+
 class ListOffers extends React.PureComponent {
 
   render() {

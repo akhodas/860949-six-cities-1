@@ -4,6 +4,7 @@ import {MemoryRouter} from 'react-router';
 
 import Loading from './loading.jsx';
 
+
 describe(`Loading`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer

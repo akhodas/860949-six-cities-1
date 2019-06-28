@@ -20,64 +20,38 @@ import {offerProp} from '../../interface-prop-types/interface-prop-types';
 import Loading from '../../components/loading/loading.jsx';
 
 
-const withScreenSwitch = (Component) => {
-  class WithScreenSwitch extends React.PureComponent {
+const withStart = (Component) => {
+  class WithStart extends React.PureComponent {
     constructor(props) {
       super(props);
 
       this.state = {
-        loading: false,
-        firstStart: true,
+        loadingData: true,
       };
+
+      this._onSubmit = this._onSubmit.bind(this);
     }
 
     componentDidMount() {
-      const {isAuthorizationStatus, controlAuthorization
-      } = this.props;
-      console.log(`componentDidMount`);
-      if (this.state.firstStart) {
-        this.setState({firstStart: false});
-      }
+      const {controlAuthorization} = this.props;
 
-      if (!isAuthorizationStatus) {
-        console.log(`isAuthorizationStatus`);
-        // console.log(isAuthorizationStatus, this.state.loading, this.state.firstStart);
-        this.setState({loading: true});
-        controlAuthorization()
+      controlAuthorization()
         .then(() => {
-          this.setState({loading: false});
+          this.setState({loadingData: false});
         })
         .catch(() => {
-          this.setState({loading: false});
+          this.setState({loadingData: false});
         });
-      }
     }
-
-    // componentDidUpdate( {
-    //   const {isAuthorizationStatus, controlAuthorization
-    //   } = this.props;
-    //   console.log(`componentDidUpdate`);
-
-    //   if (!isAuthorizationStatus || this.state.loading) {
-    //     this.setState({loading: false});
-    //     controlAuthorization()
-    //     .then(() => {
-    //       this.setState({loading: true});
-    //     })
-    //     .catch(() => {
-    //       this.setState({loading: true});
-    //     });
-    //   }
-    // }
 
     render() {
       const {isAuthorizationStatus, controlAuthorization, emailUser
       } = this.props;
-      console.log(`withScreenSwitch`);
-      console.log(isAuthorizationStatus, this.state.loading, this.state.firstStart);
-      return (!this.state.loading && !this.state.firstStart) ? (<Component
+      return !this.state.loading ? (<Component
         {...this.props}
-        controlAuthorization={() => console.log(`click`)}
+        controlAuthorization={() => {
+          this._onSubmit();
+        }}
       />
       ) : (
         <Loading
@@ -87,44 +61,21 @@ const withScreenSwitch = (Component) => {
         />
       );
     }
+
+    _onSubmit() {
+      this.setState({loadingData: true});
+
+      this.props.controlAuthorization()
+      .then(() => {
+        this.setState({loadingData: false});
+      })
+      .catch(() => {
+        this.setState({loadingData: false});
+      });
+    }
   }
 
-  // const WithScreenSwitch = (props) => {
-  //   const {isAuthorizationStatus, controlAuthorization, emailUser} = props;
-  //   let flag = false;
-  //   if (!isAuthorizationStatus) {
-  //     controlAuthorization()
-  //     .then(() => {
-  //       flag = true;
-  //       console.log(`then`);
-  //     })
-  //     .catch(() => {
-  //       flag = true;
-  //       console.log(`catch`);
-  //     });
-  //     console.log(`inner`);
-  //   }
-  //   console.log(`withScreenSwitch`);
-  //   return flag ? (<Component
-  //     {...props}
-  //     controlAuthorization={() => console.log(`click`)}
-  //   />
-  //   ) : (
-  //     <Loading
-  //       isAuthorizationStatus={isAuthorizationStatus}
-  //       controlAuthorization={controlAuthorization}
-  //       emailUser={emailUser}
-  //     />
-  //   );
-  // };
-
-  // const WithScreenSwitch = (props) => {
-  //   return <Component
-  //     {...props}
-  //   />;
-  // };
-
-  WithScreenSwitch.propTypes = {
+  WithStart.propTypes = {
     listOffers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
     city: PropTypes.string.isRequired,
     listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -138,7 +89,7 @@ const withScreenSwitch = (Component) => {
     onClickBookmark: PropTypes.func.isRequired,
   };
 
-  return WithScreenSwitch;
+  return WithStart;
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -179,9 +130,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export {withScreenSwitch};
+export {withStart};
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withScreenSwitch
+    withStart
 );

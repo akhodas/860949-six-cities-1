@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
 import Loading from '../../components/loading/loading.jsx';
+import { commentProp } from '../../interface-prop-types/interface-prop-types';
 
 
 const withRoom = (Component) => {
@@ -61,17 +62,17 @@ const withRoom = (Component) => {
   }
 
   WithRoom.propTypes = {
-    match: PropTypes.object.isRequired,
-    getOffer: PropTypes.func.isRequired,
+    comments: PropTypes.arrayOf(commentProp),
+    controlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
+    flagDataIsLoading: PropTypes.bool.isRequired,
+    getOffer: PropTypes.func.isRequired,
     getThreeOffersNear: PropTypes.func.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
-    controlAuthorization: PropTypes.func.isRequired,
     loadComments: PropTypes.func.isRequired,
-    flagDataIsLoading: PropTypes.bool.isRequired,
-    comments: PropTypes.arrayOf(PropTypes.object).isRequired,
-    sendComment: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
     onClickBookmark: PropTypes.func.isRequired,
+    sendComment: PropTypes.func.isRequired,
   };
 
   return withRouter(WithRoom);

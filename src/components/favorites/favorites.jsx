@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 import ListOffers from '../list-offers/list-offers.jsx';
 

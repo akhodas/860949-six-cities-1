@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import OptionSort from './option-sort.jsx';
 import {TypeSort} from '../../reducer/data/data.js';
 
-describe(`SignIn`, () => {
+describe(`OptionSort`, () => {
   it(`correctly  with open menu`, () => {
     const tree = renderer
       .create(

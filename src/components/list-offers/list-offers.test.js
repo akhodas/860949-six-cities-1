@@ -2,9 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router';
 
-
 import ListOffers from './list-offers.jsx';
-import {mockOffer} from '../../mocks/mockOffer.js';
+import {mockOffer} from '../../mocks/mock-offer.js';
+
 
 describe(`ListOffers`, () => {
   it(`correctly rendered`, () => {

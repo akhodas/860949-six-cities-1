@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 import Loading from '../../components/loading/loading.jsx';
 
+
 const withMain = (Component) => {
   class WithMain extends React.PureComponent {
     constructor(props) {

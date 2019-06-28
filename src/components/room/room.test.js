@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router';
 
 import Room from './room.jsx';
-import {mockOffer, mockOffers} from '../../mocks/mockOffer.js';
+import {mockOffer, mockOffers} from '../../mocks/mock-offer.js';
 
 
 describe(`Room`, () => {

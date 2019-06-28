@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
+
 const OfferCard = (props) => {
   const {
     history,
