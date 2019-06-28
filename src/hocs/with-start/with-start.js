@@ -47,12 +47,14 @@ const withStart = (Component) => {
     render() {
       const {isAuthorizationStatus, controlAuthorization, emailUser
       } = this.props;
-      return !this.state.loading ? (<Component
-        {...this.props}
-        controlAuthorization={() => {
-          this._onSubmit();
-        }}
-      />
+
+      return !this.state.loadingData ? (
+        <Component
+          {...this.props}
+          controlAuthorization={() => {
+            this._onSubmit();
+          }}
+        />
       ) : (
         <Loading
           isAuthorizationStatus={isAuthorizationStatus}

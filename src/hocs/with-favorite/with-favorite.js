@@ -31,6 +31,18 @@ const withFavorite = (Component) => {
       }
     }
 
+    componentDidUpdate() {
+      const {
+        flagDataIsLoading,
+        loadFavoriteOffers,
+      } = this.props;
+
+      if (flagDataIsLoading && !this.state.flagFavoriteOffersIsLoading) {
+        loadFavoriteOffers();
+        this.setState({flagFavoriteOffersIsLoading: true});
+      }
+    }
+
     render() {
       const {
         favoriteOffers,
