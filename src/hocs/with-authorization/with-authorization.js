@@ -25,14 +25,14 @@ const withAuthorization = (Component) => {
       />;
     }
 
-    _onChange(e) {
+    _onChange(evt) {
       this.setState({
-        [e.target.name]: e.target.value,
+        [evt.target.name]: evt.target.value,
       });
     }
 
-    _logIn(e) {
-      e.preventDefault();
+    _logIn(evt) {
+      evt.preventDefault();
       this.props.logIn({
         email: this.state.email,
         password: this.state.password,
