@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 const Loading = (props) => {
   const {
     isAuthorizationStatus,
-    controlAuthorization,
+    onControlAuthorization,
     emailUser,
   } = props;
 
@@ -47,7 +47,7 @@ const Loading = (props) => {
             <ul className="header__nav-list">
               <li className="header__nav-item user">
                 <Link className="header__nav-link header__nav-link--profile"
-                  onClick={controlAuthorization}
+                  onClick={onControlAuthorization}
                   to={isAuthorizationStatus ? `/login` : `/favorites`}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
@@ -84,7 +84,7 @@ const Loading = (props) => {
 
 Loading.propTypes = {
   isAuthorizationStatus: PropTypes.bool.isRequired,
-  controlAuthorization: PropTypes.func.isRequired,
+  onControlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
 };
 

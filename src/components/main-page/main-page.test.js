@@ -36,7 +36,7 @@ describe(`MainPage`, () => {
               onCityClick = {jest.fn()}
               redirect = {jest.fn()}
               isAuthorizationStatus = {false}
-              controlAuthorization = {jest.fn()}
+              onControlAuthorization = {jest.fn()}
               emailUser = {`email@email.com`}
               flagDataIsLoading = {true}
             />

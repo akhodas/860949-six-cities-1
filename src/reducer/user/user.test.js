@@ -46,13 +46,13 @@ describe(`Reducer works correctly with API`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
-    const logIn = Operation.logIn();
+    const onLogIn = Operation.onLogIn();
 
     apiMock
       .onPost(`/login`)
       .reply(200, [{fake: true}]);
 
-    return logIn(dispatch, jest.fn(), api)
+    return onLogIn(dispatch, jest.fn(), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

@@ -17,7 +17,7 @@ const Room = (props) => {
   const {
     history,
     emailUser,
-    controlAuthorization,
+    onControlAuthorization,
     isAuthorizationStatus,
     offer,
     comments,
@@ -50,7 +50,7 @@ const Room = (props) => {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile"
-                    onClick={controlAuthorization}
+                    onClick={onControlAuthorization}
                     to={isAuthorizationStatus ? `/login` : `/favorites`}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper">
@@ -214,7 +214,7 @@ const Room = (props) => {
 Room.propTypes = {
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
-  controlAuthorization: PropTypes.func.isRequired,
+  onControlAuthorization: PropTypes.func.isRequired,
   offer: offerProp.isRequired,
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(commentProp).isRequired,

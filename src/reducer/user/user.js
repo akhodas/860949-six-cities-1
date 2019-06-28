@@ -30,7 +30,7 @@ const ActionCreator = {
     };
   },
 
-  logIn: (status) => {
+  onLogIn: (status) => {
     return {
       type: ActionType.LOG_IN,
       payload: status,
@@ -53,12 +53,12 @@ const Operation = {
           throw new Error(`not authorized`);
         });
   },
-  logIn: (data) => (dispatch, _getState, api) => {
+  onLogIn: (data) => (dispatch, _getState, api) => {
     return api.post(`/login`, data)
         .then((response) => {
-          dispatch(ActionCreator.logIn(response.data));
+          dispatch(ActionCreator.onLogIn(response.data));
         })
-        .catch(errorMessage);
+        .catch((err) => errorMessage(err, alert));
   },
 
 };

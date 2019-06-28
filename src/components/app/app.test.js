@@ -33,10 +33,10 @@ describe(`App`, () => {
                 onClickTitleCard = {jest.fn()}
                 onClickBookmark = {jest.fn()}
                 onCityClick = {jest.fn()}
-                logIn = {jest.fn()}
+                onLogIn = {jest.fn()}
                 emailUser = {`email@email.com`}
                 isAuthorizationStatus = {false}
-                controlAuthorization = {jest.fn}
+                onControlAuthorization = {jest.fn}
                 flagDataIsLoading={true}
               />
             </Provider>

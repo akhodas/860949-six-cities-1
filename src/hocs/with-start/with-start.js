@@ -33,9 +33,9 @@ const withStart = (Component) => {
     }
 
     componentDidMount() {
-      const {controlAuthorization} = this.props;
+      const {onControlAuthorization} = this.props;
 
-      controlAuthorization()
+      onControlAuthorization()
         .then(() => {
           this.setState({loadingData: false});
         })
@@ -45,20 +45,20 @@ const withStart = (Component) => {
     }
 
     render() {
-      const {isAuthorizationStatus, controlAuthorization, emailUser
+      const {isAuthorizationStatus, onControlAuthorization, emailUser
       } = this.props;
 
       return !this.state.loadingData ? (
         <Component
           {...this.props}
-          controlAuthorization={() => {
+          onControlAuthorization={() => {
             this._onSubmit();
           }}
         />
       ) : (
         <Loading
           isAuthorizationStatus={isAuthorizationStatus}
-          controlAuthorization={controlAuthorization}
+          onControlAuthorization={onControlAuthorization}
           emailUser={emailUser}
         />
       );
@@ -67,7 +67,7 @@ const withStart = (Component) => {
     _onSubmit() {
       this.setState({loadingData: true});
 
-      this.props.controlAuthorization()
+      this.props.onControlAuthorization()
       .then(() => {
         this.setState({loadingData: false});
       })
@@ -83,10 +83,10 @@ const withStart = (Component) => {
     listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
     onClickTitleCard: PropTypes.func.isRequired,
     onCityClick: PropTypes.func.isRequired,
-    logIn: PropTypes.func.isRequired,
+    onLogIn: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
-    controlAuthorization: PropTypes.func.isRequired,
+    onControlAuthorization: PropTypes.func.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     onClickBookmark: PropTypes.func.isRequired,
   };
@@ -112,12 +112,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreatorData.changeCity(newCity));
   },
 
-  controlAuthorization: () => {
+  onControlAuthorization: () => {
     return dispatch(OperationUser.addUserData());
   },
 
-  logIn: (data) => {
-    dispatch(OperationUser.logIn(data));
+  onLogIn: (data) => {
+    dispatch(OperationUser.onLogIn(data));
   },
 
   onClickBookmark: (data) => {

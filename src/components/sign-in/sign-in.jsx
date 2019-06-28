@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 
 const SignIn = (props) => {
-  const {email, password, logIn, onChange} = props;
+  const {email, password, onLogIn, onChange} = props;
 
   return (
     <div className="page page--gray page--login">
@@ -60,7 +60,7 @@ const SignIn = (props) => {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                onClick = {logIn}
+                onClick = {onLogIn}
               ><Link to='/'>Sign in</Link></button>
             </form>
           </section>
@@ -80,7 +80,7 @@ const SignIn = (props) => {
 SignIn.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  logIn: PropTypes.func.isRequired,
+  onLogIn: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

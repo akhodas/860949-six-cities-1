@@ -12,7 +12,7 @@ describe(`SignIn`, () => {
             <SignIn
               email={`email`}
               password={`password`}
-              logIn={jest.fn()}
+              onLogIn={jest.fn()}
               onChange={jest.fn()}
             />
           </MemoryRouter>)

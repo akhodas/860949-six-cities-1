@@ -22,7 +22,7 @@ const MainPage = (props) => {
     onClickTitleCard,
     onCityClick,
     isAuthorizationStatus,
-    controlAuthorization,
+    onControlAuthorization,
     emailUser,
     activeOffer,
     onChangeActiveOffer,
@@ -66,7 +66,7 @@ const MainPage = (props) => {
             <ul className="header__nav-list">
               <li className="header__nav-item user">
                 <Link className="header__nav-link header__nav-link--profile"
-                  onClick={controlAuthorization}
+                  onClick={onControlAuthorization}
                   to={isAuthorizationStatus ? `/login` : `/favorites`}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
@@ -146,7 +146,7 @@ MainPage.propTypes = {
   onClickTitleCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
-  controlAuthorization: PropTypes.func.isRequired,
+  onControlAuthorization: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
   activeOffer: offerProp,

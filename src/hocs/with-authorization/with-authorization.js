@@ -11,7 +11,7 @@ const withAuthorization = (Component) => {
         password: `password`,
       };
 
-      this._logIn = this._logIn.bind(this);
+      this._onLogIn = this._onLogIn.bind(this);
       this._onChange = this._onChange.bind(this);
     }
 
@@ -20,7 +20,7 @@ const withAuthorization = (Component) => {
         {...this.props}
         email={this.state.email}
         password={this.state.password}
-        logIn={this._logIn}
+        onLogIn={this._onLogIn}
         onChange={this._onChange}
       />;
     }
@@ -31,9 +31,9 @@ const withAuthorization = (Component) => {
       });
     }
 
-    _logIn(evt) {
+    _onLogIn(evt) {
       evt.preventDefault();
-      this.props.logIn({
+      this.props.onLogIn({
         email: this.state.email,
         password: this.state.password,
       });
@@ -41,7 +41,7 @@ const withAuthorization = (Component) => {
   }
 
   WithAuthorization.propTypes = {
-    logIn: PropTypes.func.isRequired,
+    onLogIn: PropTypes.func.isRequired,
   };
 
   return WithAuthorization;
