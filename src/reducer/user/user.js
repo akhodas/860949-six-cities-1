@@ -23,17 +23,17 @@ const ActionCreator = {
     };
   },
 
-  addUserData: (status) => {
+  addUserData: (data) => {
     return {
       type: ActionType.ADD_USER_DATA,
-      payload: status,
+      payload: data,
     };
   },
 
-  logIn: (status) => {
+  onLogIn: (data) => {
     return {
       type: ActionType.LOG_IN,
-      payload: status,
+      payload: data,
     };
   },
 };
@@ -53,12 +53,12 @@ const Operation = {
           throw new Error(`not authorized`);
         });
   },
-  logIn: (data) => (dispatch, _getState, api) => {
+  onLogIn: (data) => (dispatch, _getState, api) => {
     return api.post(`/login`, data)
         .then((response) => {
-          dispatch(ActionCreator.logIn(response.data));
+          dispatch(ActionCreator.onLogIn(response.data));
         })
-        .catch(errorMessage);
+        .catch((err) => errorMessage(err, alert));
   },
 
 };

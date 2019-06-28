@@ -17,8 +17,8 @@ const withOptionSort = (Component) => {
         showMenuSort: false,
       };
 
-      this.escFunction = ((e) => {
-        if (e.keyCode === 27) {
+      this.onEscFunction = ((evt) => {
+        if (evt.keyCode === 27) {
           this.setState({
             showMenuSort: !this.state.showMenuSort,
           });
@@ -31,11 +31,11 @@ const withOptionSort = (Component) => {
 
 
     componentDidMount() {
-      document.addEventListener(`keydown`, this.escFunction, false);
+      document.addEventListener(`keydown`, this.onEscFunction, false);
     }
 
     componentWillUnmount() {
-      document.removeEventListener(`keydown`, this.escFunction, false);
+      document.removeEventListener(`keydown`, this.onEscFunction, false);
     }
 
     render() {
@@ -54,8 +54,8 @@ const withOptionSort = (Component) => {
       });
     }
 
-    _onChangeTypeSort(e) {
-      const selectTypeSort = e.nativeEvent.target.textContent;
+    _onChangeTypeSort(evt) {
+      const selectTypeSort = evt.nativeEvent.target.textContent;
       this.props.onChangeTypeSort(selectTypeSort);
       this.setState({
         showMenuSort: !this.state.showMenuSort,

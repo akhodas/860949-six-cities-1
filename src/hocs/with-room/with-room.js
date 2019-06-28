@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
 import Loading from '../../components/loading/loading.jsx';
-import { commentProp } from '../../interface-prop-types/interface-prop-types';
+import {commentProp} from '../../interface-prop-types/interface-prop-types';
 
 
 const withRoom = (Component) => {
@@ -26,7 +26,7 @@ const withRoom = (Component) => {
         flagDataIsLoading,
         comments,
         isAuthorizationStatus,
-        controlAuthorization,
+        onControlAuthorization,
         emailUser,
         sendComment,
       } = this.props;
@@ -53,7 +53,7 @@ const withRoom = (Component) => {
       ) : (
         <Loading
           isAuthorizationStatus={isAuthorizationStatus}
-          controlAuthorization={controlAuthorization}
+          onControlAuthorization={onControlAuthorization}
           emailUser={emailUser}
         />
       );
@@ -63,7 +63,7 @@ const withRoom = (Component) => {
 
   WithRoom.propTypes = {
     comments: PropTypes.arrayOf(commentProp),
-    controlAuthorization: PropTypes.func.isRequired,
+    onControlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     getOffer: PropTypes.func.isRequired,

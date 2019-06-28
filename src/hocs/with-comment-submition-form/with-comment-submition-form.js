@@ -31,20 +31,20 @@ const withCommentSubmitionForm = (Component) => {
       />;
     }
 
-    _onChangeText(e) {
+    _onChangeText(evt) {
       this.setState({
-        commentText: e.target.value,
+        commentText: evt.target.value,
       });
     }
 
-    _onChangeRating(e) {
+    _onChangeRating(evt) {
       this.setState({
-        rating: +e.target.value,
+        rating: +evt.target.value,
       });
     }
 
-    _onSubmit(e) {
-      e.preventDefault();
+    _onSubmit(evt) {
+      evt.preventDefault();
 
       this.setState({blockForm: true});
 

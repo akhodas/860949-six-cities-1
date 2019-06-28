@@ -27,7 +27,7 @@ const withMain = (Component) => {
       const {
         flagDataIsLoading,
         isAuthorizationStatus,
-        controlAuthorization,
+        onControlAuthorization,
         emailUser,
       } = this.props;
 
@@ -40,7 +40,7 @@ const withMain = (Component) => {
       ) : (
         <Loading
           isAuthorizationStatus={isAuthorizationStatus}
-          controlAuthorization={controlAuthorization}
+          onControlAuthorization={onControlAuthorization}
           emailUser={emailUser}
         />
       ));
@@ -58,7 +58,7 @@ const withMain = (Component) => {
     onClickTitleCard: PropTypes.func.isRequired,
     onCityClick: PropTypes.func.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
-    controlAuthorization: PropTypes.func.isRequired,
+    onControlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     activeOffer: offerProp,

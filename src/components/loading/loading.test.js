@@ -12,7 +12,7 @@ describe(`Loading`, () => {
           <MemoryRouter>
             <Loading
               isAuthorizationStatus = {false}
-              controlAuthorization = {jest.fn()}
+              onControlAuthorization = {jest.fn()}
               emailUser = {`email@email.com`}
             />
           </MemoryRouter>)

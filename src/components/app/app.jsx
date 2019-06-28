@@ -26,9 +26,9 @@ const App = (props) => {
     listCities,
     listOffers,
     onCityClick,
-    logIn,
+    onLogIn,
     isAuthorizationStatus,
-    controlAuthorization,
+    onControlAuthorization,
     emailUser,
     flagDataIsLoading,
     onClickBookmark,
@@ -45,7 +45,7 @@ const App = (props) => {
           onClickBookmark = {onClickBookmark}
           onCityClick = {onCityClick}
           isAuthorizationStatus = {isAuthorizationStatus}
-          controlAuthorization = {controlAuthorization}
+          onControlAuthorization = {onControlAuthorization}
           emailUser = {emailUser}
           flagDataIsLoading = {flagDataIsLoading}
         />
@@ -59,7 +59,7 @@ const App = (props) => {
             <FavoritesWrapped
               emailUser={emailUser}
               isAuthorizationStatus = {isAuthorizationStatus}
-              controlAuthorization = {controlAuthorization}
+              onControlAuthorization = {onControlAuthorization}
               flagDataIsLoading = {flagDataIsLoading}
               onClickTitleCard = {onClickTitleCard}
               onClickBookmark = {onClickBookmark}
@@ -70,7 +70,7 @@ const App = (props) => {
       <Route path='/login' exact render={() => (
         isAuthorizationStatus ? (
           <SignInWrapped
-            logIn = {logIn}
+            onLogIn = {onLogIn}
           />
         )
           : (
@@ -82,7 +82,7 @@ const App = (props) => {
         <RoomWrapped
           emailUser={emailUser}
           isAuthorizationStatus = {isAuthorizationStatus}
-          controlAuthorization = {controlAuthorization}
+          onControlAuthorization = {onControlAuthorization}
           flagDataIsLoading = {flagDataIsLoading}
           onClickBookmark = {onClickBookmark}
         />
@@ -99,10 +99,10 @@ App.propTypes = {
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
-  logIn: PropTypes.func.isRequired,
+  onLogIn: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
-  controlAuthorization: PropTypes.func.isRequired,
+  onControlAuthorization: PropTypes.func.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
   onClickBookmark: PropTypes.func.isRequired,
 };

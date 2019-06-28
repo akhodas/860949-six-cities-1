@@ -11,7 +11,6 @@ import {Operation as OperationData} from './reducer/data/data';
 import reducer from './reducer/reducer';
 import {createAPI} from './api';
 import withStart from './hocs/with-start/with-start.js';
-import ScrollToTop from './components/scrool-to-top/scroll-to-top.jsx';
 
 const init = () => {
   const api = createAPI((...args) => store.dispatch(...args));
@@ -35,11 +34,9 @@ const init = () => {
   ReactDOM.render(
       <Provider store={store} >
         <BrowserRouter>
-          <ScrollToTop>
-            <AppWrapped
-              {...settings}
-            />
-          </ScrollToTop>
+          <AppWrapped
+            {...settings}
+          />
         </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)

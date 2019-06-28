@@ -1,5 +1,5 @@
 import ModelOffer from '../../ModalData/model-offer';
-import ModelComment from '../../ModalData/modal-comment';
+import ModelComment from '../../ModalData/model-comment';
 
 export const TypeSort = {
   POPULAR: `Popular`,
@@ -16,6 +16,7 @@ const initialState = {
   listFavoriteOffers: [],
   typeSort: TypeSort.POPULAR,
 };
+
 
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,

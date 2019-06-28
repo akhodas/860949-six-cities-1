@@ -11,7 +11,7 @@ const MockComponentWrapped = withAuthorization(MockComponent);
 describe(`withAuthorization`, () => {
   it(`Should change value when call onChange`, () => {
     const wrapper = shallow(<MockComponentWrapped
-      logIn={jest.fn()}
+      onLogIn={jest.fn()}
     />);
 
     expect(wrapper.props().email).toEqual(`email@email.ru`);

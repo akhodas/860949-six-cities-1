@@ -31,12 +31,24 @@ const withFavorite = (Component) => {
       }
     }
 
+    componentDidUpdate() {
+      const {
+        flagDataIsLoading,
+        loadFavoriteOffers,
+      } = this.props;
+
+      if (flagDataIsLoading && !this.state.flagFavoriteOffersIsLoading) {
+        loadFavoriteOffers();
+        this.setState({flagFavoriteOffersIsLoading: true});
+      }
+    }
+
     render() {
       const {
         favoriteOffers,
         flagDataIsLoading,
         isAuthorizationStatus,
-        controlAuthorization,
+        onControlAuthorization,
         emailUser,
       } = this.props;
 
@@ -48,7 +60,7 @@ const withFavorite = (Component) => {
       ) : (
         <Loading
           isAuthorizationStatus={isAuthorizationStatus}
-          controlAuthorization={controlAuthorization}
+          onControlAuthorization={onControlAuthorization}
           emailUser={emailUser}
         />
       );
@@ -80,7 +92,7 @@ const withFavorite = (Component) => {
     loadFavoriteOffers: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
-    controlAuthorization: PropTypes.func.isRequired,
+    onControlAuthorization: PropTypes.func.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
   };
 

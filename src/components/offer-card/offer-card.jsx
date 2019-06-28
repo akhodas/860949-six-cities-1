@@ -23,8 +23,8 @@ const OfferCard = (props) => {
       </div>
       : null}
     <div className={`${styleClassNames[2]}image-wrapper place-card__image-wrapper`}>
-      <a href="#" onClick={(e) => {
-        e.preventDefault();
+      <a href="#" onClick={(evt) => {
+        evt.preventDefault();
         if (onChangeActiveOffer) {
           onChangeActiveOffer(offer);
         }
@@ -71,8 +71,8 @@ const OfferCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={(e) => {
-          e.preventDefault();
+        <a href="#" onClick={(evt) => {
+          evt.preventDefault();
           onClickTitleCard(history, id);
         }}>{title}</a>
       </h2>
