@@ -38,7 +38,7 @@ const OfferCard = (props) => {
         </img>
       </a>
     </div>
-    <div className={`${styleClassNames[3] ? styleClassNames[3] : null} place-card__info`}>
+    <div className={`${styleClassNames[3] ? styleClassNames[3] : ``}place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>

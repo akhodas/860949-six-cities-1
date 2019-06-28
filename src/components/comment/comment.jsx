@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import {commentProp} from '../../interface-prop-types/interface-prop-types';
 
 

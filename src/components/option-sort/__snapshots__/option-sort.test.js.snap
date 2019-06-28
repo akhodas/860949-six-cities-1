@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignIn correctly  with open menu 1`] = `
+exports[`OptionSort correctly  with open menu 1`] = `
 <form
   action="#"
   className="places__sorting"
@@ -59,7 +59,7 @@ exports[`SignIn correctly  with open menu 1`] = `
 </form>
 `;
 
-exports[`SignIn correctly  without open menu 1`] = `
+exports[`OptionSort correctly  without open menu 1`] = `
 <form
   action="#"
   className="places__sorting"

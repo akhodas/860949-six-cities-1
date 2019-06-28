@@ -96,7 +96,7 @@ const Favorites = (props) => {
                           `favorites__places`,
                           `favorites__`,
                           `favorites__`,
-                          `favorites__card-info`,
+                          `favorites__card-info `,
                         ]}
                       />
 

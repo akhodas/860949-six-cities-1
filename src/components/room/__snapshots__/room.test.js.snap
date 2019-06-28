@@ -357,7 +357,6 @@ Array [
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -826,7 +825,6 @@ Array [
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
