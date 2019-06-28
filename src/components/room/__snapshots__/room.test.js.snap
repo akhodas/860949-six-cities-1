@@ -152,7 +152,8 @@ Array [
               title
             </h1>
             <button
-              className="property__bookmark-button button"
+              className="property__bookmark-button property__bookmark-button--active button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -356,7 +357,6 @@ Array [
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -403,7 +403,8 @@ Array [
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button button"
+                  className="place-card__bookmark-button place-card__bookmark-button--active button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -619,7 +620,8 @@ Array [
               title
             </h1>
             <button
-              className="property__bookmark-button button"
+              className="property__bookmark-button property__bookmark-button--active button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -823,7 +825,6 @@ Array [
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -870,7 +871,8 @@ Array [
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button button"
+                  className="place-card__bookmark-button place-card__bookmark-button--active button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg

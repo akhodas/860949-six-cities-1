@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router';
 
 import Room from './room.jsx';
-import {mockOffer, mockOffers} from '../../mocks/mockOffer.js';
+import {mockOffer, mockOffers} from '../../mocks/mock-offer.js';
 
 
 describe(`Room`, () => {
@@ -15,6 +15,7 @@ describe(`Room`, () => {
         emailUser={`myEmail@mail.com`}
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
+        onClickBookmark = {jest.fn()}
         flagDataIsLoading={true}
         comments={[]}
         sendComment={jest.fn()}
@@ -32,6 +33,7 @@ describe(`Room`, () => {
         emailUser={`myEmail@mail.com`}
         isAuthorizationStatus={true}
         controlAuthorization={jest.fn()}
+        onClickBookmark = {jest.fn()}
         flagDataIsLoading={true}
         comments={[]}
         sendComment={jest.fn()}

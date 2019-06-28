@@ -7,9 +7,10 @@ import {applyMiddleware, createStore} from 'redux';
 import {compose} from 'recompose';
 
 import App from './app.jsx';
-import {mockOffers} from '../../mocks/mockOffer.js';
+import {mockOffers} from '../../mocks/mock-offer.js';
 import reducer from '../../reducer/reducer';
 import {createAPI} from '../../api';
+
 
 describe(`App`, () => {
   it(`correctly rendered`, () => {
@@ -30,7 +31,7 @@ describe(`App`, () => {
                 city = {`Minsk`}
                 listCities = {[`Minsk`]}
                 onClickTitleCard = {jest.fn()}
-                onClickImageCard = {jest.fn()}
+                onClickBookmark = {jest.fn()}
                 onCityClick = {jest.fn()}
                 logIn = {jest.fn()}
                 emailUser = {`email@email.com`}

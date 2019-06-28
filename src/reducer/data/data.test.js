@@ -33,6 +33,7 @@ describe(`Reducer works correctly`, () => {
       city: `No cities`,
       listComments: [],
       listOffers: [],
+      listFavoriteOffers: [],
       flagDataIsLoading: false,
       typeSort: TypeSort.POPULAR,
     });

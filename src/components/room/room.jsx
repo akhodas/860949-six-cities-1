@@ -1,22 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ListComments from '../list-comments/list-comments.jsx';
 import ListOffers from '../list-offers/list-offers.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.js';
 import CitiesMap from '../cities-map/cities-map.jsx';
-import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import {offerProp, commentProp} from '../../interface-prop-types/interface-prop-types.js';
 import CommentSubmitionForm from '../comment-submition-form/comment-submition-form.jsx';
 import withCommentSubmitionForm from '../../hocs/with-comment-submition-form/with-comment-submition-form.js';
 
 
-const ListOffersWrapped = withActiveItem(ListOffers);
 const CommentSubmitionFormWrapped = withCommentSubmitionForm(CommentSubmitionForm);
 
 const Room = (props) => {
 
   const {
+    history,
     emailUser,
     controlAuthorization,
     isAuthorizationStatus,
@@ -24,6 +23,7 @@ const Room = (props) => {
     comments,
     offersNear,
     sendComment,
+    onClickBookmark,
   } = props;
 
   return (
@@ -90,7 +90,20 @@ const Room = (props) => {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={offer.isFavorite ?
+                    `property__bookmark-button property__bookmark-button--active button`
+                    : `property__bookmark-button button`
+                  }
+                  type="button"
+                  onClick={() => {
+                    onClickBookmark({
+                      idOffer: offer.id,
+                      favoriteStatus: +!offer.isFavorite,
+                      objHistory: history,
+                    });
+                  }}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -99,10 +112,12 @@ const Room = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${100 * offer.rating / 5}%`}}></span>
+                  <span style={{width: `${Math.round(offer.rating) * 100 / 5}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{offer.rating}</span>
+                <span className="property__rating-value rating__value">
+                  {Math.round(offer.rating)}
+                </span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -157,6 +172,7 @@ const Room = (props) => {
                 {!isAuthorizationStatus ? (
                   <CommentSubmitionFormWrapped
                     sendComment={sendComment}
+                    history={history}
                   />) : null }
               </section>
             </div>
@@ -175,12 +191,11 @@ const Room = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <ListOffersWrapped
+            <ListOffers
               offers = {offersNear}
-              onClickTitleCard = {(history, id) => {
-                history.push(`/offer/${id}`);
-                // eslint-disable-next-line no-console
-                console.log(`CLICK on card NEAR #${id}`);
+              onClickBookmark = {onClickBookmark}
+              onClickTitleCard = {(objHistory, id) => {
+                objHistory.push(`/offer/${id}`);
               }}
               styleClassNames = {[
                 `near-places__list places__list`,
@@ -202,8 +217,10 @@ Room.propTypes = {
   controlAuthorization: PropTypes.func.isRequired,
   offer: offerProp.isRequired,
   offersNear: PropTypes.array.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.arrayOf(commentProp).isRequired,
   sendComment: PropTypes.func.isRequired,
+  history: PropTypes.object,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
-export default Room;
+export default withRouter(Room);

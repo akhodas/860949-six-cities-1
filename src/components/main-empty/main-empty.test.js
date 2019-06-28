@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import MainEmpty from './main-empty.jsx';
 
-describe(`Loading`, () => {
+describe(`MainEmpty`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
       .create(

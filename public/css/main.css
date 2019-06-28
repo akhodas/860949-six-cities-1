@@ -1026,7 +1026,7 @@ img {
 .property__bookmark-button:hover .property__bookmark-icon {
   stroke: #4481c3;
 }
-.property__bookmark-button--active .place-card__bookmark-icon {
+.property__bookmark-button--active .property__bookmark-icon {
   stroke: #4481c3;
   fill: #4481c3;
 }

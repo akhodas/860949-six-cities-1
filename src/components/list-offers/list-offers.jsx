@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 
+
 class ListOffers extends React.PureComponent {
 
   render() {
     const {
       offers,
       onClickTitleCard,
-      onClickImageCard,
-      onItemActivate,
       styleClassNames,
       onChangeActiveOffer,
+      onClickBookmark,
     } = this.props;
 
     return <div className={styleClassNames[0]}>
@@ -21,11 +21,8 @@ class ListOffers extends React.PureComponent {
         key={item.id}
         offer={item}
         onClickTitleCard={onClickTitleCard}
-        onClickImageCard={onClickImageCard}
         onChangeActiveOffer={onChangeActiveOffer}
-        onHoverCard={(e) => {
-          onItemActivate(item, e);
-        }}
+        onClickBookmark={onClickBookmark}
         styleClassNames = {styleClassNames}
       />)
       }
@@ -36,10 +33,9 @@ class ListOffers extends React.PureComponent {
 ListOffers.propTypes = {
   offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func,
   onChangeActiveOffer: PropTypes.func,
-  onItemActivate: PropTypes.func.isRequired,
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
 export default ListOffers;

@@ -15,13 +15,13 @@ export const createAPI = (dispatch) => {
     switch (err.response.status) {
       case 403:
         dispatch(ActionCreator.requireAuthorization(true));
-        return;
+        return err.response;
 
       case 400:
-        throw new Error(`Неправильно указаны данные!`);
+        throw new Error(`Incorrect data!`);
 
       default:
-        throw err;
+        throw new Error(`Ooooppppssss!`);
     }
   };
 

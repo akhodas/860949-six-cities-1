@@ -3,7 +3,8 @@ import renderer from 'react-test-renderer';
 
 import CommentSubmitionForm from './comment-submition-form.jsx';
 
-describe(`Loading`, () => {
+
+describe(`CommentSubmitionForm`, () => {
   it(`correctly rendered`, () => {
     const tree = renderer
       .create(

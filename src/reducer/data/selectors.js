@@ -1,5 +1,5 @@
-import {createSelector} from "reselect";
 import Namespace from "../namespace";
+import {createSelector} from "reselect";
 import {TypeSort} from "./data";
 
 export const DefaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
@@ -49,6 +49,13 @@ export const getComments = (state) => {
 
 export const getOffers = (state) => {
   return state[NAMESPACE].listOffers;
+};
+
+
+export const getFavoriteOffers = (state) => {
+  return state[NAMESPACE].listFavoriteOffers.sort(
+      (a, b) => (a.city.name < b.city.name) ? -1 : 1
+  );
 };
 
 

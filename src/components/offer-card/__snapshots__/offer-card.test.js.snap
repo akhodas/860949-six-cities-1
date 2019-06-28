@@ -5,7 +5,6 @@ Array [
   " ",
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[MockFunction]}
   >
     <div
       className="place-card__mark"
@@ -52,7 +51,8 @@ Array [
           </span>
         </div>
         <button
-          className="place-card__bookmark-button button"
+          className="place-card__bookmark-button place-card__bookmark-button--active button"
+          onClick={[Function]}
           type="button"
         >
           <svg

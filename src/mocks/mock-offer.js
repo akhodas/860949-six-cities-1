@@ -1,4 +1,4 @@
-export const mockOffers = [{
+const mockOffers = [{
   id: 1,
   city: {
     name: `Minsk`,
@@ -33,7 +33,7 @@ export const mockOffers = [{
   }
 }];
 
-export const mockOffer = {
+const mockOffer = {
   id: 0,
   city: {
     name: `Minsk`,
@@ -68,3 +68,7 @@ export const mockOffer = {
   }
 };
 
+export {
+  mockOffer,
+  mockOffers,
+};

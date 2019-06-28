@@ -1,3 +1,5 @@
+import {errorMessage} from '../data/data';
+
 const initialState = {
   isAuthorizationRequired: true,
   id: 1,
@@ -40,10 +42,15 @@ const ActionCreator = {
 const Operation = {
   addUserData: () => (dispatch, _getState, api) => {
     return api.get(`/login`)
-        .then((response) => dispatch(ActionCreator.addUserData(response.data)))
-        .catch(() => {
-          // eslint-disable-next-line no-console
-          console.log(`Ошибка авторизации. Повторите позже!`);
+        .then((response) => {
+          if (response.status !== 403) {
+            dispatch(ActionCreator.addUserData(response.data));
+          }
+          return response;
+        })
+        .catch((err) => {
+          errorMessage(err);
+          throw new Error(`not authorized`);
         });
   },
   logIn: (data) => (dispatch, _getState, api) => {
@@ -51,7 +58,7 @@ const Operation = {
         .then((response) => {
           dispatch(ActionCreator.logIn(response.data));
         })
-        .catch(alert);
+        .catch(errorMessage);
   },
 
 };
@@ -66,6 +73,7 @@ const reducer = (state = initialState, action) =>{
 
     case ActionType.ADD_USER_DATA:
       return Object.assign({}, state, {
+        isAuthorizationRequired: false,
         id: action.payload.id,
         email: action.payload.email,
         name: action.payload.name,

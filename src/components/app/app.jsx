@@ -10,17 +10,18 @@ import Room from '../room/room.jsx';
 import withRoom from '../../hocs/with-room/with-room.js';
 import withMain from '../../hocs/with-main/with-main.js';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
+import withFavorite from '../../hocs/with-favorite/with-favorite.js';
 
 
 const SignInWrapped = withAuthorization(SignIn);
 const RoomWrapped = withRoom(Room);
 const MainPageWrapped = withMain(MainPage);
+const FavoritesWrapped = withFavorite(Favorites);
 
 
 const App = (props) => {
   const {
     onClickTitleCard,
-    onClickImageCard,
     city,
     listCities,
     listOffers,
@@ -30,6 +31,7 @@ const App = (props) => {
     controlAuthorization,
     emailUser,
     flagDataIsLoading,
+    onClickBookmark,
   } = props;
 
   return (
@@ -40,7 +42,7 @@ const App = (props) => {
           city = {city}
           listCities = {listCities}
           onClickTitleCard = {onClickTitleCard}
-          onClickImageCard = {onClickImageCard}
+          onClickBookmark = {onClickBookmark}
           onCityClick = {onCityClick}
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
@@ -54,8 +56,13 @@ const App = (props) => {
           <Redirect to='/login'/>
         )
           : (
-            <Favorites
+            <FavoritesWrapped
               emailUser={emailUser}
+              isAuthorizationStatus = {isAuthorizationStatus}
+              controlAuthorization = {controlAuthorization}
+              flagDataIsLoading = {flagDataIsLoading}
+              onClickTitleCard = {onClickTitleCard}
+              onClickBookmark = {onClickBookmark}
             />
           )
       )} />
@@ -77,6 +84,7 @@ const App = (props) => {
           isAuthorizationStatus = {isAuthorizationStatus}
           controlAuthorization = {controlAuthorization}
           flagDataIsLoading = {flagDataIsLoading}
+          onClickBookmark = {onClickBookmark}
         />
       )} />
 
@@ -90,13 +98,13 @@ App.propTypes = {
   city: PropTypes.string.isRequired,
   listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickTitleCard: PropTypes.func.isRequired,
-  onClickImageCard: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   logIn: PropTypes.func.isRequired,
   emailUser: PropTypes.string.isRequired,
   isAuthorizationStatus: PropTypes.bool.isRequired,
   controlAuthorization: PropTypes.func.isRequired,
   flagDataIsLoading: PropTypes.bool.isRequired,
+  onClickBookmark: PropTypes.func.isRequired,
 };
 
 

@@ -1,20 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Month = {
-  0: `January`,
-  1: `February`,
-  2: `March`,
-  3: `April`,
-  4: `May`,
-  5: `June`,
-  6: `July`,
-  7: `August`,
-  8: `September`,
-  9: `October`,
-  10: `November`,
-  11: `December`,
-};
+import {commentProp} from '../../interface-prop-types/interface-prop-types';
+
+
+const Month = [
+  `January`,
+  `February`,
+  `March`,
+  `April`,
+  `May`,
+  `June`,
+  `July`,
+  `August`,
+  `September`,
+  `October`,
+  `November`,
+  `December`,
+];
 
 
 const Comment = (props) => {
@@ -57,18 +59,7 @@ const Comment = (props) => {
 };
 
 Comment.propTypes = {
-  comment: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.object.isRequired,
-  }).isRequired,
+  comment: commentProp,
 };
 
 export default Comment;

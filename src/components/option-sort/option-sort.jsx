@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {TypeSort} from '../../reducer/data/data';
 
+
 const OptionSort = (props) => {
 
   const {showMenuSort, typeSort, onChange, onSelect} = props;

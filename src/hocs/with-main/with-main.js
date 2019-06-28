@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 import Loading from '../../components/loading/loading.jsx';
 
+
 const withMain = (Component) => {
   class WithMain extends React.PureComponent {
     constructor(props) {
@@ -27,7 +28,7 @@ const withMain = (Component) => {
         flagDataIsLoading,
         isAuthorizationStatus,
         controlAuthorization,
-        emailUser
+        emailUser,
       } = this.props;
 
       return (flagDataIsLoading ? (
@@ -55,13 +56,13 @@ const withMain = (Component) => {
     city: PropTypes.string.isRequired,
     listCities: PropTypes.arrayOf(PropTypes.string).isRequired,
     onClickTitleCard: PropTypes.func.isRequired,
-    onClickImageCard: PropTypes.func.isRequired,
     onCityClick: PropTypes.func.isRequired,
     isAuthorizationStatus: PropTypes.bool.isRequired,
     controlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
     activeOffer: offerProp,
+    onClickBookmark: PropTypes.func.isRequired,
   };
 
   return WithMain;

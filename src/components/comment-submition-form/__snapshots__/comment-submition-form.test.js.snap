@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loading correctly rendered 1`] = `
+exports[`CommentSubmitionForm correctly rendered 1`] = `
 <form
   action="#"
   className="reviews__form form"

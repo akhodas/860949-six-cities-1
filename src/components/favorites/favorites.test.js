@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import {MemoryRouter} from 'react-router';
 
 import Favorites from './favorites.jsx';
+import {mockOffers} from '../../mocks/mock-offer.js';
 
 
 describe(`Favorites`, () => {
@@ -12,6 +13,9 @@ describe(`Favorites`, () => {
             <MemoryRouter>
               <Favorites
                 emailUser={`email@email.ru`}
+                favoriteOffers={[mockOffers]}
+                onClickTitleCard={jest.fn()}
+                onClickBookmark={jest.fn()}
               />
             </MemoryRouter>
         )
