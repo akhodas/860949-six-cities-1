@@ -17,6 +17,7 @@ const initialState = {
   typeSort: TypeSort.POPULAR,
 };
 
+
 const ActionType = {
   ADD_LIST_OFFERS: `ADD_LIST_OFFERS`,
   CHANGE_FAVORITES_STATUS: `CHANGE_FAVORITES_STATUS`,

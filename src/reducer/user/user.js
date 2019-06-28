@@ -23,17 +23,17 @@ const ActionCreator = {
     };
   },
 
-  addUserData: (status) => {
+  addUserData: (data) => {
     return {
       type: ActionType.ADD_USER_DATA,
-      payload: status,
+      payload: data,
     };
   },
 
-  onLogIn: (status) => {
+  onLogIn: (data) => {
     return {
       type: ActionType.LOG_IN,
-      payload: status,
+      payload: data,
     };
   },
 };
