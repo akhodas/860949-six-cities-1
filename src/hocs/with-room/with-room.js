@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
-import Loading from '../../components/loading/loading.jsx';
-import {commentProp} from '../../interface-prop-types/interface-prop-types';
+// import Loading from '../../components/loading/loading.jsx';
+import {commentProp, offerProp} from '../../interface-prop-types/interface-prop-types';
 
 
 const withRoom = (Component) => {
@@ -20,43 +20,37 @@ const withRoom = (Component) => {
 
     render() {
       const {
-        match,
-        getOffer,
-        getThreeOffersNear,
-        flagDataIsLoading,
+        // match,
+        // getOffer,
+        // getThreeOffersNear,
+        offer,
+        offersNear,
+        // flagDataIsLoading,
         comments,
-        isAuthorizationStatus,
-        onControlAuthorization,
-        emailUser,
+        // isAuthorizationStatus,
+        // onControlAuthorization,
+        // emailUser,
         sendComment,
       } = this.props;
 
-      let offer = {};
-      let offersNear = [];
+      // let offer = {};
+      // let offersNear = [];
 
-      if (flagDataIsLoading) {
-        offer = getOffer(+match.params.roomId);
-        offersNear = getThreeOffersNear(offer);
-      }
+      // if (flagDataIsLoading) {
+      //   offer = getOffer(+match.params.roomId);
+      //   offersNear = getThreeOffersNear(offer);
+      // }
 
-      return flagDataIsLoading ? (
-        <Component
-          {...this.props}
-          offer={offer}
-          offersNear={offersNear}
-          comments={comments}
-          sendComment={(newComment) => sendComment({
-            comment: newComment,
-            id: offer.id,
-          })}
-        />
-      ) : (
-        <Loading
-          isAuthorizationStatus={isAuthorizationStatus}
-          onControlAuthorization={onControlAuthorization}
-          emailUser={emailUser}
-        />
-      );
+      return <Component
+        {...this.props}
+        offer={offer}
+        offersNear={offersNear}
+        comments={comments}
+        sendComment={(newComment) => sendComment({
+          comment: newComment,
+          id: offer.id,
+        })}
+      />;
     }
 
   }
@@ -66,8 +60,10 @@ const withRoom = (Component) => {
     onControlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
     flagDataIsLoading: PropTypes.bool.isRequired,
-    getOffer: PropTypes.func.isRequired,
-    getThreeOffersNear: PropTypes.func.isRequired,
+    // getOffer: PropTypes.func.isRequired,
+    // getThreeOffersNear: PropTypes.func.isRequired,
+    offer: offerProp,
+    offersNear: PropTypes.arrayOf(offerProp),
     isAuthorizationStatus: PropTypes.bool.isRequired,
     loadComments: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
@@ -75,18 +71,22 @@ const withRoom = (Component) => {
     sendComment: PropTypes.func.isRequired,
   };
 
-  return withRouter(WithRoom);
+  return WithRoom;
 };
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    getOffer: (id) => {
-      return getOffers(state).find((offer) => offer.id === id);
-    },
+    offer: getOffers(state).find((offer) => offer.id === +ownProps.match.params.roomId),
+    // }, getOffer(+match.params.roomId)
+    // getOffer: (id) => {
+    //   return getOffers(state).find((offer) => offer.id === id);
+    // }, getOffer(+match.params.roomId)
+    // offersNear = getThreeOffersNear(offer);
     comments: getComments(state),
-    getThreeOffersNear: (currentOffer) => {
-      return getOffersNear(state, currentOffer);
-    },
+    offersNear: getOffersNear(
+        state,
+        getOffers(state).find((offer) => offer.id === +ownProps.match.params.roomId)
+    ),
   });
 };
 
@@ -100,6 +100,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {withRoom};
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    withRouter, connect(mapStateToProps, mapDispatchToProps),
     withRoom
 );
