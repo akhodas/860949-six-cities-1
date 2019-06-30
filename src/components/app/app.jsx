@@ -85,7 +85,6 @@ const App = (props) => {
             emailUser={emailUser}
             isAuthorizationStatus = {isAuthorizationStatus}
             onControlAuthorization = {onControlAuthorization}
-            flagDataIsLoading = {flagDataIsLoading}
             onClickBookmark = {onClickBookmark}
           />
         ) : (
