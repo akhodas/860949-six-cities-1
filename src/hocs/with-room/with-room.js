@@ -22,7 +22,7 @@ const withRoom = (Component) => {
         offer,
         offersNear,
         comments,
-        sendComment,
+        onSendComment,
       } = this.props;
 
       return (
@@ -31,7 +31,7 @@ const withRoom = (Component) => {
           offer={offer}
           offersNear={offersNear}
           comments={comments}
-          sendComment={(newComment) => sendComment({
+          onSendComment={(newComment) => onSendComment({
             comment: newComment,
             id: offer.id,
           })}
@@ -51,7 +51,7 @@ const withRoom = (Component) => {
     loadComments: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     onClickBookmark: PropTypes.func.isRequired,
-    sendComment: PropTypes.func.isRequired,
+    onSendComment: PropTypes.func.isRequired,
   };
 
   return WithRoom;
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(OperationData.loadComments(id));
   },
 
-  sendComment: (data) => dispatch(OperationData.sendComment(data.comment, data.id)),
+  onSendComment: (data) => dispatch(OperationData.sendComment(data.comment, data.id)),
 });
 
 export {withRoom};

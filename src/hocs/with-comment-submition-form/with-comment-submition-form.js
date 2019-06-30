@@ -48,7 +48,7 @@ const withCommentSubmitionForm = (Component) => {
 
       this.setState({blockForm: true});
 
-      this.props.sendComment({
+      this.props.onSendComment({
         rating: this.state.rating,
         comment: this.state.commentText,
       })
@@ -74,7 +74,7 @@ const withCommentSubmitionForm = (Component) => {
   }
 
   WithCommentSubmitionForm.propTypes = {
-    sendComment: PropTypes.func.isRequired,
+    onSendComment: PropTypes.func.isRequired,
     history: PropTypes.object,
   };
 

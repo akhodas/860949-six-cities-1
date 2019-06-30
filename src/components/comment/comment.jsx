@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {commentProp} from '../../interface-prop-types/interface-prop-types';
+import {MAXIMUM_PERCENTS, MAXIMUM_RATING} from '../offer-card/offer-card.jsx';
 
 
 const Month = [
@@ -43,7 +44,9 @@ const Comment = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${Math.round(comment.rating) * 100 / 5}%`}}></span>
+            <span style={{
+              width: `${Math.round(comment.rating) * MAXIMUM_PERCENTS / MAXIMUM_RATING}%`
+            }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
