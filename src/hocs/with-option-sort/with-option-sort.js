@@ -25,8 +25,8 @@ const withOptionSort = (Component) => {
         }
       });
 
-      this._onChangeTypeSort = this._onChangeTypeSort.bind(this);
-      this._onChange = this._onChange.bind(this);
+      this._handleTypeSortChange = this._handleTypeSortChange.bind(this);
+      this._handleShowMenuSortChange = this._handleShowMenuSortChange.bind(this);
     }
 
 
@@ -43,18 +43,18 @@ const withOptionSort = (Component) => {
         {...this.props}
         typeSort={this.state.typeSort}
         showMenuSort={this.state.showMenuSort}
-        onSelect={this._onChangeTypeSort}
-        onChange={this._onChange}
+        onSelect={this._handleTypeSortChange}
+        onChange={this._handleShowMenuSortChange}
       />;
     }
 
-    _onChange() {
+    _handleShowMenuSortChange() {
       this.setState({
         showMenuSort: !this.state.showMenuSort,
       });
     }
 
-    _onChangeTypeSort(evt) {
+    _handleTypeSortChange(evt) {
       const selectTypeSort = evt.nativeEvent.target.textContent;
       this.props.onChangeTypeSort(selectTypeSort);
       this.setState({

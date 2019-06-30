@@ -11,8 +11,8 @@ const withAuthorization = (Component) => {
         password: `password`,
       };
 
-      this._onLogIn = this._onLogIn.bind(this);
-      this._onChange = this._onChange.bind(this);
+      this._handleFormSubmit = this._handleFormSubmit.bind(this);
+      this._handleInputChange = this._handleInputChange.bind(this);
     }
 
     render() {
@@ -20,18 +20,18 @@ const withAuthorization = (Component) => {
         {...this.props}
         email={this.state.email}
         password={this.state.password}
-        onLogIn={this._onLogIn}
-        onChange={this._onChange}
+        onLogIn={this._handleFormSubmit}
+        onChange={this._handleInputChange}
       />;
     }
 
-    _onChange(evt) {
+    _handleInputChange(evt) {
       this.setState({
         [evt.target.name]: evt.target.value,
       });
     }
 
-    _onLogIn(evt) {
+    _handleFormSubmit(evt) {
       evt.preventDefault();
       this.props.onLogIn({
         email: this.state.email,
