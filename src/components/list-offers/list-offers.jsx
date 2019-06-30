@@ -5,30 +5,27 @@ import OfferCard from '../offer-card/offer-card.jsx';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 
 
-class ListOffers extends React.PureComponent {
+const ListOffers = (props) => {
+  const {
+    offers,
+    onClickTitleCard,
+    styleClassNames,
+    onChangeActiveOffer,
+    onClickBookmark,
+  } = props;
 
-  render() {
-    const {
-      offers,
-      onClickTitleCard,
-      styleClassNames,
-      onChangeActiveOffer,
-      onClickBookmark,
-    } = this.props;
-
-    return <div className={styleClassNames[0]}>
-      {offers.map((item) => <OfferCard
-        key={item.id}
-        offer={item}
-        onClickTitleCard={onClickTitleCard}
-        onChangeActiveOffer={onChangeActiveOffer}
-        onClickBookmark={onClickBookmark}
-        styleClassNames = {styleClassNames}
-      />)
-      }
-    </div>;
-  }
-}
+  return <div className={styleClassNames[0]}>
+    {offers.map((item) => <OfferCard
+      key={item.id}
+      offer={item}
+      onClickTitleCard={onClickTitleCard}
+      onChangeActiveOffer={onChangeActiveOffer}
+      onClickBookmark={onClickBookmark}
+      styleClassNames = {styleClassNames}
+    />)
+    }
+  </div>;
+};
 
 ListOffers.propTypes = {
   offers: PropTypes.arrayOf(offerProp.isRequired).isRequired,

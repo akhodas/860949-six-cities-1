@@ -5,6 +5,7 @@ import {TypeSort} from "./data";
 export const DefaultCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const NAMESPACE = Namespace.DATA;
+const COUNT_OFFERS_NEAR_SELECTED = 3;
 
 const _distanceBetweenOffers = (offer1, offer2) => {
   return Math.sqrt(
@@ -58,6 +59,13 @@ export const getFavoriteOffers = (state) => {
   );
 };
 
+export const getOffer = createSelector(
+    getOffers,
+    (state, currentIdOffer) => currentIdOffer,
+    (offers, currentIdOffer) => {
+      return offers.find((offer) => offer.id === currentIdOffer);
+    }
+);
 
 export const getCities = createSelector(
     getOffers,
@@ -93,14 +101,18 @@ export const getOffersForCity = createSelector(
 );
 
 export const getOffersNear = createSelector(
-    (state, offer) => {
-      return getOffersForCity(state, offer.city.name);
+    (state, currentIdOffer) => {
+      return getOffersForCity(
+          state,
+          getOffer(state, currentIdOffer).city.name
+      );
     },
-    (state, offer) => offer,
+    getOffer,
     (offers, currentOffer) => {
       return offers.sort((a, b) => {
         return _distanceBetweenOffers(a, currentOffer)
         - _distanceBetweenOffers(b, currentOffer);
-      }).slice(1, 4);
+      }).slice(1, COUNT_OFFERS_NEAR_SELECTED + 1);
+      // The first value in the sorted array is ignored because it is a "selected offer"
     }
 );

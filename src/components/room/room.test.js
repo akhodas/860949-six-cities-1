@@ -18,7 +18,7 @@ describe(`Room`, () => {
         onClickBookmark = {jest.fn()}
         flagDataIsLoading={true}
         comments={[]}
-        sendComment={jest.fn()}
+        onSendComment={jest.fn()}
       /> </MemoryRouter>)
       .toJSON();
 
@@ -36,7 +36,7 @@ describe(`Room`, () => {
         onClickBookmark = {jest.fn()}
         flagDataIsLoading={true}
         comments={[]}
-        sendComment={jest.fn()}
+        onSendComment={jest.fn()}
       /> </MemoryRouter>)
       .toJSON();
 

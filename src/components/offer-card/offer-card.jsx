@@ -3,6 +3,8 @@ import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerProp} from '../../interface-prop-types/interface-prop-types';
 
+const MAXIMUM_RATING = 5;
+const MAXIMUM_PERCENTS = 100;
 
 const OfferCard = (props) => {
   const {
@@ -66,7 +68,9 @@ const OfferCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${(Math.round(rating) * 100 / 5)}%`}}></span>
+          <span style={{
+            width: `${(Math.round(rating) * MAXIMUM_PERCENTS / MAXIMUM_RATING)}%`
+          }}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -90,6 +94,10 @@ OfferCard.propTypes = {
   styleClassNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export {OfferCard};
+export {
+  OfferCard,
+  MAXIMUM_PERCENTS,
+  MAXIMUM_RATING,
+};
 
 export default withRouter(OfferCard);

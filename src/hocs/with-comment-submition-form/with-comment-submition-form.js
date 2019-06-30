@@ -13,9 +13,9 @@ const withCommentSubmitionForm = (Component) => {
         successSend: true,
       };
 
-      this._onSubmit = this._onSubmit.bind(this);
-      this._onChangeText = this._onChangeText.bind(this);
-      this._onChangeRating = this._onChangeRating.bind(this);
+      this._handleFormSubmit = this._handleFormSubmit.bind(this);
+      this._handleTextareaTextChange = this._handleTextareaTextChange.bind(this);
+      this._handleInputRatingChange = this._handleInputRatingChange.bind(this);
     }
 
     render() {
@@ -25,30 +25,30 @@ const withCommentSubmitionForm = (Component) => {
         commentText={this.state.commentText}
         blockForm={this.state.blockForm}
         successSend={this.state.successSend}
-        onSubmit={this._onSubmit}
-        onChangeText={this._onChangeText}
-        onChangeRating={this._onChangeRating}
+        onSubmit={this._handleFormSubmit}
+        onChangeText={this._handleTextareaTextChange}
+        onChangeRating={this._handleInputRatingChange}
       />;
     }
 
-    _onChangeText(evt) {
+    _handleTextareaTextChange(evt) {
       this.setState({
         commentText: evt.target.value,
       });
     }
 
-    _onChangeRating(evt) {
+    _handleInputRatingChange(evt) {
       this.setState({
         rating: +evt.target.value,
       });
     }
 
-    _onSubmit(evt) {
+    _handleFormSubmit(evt) {
       evt.preventDefault();
 
       this.setState({blockForm: true});
 
-      this.props.sendComment({
+      this.props.onSendComment({
         rating: this.state.rating,
         comment: this.state.commentText,
       })
@@ -74,7 +74,7 @@ const withCommentSubmitionForm = (Component) => {
   }
 
   WithCommentSubmitionForm.propTypes = {
-    sendComment: PropTypes.func.isRequired,
+    onSendComment: PropTypes.func.isRequired,
     history: PropTypes.object,
   };
 

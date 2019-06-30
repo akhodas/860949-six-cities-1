@@ -13,7 +13,7 @@ const withMain = (Component) => {
         activeOffer: null,
       };
 
-      this._onChangeActiveOffer = this._onChangeActiveOffer.bind(this);
+      this._handleOfferChange = this._handleOfferChange.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -35,7 +35,7 @@ const withMain = (Component) => {
         <Component
           {...this.props}
           activeOffer={this.state.activeOffer}
-          onChangeActiveOffer={this._onChangeActiveOffer}
+          onChangeActiveOffer={this._handleOfferChange}
         />
       ) : (
         <Loading
@@ -46,7 +46,7 @@ const withMain = (Component) => {
       ));
     }
 
-    _onChangeActiveOffer(offer) {
+    _handleOfferChange(offer) {
       this.setState({activeOffer: offer});
     }
   }

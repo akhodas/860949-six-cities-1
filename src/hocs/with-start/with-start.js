@@ -29,7 +29,7 @@ const withStart = (Component) => {
         loadingData: true,
       };
 
-      this._onSubmit = this._onSubmit.bind(this);
+      this._handleStatusAuthorizationChange = this._handleStatusAuthorizationChange.bind(this);
     }
 
     componentDidMount() {
@@ -52,7 +52,7 @@ const withStart = (Component) => {
         <Component
           {...this.props}
           onControlAuthorization={() => {
-            this._onSubmit();
+            this._handleStatusAuthorizationChange();
           }}
         />
       ) : (
@@ -64,7 +64,7 @@ const withStart = (Component) => {
       );
     }
 
-    _onSubmit() {
+    _handleStatusAuthorizationChange() {
       this.setState({loadingData: true});
 
       this.props.onControlAuthorization()

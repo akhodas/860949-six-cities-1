@@ -4,10 +4,9 @@ import {compose} from "recompose";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {getOffers, getComments, getOffersNear} from '../../reducer/data/selectors';
+import {getComments, getOffersNear, getOffer} from '../../reducer/data/selectors';
 import {Operation as OperationData} from '../../reducer/data/data';
-import Loading from '../../components/loading/loading.jsx';
-import {commentProp} from '../../interface-prop-types/interface-prop-types';
+import {commentProp, offerProp} from '../../interface-prop-types/interface-prop-types';
 
 
 const withRoom = (Component) => {
@@ -20,41 +19,22 @@ const withRoom = (Component) => {
 
     render() {
       const {
-        match,
-        getOffer,
-        getThreeOffersNear,
-        flagDataIsLoading,
+        offer,
+        offersNear,
         comments,
-        isAuthorizationStatus,
-        onControlAuthorization,
-        emailUser,
-        sendComment,
+        onSendComment,
       } = this.props;
 
-      let offer = {};
-      let offersNear = [];
-
-      if (flagDataIsLoading) {
-        offer = getOffer(+match.params.roomId);
-        offersNear = getThreeOffersNear(offer);
-      }
-
-      return flagDataIsLoading ? (
+      return (
         <Component
           {...this.props}
           offer={offer}
           offersNear={offersNear}
           comments={comments}
-          sendComment={(newComment) => sendComment({
+          onSendComment={(newComment) => onSendComment({
             comment: newComment,
             id: offer.id,
           })}
-        />
-      ) : (
-        <Loading
-          isAuthorizationStatus={isAuthorizationStatus}
-          onControlAuthorization={onControlAuthorization}
-          emailUser={emailUser}
         />
       );
     }
@@ -65,28 +45,24 @@ const withRoom = (Component) => {
     comments: PropTypes.arrayOf(commentProp),
     onControlAuthorization: PropTypes.func.isRequired,
     emailUser: PropTypes.string.isRequired,
-    flagDataIsLoading: PropTypes.bool.isRequired,
-    getOffer: PropTypes.func.isRequired,
-    getThreeOffersNear: PropTypes.func.isRequired,
+    offer: offerProp,
+    offersNear: PropTypes.arrayOf(offerProp),
     isAuthorizationStatus: PropTypes.bool.isRequired,
     loadComments: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     onClickBookmark: PropTypes.func.isRequired,
-    sendComment: PropTypes.func.isRequired,
+    onSendComment: PropTypes.func.isRequired,
   };
 
-  return withRouter(WithRoom);
+  return WithRoom;
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const currentIdOffer = +ownProps.match.params.roomId;
   return Object.assign({}, ownProps, {
-    getOffer: (id) => {
-      return getOffers(state).find((offer) => offer.id === id);
-    },
+    offer: getOffer(state, currentIdOffer),
     comments: getComments(state),
-    getThreeOffersNear: (currentOffer) => {
-      return getOffersNear(state, currentOffer);
-    },
+    offersNear: getOffersNear(state, currentIdOffer),
   });
 };
 
@@ -95,11 +71,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(OperationData.loadComments(id));
   },
 
-  sendComment: (data) => dispatch(OperationData.sendComment(data.comment, data.id)),
+  onSendComment: (data) => dispatch(OperationData.sendComment(data.comment, data.id)),
 });
 
 export {withRoom};
 export default compose(
+    withRouter,
     connect(mapStateToProps, mapDispatchToProps),
     withRoom
 );

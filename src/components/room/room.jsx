@@ -8,7 +8,9 @@ import CitiesMap from '../cities-map/cities-map.jsx';
 import {offerProp, commentProp} from '../../interface-prop-types/interface-prop-types.js';
 import CommentSubmitionForm from '../comment-submition-form/comment-submition-form.jsx';
 import withCommentSubmitionForm from '../../hocs/with-comment-submition-form/with-comment-submition-form.js';
+import {MAXIMUM_PERCENTS, MAXIMUM_RATING} from '../offer-card/offer-card.jsx';
 
+const COUNT_OF_IMAGES_TO_DISPLAY_IN_GALLERY = 6;
 
 const CommentSubmitionFormWrapped = withCommentSubmitionForm(CommentSubmitionForm);
 
@@ -22,7 +24,7 @@ const Room = (props) => {
     offer,
     comments,
     offersNear,
-    sendComment,
+    onSendComment,
     onClickBookmark,
   } = props;
 
@@ -72,7 +74,9 @@ const Room = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.images.slice(0, 6).map((image) => (
+              {offer.images.slice(
+                  0, COUNT_OF_IMAGES_TO_DISPLAY_IN_GALLERY
+              ).map((image) => (
                 <div key={image + offer.id} className="property__image-wrapper">
                   <img className="property__image" src={image} alt="Photo studio"/>
                 </div>
@@ -112,7 +116,9 @@ const Room = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${Math.round(offer.rating) * 100 / 5}%`}}></span>
+                  <span style={{
+                    width: `${Math.round(offer.rating) * MAXIMUM_PERCENTS / MAXIMUM_RATING}%`
+                  }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
@@ -171,7 +177,7 @@ const Room = (props) => {
                 />
                 {!isAuthorizationStatus ? (
                   <CommentSubmitionFormWrapped
-                    sendComment={sendComment}
+                    onSendComment={onSendComment}
                     history={history}
                   />) : null }
               </section>
@@ -218,7 +224,7 @@ Room.propTypes = {
   offer: offerProp.isRequired,
   offersNear: PropTypes.array.isRequired,
   comments: PropTypes.arrayOf(commentProp).isRequired,
-  sendComment: PropTypes.func.isRequired,
+  onSendComment: PropTypes.func.isRequired,
   history: PropTypes.object,
   onClickBookmark: PropTypes.func.isRequired,
 };

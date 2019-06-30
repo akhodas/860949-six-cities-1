@@ -11,6 +11,7 @@ import withRoom from '../../hocs/with-room/with-room.js';
 import withMain from '../../hocs/with-main/with-main.js';
 import {offerProp} from '../../interface-prop-types/interface-prop-types.js';
 import withFavorite from '../../hocs/with-favorite/with-favorite.js';
+import Loading from '../loading/loading.jsx';
 
 
 const SignInWrapped = withAuthorization(SignIn);
@@ -79,13 +80,20 @@ const App = (props) => {
       )} />
 
       <Route path='/offer/:roomId' exact render={() => (
-        <RoomWrapped
-          emailUser={emailUser}
-          isAuthorizationStatus = {isAuthorizationStatus}
-          onControlAuthorization = {onControlAuthorization}
-          flagDataIsLoading = {flagDataIsLoading}
-          onClickBookmark = {onClickBookmark}
-        />
+        flagDataIsLoading ? (
+          <RoomWrapped
+            emailUser={emailUser}
+            isAuthorizationStatus = {isAuthorizationStatus}
+            onControlAuthorization = {onControlAuthorization}
+            onClickBookmark = {onClickBookmark}
+          />
+        ) : (
+          <Loading
+            isAuthorizationStatus={isAuthorizationStatus}
+            onControlAuthorization={onControlAuthorization}
+            emailUser={emailUser}
+          />
+        )
       )} />
 
     </Switch>
